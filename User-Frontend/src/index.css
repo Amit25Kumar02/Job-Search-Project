@@ -1,0 +1,137 @@
+*{
+  text-decoration: none;
+}
+.con-btn {
+  text-decoration: none;
+  margin-bottom: 5px;
+  /* border-radius: 100px; */
+  /* background-color: rgba(0, 0, 0, 0.1); */
+}
+.con-card:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.dark-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  pointer-events: none; 
+  border-radius: 5px;
+}
+
+.footer {
+  margin-top: 5%;
+  text-align: center;
+  background-color: black;
+  color: white;
+  width: 100%;
+}
+
+.user {
+  margin: 5% auto;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.dropdown-menu {
+  max-width: 50px; 
+  width: 50px;
+}
+
+.back-btn{
+  text-decoration: none;
+  font-size: 25px;
+}
+.card-sec{
+  /* margin-top: 5%; */
+  width: 98%;
+  margin:5% auto;
+}
+.btn-1{
+  outline: none;
+  border: none;
+  border-radius: 100%;
+  float: right;
+  background: transparent;
+  /* background-color: rgba(0, 0, 0, 0.1); */
+  font-size: 20px;
+}
+.skill{
+  gap: 5px;
+}
+.con{
+  margin-top: 7%;
+}
+
+.job-ul{
+  text-decoration: none;
+  /* text-align: center; */
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: auto;
+  margin-top: 5%;
+  width: 30%;
+}
+.job-ul li{
+  text-decoration: none;
+}
+.text-j{
+  text-align: center;
+  margin-top: 7%;
+}
+@media (max-width: 576px) {
+ .con-d{
+  margin-top: 20vh;
+ }
+ .car-1{
+  width: 98%;
+  margin: auto;
+  margin-top: 10vh;
+ }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  .con-d{
+   margin-top: 20vh;
+  }
+  .car-1{
+    width: 98%;
+    margin: auto;
+    margin-top: 10vh;
+   }
+ }
+ @media (min-width: 768px) and (max-width: 992px) {
+  .con-d{
+   margin-top: 20vh;
+  }
+  .car-1{
+    width: 98%;
+    margin: auto;
+    margin-top: 10vh;
+   }
+ }
+ @media (min-width: 992px) and (max-width: 1200px) {
+  .con-d{
+   margin-top: 20vh;
+  }
+  .car-1{
+    width: 98%;
+    margin: auto;
+    margin-top: 10vh;
+   }
+ }
+ @media (min-width: 1200px){
+  .con-d{
+   margin-top: 20vh;
+  }
+  .car-1{
+    width: 98%;
+    margin: auto;
+    margin-top: 10vh;
+   }
+ }
