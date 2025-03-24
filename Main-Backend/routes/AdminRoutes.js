@@ -41,16 +41,22 @@ console.log( "user",user)
   // Save OTP in MongoDB (Overwrite if already exists)
   await Otp.findOneAndUpdate(
     { email },
-    { otp, expiresAt: new Date(Date.now() + 10 * 60 * 1000) }, // Expires in 10 min
+    { otp, expiresAt: new Date(Date.now() + 5 * 60 * 1000) }, // Expires in 5 min
     { upsert: true, new: true }
   );
 
   const mailOptions = {
-    from: `"Amit-Hotel-Room-Booking" <${process.env.EMAIL_USER}>`,
+    from: `"AmitJobsHub" <${process.env.EMAIL_USER}>`,
     to: email,
-    subject: "🔐 Email Verification OTP for Amit-Hotel-Room-Booking",
-    text: `Dear User,\n\nYour OTP for email verification is: ${otp}.\n\nThis OTP is valid for 10 minutes.\n\nThank you,\nAmit-Hotel-Room-Booking Team`,
+    subject: "🔐 Email Verification OTP for AmitJobsHub",
+    html: ` 
+      <h2>Dear User,</h2>
+      <h3>Your OTP for email verification is: <span style="color: blue;">${otp}</span>.</h3>
+      <h4>This OTP is valid for 5 minutes.</h4>
+      <h4>Thank you,</h4>
+      <h2>AmitJobsHub Team</h2>`
   };
+  
 
   try {
     await transporter.sendMail(mailOptions);

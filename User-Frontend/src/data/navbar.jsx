@@ -26,7 +26,7 @@ function NavbarSection() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="#">Job Search</Link>
+        <Link className=" jobs-nav" to="#">AmitJobsHub</Link>
         <button 
           className="navbar-toggler" 
           type="button" 

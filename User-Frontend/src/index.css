@@ -10,6 +10,50 @@
 .con-card:hover{
   background-color: rgba(0, 0, 0, 0.1);
 }
+
+.jobs-nav{
+  color: #0984e3;
+  position: relative;
+  text-decoration: none;
+  font-size: 25px;
+}
+.jobs-nav:hover::after{
+  width: 100%;
+  left: 0;
+}
+.jobs-nav::after{
+  content: "";
+  position: absolute;
+  left: 50%; /* Start from center */
+  bottom: -2px; /* Position slightly below the text */
+  width: 0;
+  height: 2px;
+  background-color:#0984e3 ;
+  transition: width 0.7s ease, left 0.7s ease;
+}
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  color: black;
+  /* padding-bottom: 3px; Optional: Adds space for the underline */
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%; /* Start from center */
+  bottom: -5px;
+  width: 0; /* No initial width */
+  height: 3px;
+  background: linear-gradient(90deg, #ff6b6b, #ff9f43, #48dbfb, #1dd1a1);
+  transition: width 0.7s ease, left 0.7s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%; /* Expand fully */
+  left: 0; /* Move left to cover the full width */
+}
+
 .dark-overlay {
   position: absolute;
   top: 0;
@@ -122,7 +166,7 @@
   .car-1{
     width: 98%;
     margin: auto;
-    margin-top: 10vh;
+    margin-top: 12vh;
    }
  }
  @media (min-width: 1200px){
@@ -132,6 +176,6 @@
   .car-1{
     width: 98%;
     margin: auto;
-    margin-top: 10vh;
+    margin-top: 12vh;
    }
  }

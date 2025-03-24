@@ -24,13 +24,13 @@ function UserHome() {
                     </div>
                     <div className="carousel-inner mt-5">
                         <div className={`carousel-item ${index === 0 ? 'active' : ''}`}>
-                            <img src={CarouselImage} className="d-block w-100 rounded-lg" alt="First slide" style={{ height: '400px', objectFit: 'cover' , borderRadius: "5px"}} />
+                            <img src={CarouselImage} className="d-block w-100 rounded-lg" alt="First slide" style={{ height: '300px', objectFit: 'cover' , borderRadius: "5px"}} />
                         </div>
                         <div className={`carousel-item ${index === 1 ? 'active' : ''}`}>
-                            <img src={CarouselImage1} className="d-block w-100 rounded-lg" alt="Second slide" style={{ height: '400px', objectFit: 'cover', borderRadius: "5px" }} />
+                            <img src={CarouselImage1} className="d-block w-100 rounded-lg" alt="Second slide" style={{ height: '300px', objectFit: 'cover', borderRadius: "5px" }} />
                         </div>
                         <div className={`carousel-item ${index === 2 ? 'active' : ''}`}>
-                            <img src={CarouselImage2} className="d-block w-100 rounded-lg" alt="Third slide" style={{ height: '400px', objectFit: 'cover', borderRadius: "5px" }} />
+                            <img src={CarouselImage2} className="d-block w-100 rounded-lg" alt="Third slide" style={{ height: '300px', objectFit: 'cover', borderRadius: "5px" }} />
                         </div>
                     </div>
                     <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

@@ -62,7 +62,8 @@ const User = () => {
       (job) =>
         job.companyName.toLowerCase().includes(searchValue) ||
         job.jobTitle.toLowerCase().includes(searchValue) ||
-        job.location.toLowerCase().includes(searchValue)
+        job.location.toLowerCase().includes(searchValue) ||
+        job.skills.some(skill => skill.toLowerCase().includes(searchValue))
     );
     setFilteredJobs(filtered);
   };

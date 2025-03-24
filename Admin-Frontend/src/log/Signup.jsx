@@ -43,7 +43,7 @@ function Home() {
     }
     try {
       const response = await axios.post('http://localhost:5200/api/Admin/verify-otp', form);
-      const data = response.data;
+      // const data = response.data;
       console.log(response)
         toast.success('User Signup successfully.');
         setTimeout(() => navigate("/login"), 1000);
@@ -98,10 +98,10 @@ function Home() {
               </button>
             </>
           )}
-          <h3 className="spn">Already have an account?</h3>
-          <div className="btn-1">
-            <Link to="/" className="l-btn">Log-In</Link>
-          </div>
+          <h3 className="spn">Already have an account?
+         
+            <Link to="/">Log-In</Link>
+            </h3>
         </form>
       </center>
       <ToastContainer />

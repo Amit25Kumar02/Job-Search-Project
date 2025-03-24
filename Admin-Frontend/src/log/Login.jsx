@@ -35,6 +35,7 @@ function Login() {
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
       navigate('/userdata');
+      window.location.reload();
     } catch (err) {
       toast.error(err.response?.data?.error || "Invalid credentials.", { position: "top-center" });
     }
@@ -51,10 +52,10 @@ function Login() {
           <input type="submit" className="btn-1" value="Log-In" />
           <Link to="/update" className="p-btn"><h3>Forget Password</h3></Link>
           <Link to="/delete-user" className="p-btn"><h3>Delete User</h3></Link>
-          <h3 className="spn">Doesn&apos;t have an account?</h3>
-          <div className="btn-1">
-            <Link to="/signup" className="l-btn">Sign-Up</Link>
-          </div>
+          <h3 className="spn">Doesn&apos;t have an account?
+          
+            <Link to="/signup">Sign-Up</Link>
+            </h3>
         </form>
       </center>
     </>

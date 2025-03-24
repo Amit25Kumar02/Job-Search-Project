@@ -6,8 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Navbar() {
   const [userName, setUserName] = useState(null);
+  // console.log(userName)
  
-
   useEffect(() => {
     const userData = localStorage.getItem("user");
     // console.log(userData)
@@ -28,7 +28,7 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="#">Job Search</Link>
+        <Link className="navbar-brand" to="#">AmitJobsHub</Link>
         <button
           className="navbar-toggler"
           type="button"
