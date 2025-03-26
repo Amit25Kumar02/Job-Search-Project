@@ -81,7 +81,7 @@ const JobApplyForm = () => {
                 value={proposal} 
                 onChange={handleProposalChange} 
             />
-            <button onClick={handleApply} className="btn btn-success mt-3">Submit Application</button>
+            <button onClick={handleApply} className="btn btn-outline-success mt-3">Submit Application</button>
         </div>
     );
 };

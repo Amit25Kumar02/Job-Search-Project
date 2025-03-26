@@ -68,14 +68,20 @@ function UserProfile() {
   };
     // Function to calculate profile completeness
     const calculateCompletion = (data) => {
-      const totalFields = Object.keys(data).length;
-      const filledFields = Object.values(data).filter((value) => value !== "").length;
-      const completionPercentage = Math.round((filledFields / totalFields) * 100);
+      // Define required fields (exclude optional fields like 'profile' if not mandatory)
+      const requiredFields = ["username", "email", "phone", "dob", "gender", "address","profile"];
+    
+      // Count filled fields (trim to remove spaces and check for valid values)
+      const filledFields = requiredFields.filter((field) => data[field] && data[field].trim() !== "").length;
+    
+      // Calculate percentage correctly
+      const completionPercentage = Math.round((filledFields / requiredFields.length) * 100);
+      
       setProfileCompletion(completionPercentage);
     };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 pro-card">
+    <div className="d-flex  pro-card">
     <div className="card p-4 pro-div" style={{ width: "400px" }}>
       <h2 className="text-center mb-4">Profile Page</h2>
       

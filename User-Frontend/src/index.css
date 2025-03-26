@@ -31,27 +31,31 @@
   background-color:#0984e3 ;
   transition: width 0.7s ease, left 0.7s ease;
 }
+/* Standard Navigation Links */
 .nav-link {
   position: relative;
   text-decoration: none;
   color: black;
-  /* padding-bottom: 3px;  */
+  display: inline-block;
+  padding-bottom: 3px;
 }
 
 .nav-link::after {
   content: "";
   position: absolute;
-  left: 50%; /* Start from center */
+  left: 50%;
   bottom: 1px;
-  width: 0; 
+  width: 0;
   height: 5px;
   background: linear-gradient(90deg, #ff6b6b, #ff9f43, #ff6b6b);
-  transition: width 0.7s ease, left 0.7s ease;
+  transition: width 0.7s ease, left 0.7s ease; /* Smooth expansion */
+  transform: translateX(-50%); /* Keeps it centered */
 }
 
 .nav-link:hover::after {
-  width: 100%; 
-  left: 0; 
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%); /* Ensures expansion from center */
 }
 
 .dark-overlay {

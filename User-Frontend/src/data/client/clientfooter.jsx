@@ -34,7 +34,7 @@ function ClientFooter() {
                 </div>
             </div>
             <div className="footer-bottom">
-                &copy; 2025 Amit-Jobs. All Rights Reserved.
+                &copy; 2025 AmitJobsHub. All Rights Reserved.
             </div>
         </footer>
     );

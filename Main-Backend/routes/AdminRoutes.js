@@ -61,12 +61,16 @@ app.post("/send-otp", async (req, res) => {
     from: `"AmitJobsHub" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: "🔐 Email Verification OTP for AmitJobsHub",
-    html: ` 
-      <h2>Dear User,</h2>
-      <h3>Your OTP for email verification is: <span style="color: blue;">${otp}</span>.</h3>
-      <h4>This OTP is valid for 5 minutes.</h4>
-      <h4>Thank you,</h4>
-      <h2>AmitJobsHub Team</h2>`
+    html: `  <div style="font-family: Arial, sans-serif; color: #333; padding: 20px; line-height: 1.6;">
+      <h2 style="color: #2c3e50;">Dear User,</h2>
+      <h3>Your One-Time Password (OTP) for email verification is: 
+          <span style="color: #007bff; font-weight: bold;">${otp}</span>.
+      </h3>
+      <h4>Please use this OTP within the next <strong>5 minutes</strong> to complete your verification process.</h4>
+      <p>If you did not request this verification, please ignore this email.</p>
+      <h4>Best Regards,</h4>
+      <h3 style="color: #2c3e50;">AmitJobsHub Team</h3>
+  </div>`
   };
   try {
     await transporter.sendMail(mailOptions);
@@ -157,7 +161,6 @@ app.put('/update/:email', async (req, res) => {
   if (!username || !password) {
     return res.status(400).json({ error: 'All fields (username, password) are required' });
   }
-
   try {
     const updatedUser = await Admin.findOneAndUpdate(
       { emailId },
@@ -185,22 +188,41 @@ app.delete('/sub/:email', async (req, res) => {
   }
 });
 // for profile update routes
-app.post('/profileUpdate', upload.single("profileImage"),async(req,res)=>{
+app.post('/profileUpdate', upload.single("profileImage"), async (req, res) => {
   try {
-    const{username,email,dob,phone,address,gender}=req.body;
-    // console.log("reqBody Line : ",req.body);
-    const adminP = await Admin.findOneAndUpdate({email},{username,email,dob,phone,address,gender},{new:true});
-    if(!adminP){
-      res.status(404).json({message:"Details not found"});
+    const { username, email, dob, phone, address, gender } = req.body;
+
+    // Construct the update object
+    let updateData = {
+      username,
+      dob,
+      phone,
+      address,
+      gender,
+    };
+
+    // If a profile image is uploaded, update it
+    if (req.file) {
+      updateData.profileImage = `profileImage/${req.file.filename}`;
     }
-    // console.log("Details line :",adminP);
-    adminP.profileImage=req.file?`profileImage/${req.file.filename}`: null; // for  storing profile image
-    await adminP.save();
-    res.status(200).json({message:"Profile Update Successfully"})
+
+    // Update the admin profile in the database
+    const adminP = await Admin.findOneAndUpdate(
+      { email },
+      updateData,
+      { new: true }
+    );
+
+    if (!adminP) {
+      return res.status(404).json({ message: "Details not found" });
+    }
+
+    res.status(200).json({ message: "Profile Updated Successfully", data: adminP });
   } catch (error) {
-    // console.log("error",error)
-    res.status(500).json({message:"Server Error",error})
+    console.error("Error:", error);
+    res.status(500).json({ message: "Server Error", error });
   }
-})
+});
+
 
 module.exports = app;
