@@ -7,6 +7,7 @@ const jobOfferRoutes = require('./routes/Client');
 const AdminRoutes =  require('./routes/AdminRoutes');
 const JobRoutes = require("./routes/jobRoutes");
 const Favroit = require("./routes/favroit")
+const verifyToken = require("./authorizationMiddleware/clientAuth")
 require ('dotenv').config();
 const app = express();
 
@@ -18,7 +19,7 @@ app.use("/uploads", express.static("uploads"));
 connectDB();
 app.use("/api/Ajobs", JobRoutes); 
 app.use("/api/users", userRoutes); 
-app.use('/api/jobs', jobOfferRoutes);
+app.use('/api/jobs', verifyToken ,jobOfferRoutes);
 app.use('/api/Admin', AdminRoutes);
 app.use('/api/Favroit', Favroit);
 

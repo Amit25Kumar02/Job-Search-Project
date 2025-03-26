@@ -74,7 +74,7 @@ function JobOfferForm() {
 
   const fetchJobs = async () => {
     try {
-      const response = await axios.get(`http://localhost:5200/api/jobs/all`);
+      const response = await axios.get(`http://localhost:5200/api/jobs/all`,{ headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` } });
       if (response.data.success) {
         setJobs(response.data.jobs);
       } else {

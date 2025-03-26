@@ -6,7 +6,9 @@ import { toast } from "react-toastify";
 const JobApplyForm = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { job, user } = location.state || {};
+    const { job, user} = location.state || {};
+
+    const token = localStorage.getItem('token')
 
     const [resume, setResume] = useState(null);
 
@@ -34,7 +36,7 @@ const JobApplyForm = () => {
 
         try {
             const response = await axios.post("http://localhost:5200/api/Ajobs/apply", formData, {
-                headers: { "Content-Type": "multipart/form-data" }
+                headers: { "Content-Type": "multipart/form-data" ,   "Authorization": `Bearer ${token}`  }
             });
 
             if (response.data.success) {

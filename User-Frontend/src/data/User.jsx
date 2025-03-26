@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import CarouselImage from "./user-img/1735987411225.jpg";
 import CarouselImage1 from "./user-img/240_F_283636229_M3E2FdyD2W6xIsZjKeXx1NeF2ExxKMTW.jpg";
 import CarouselImage2 from "./user-img/gettyimages-956327810-612x612.jpg";
-import { Heart } from 'lucide-react';
+import { Heart } from "lucide-react";
 
 const User = () => {
   const [jobs, setJobs] = useState([]);
@@ -17,9 +17,12 @@ const User = () => {
   const [dislikedJobs, setDislikedJobs] = useState(new Set());
 
   useEffect(() => {
+    let token = localStorage.getItem("token");
     const fetchJobs = async () => {
       try {
-        const response = await axios.get("http://localhost:5200/api/jobs/all");
+        const response = await axios.get("http://localhost:5200/api/jobs/all", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         if (response.data.success) {
           const currentDate = new Date();
           const validJobs = response.data.jobs.filter(
@@ -45,7 +48,8 @@ const User = () => {
     fetchJobs();
 
     // Load saved jobs from localStorage
-    const savedJobsFromLocalStorage = JSON.parse(localStorage.getItem("savedJobs")) || [];
+    const savedJobsFromLocalStorage =
+      JSON.parse(localStorage.getItem("savedJobs")) || [];
     setSavedJobs(savedJobsFromLocalStorage);
   }, []);
 
@@ -72,43 +76,67 @@ const User = () => {
       const updatedSavedJobs = prev.some((savedJob) => savedJob._id === job._id)
         ? prev.filter((savedJob) => savedJob._id !== job._id)
         : [...prev, job];
-        
+
       // Save the updated saved jobs to localStorage
       localStorage.setItem("savedJobs", JSON.stringify(updatedSavedJobs));
       return updatedSavedJobs;
     });
   };
 
-  
   const handleDislike = (jobId) => {
     if (!dislikedJobs.has(jobId)) {
       setDislikeCounts((prevCounts) => ({
         ...prevCounts,
         [jobId]: (prevCounts[jobId] || 0) + 1,
       }));
-  
-      setDislikedJobs((prevDislikedJobs) => new Set(prevDislikedJobs).add(jobId));
+
+      setDislikedJobs((prevDislikedJobs) =>
+        new Set(prevDislikedJobs).add(jobId)
+      );
     }
   };
-  
 
   const toggleSavedJobs = () => setShowSavedJobs(!showSavedJobs);
 
   return (
     <>
       <div className="car-1">
-        <div id="jobCarousel" className="carousel slide mt-5" data-bs-ride="carousel">
+        <div
+          id="jobCarousel"
+          className="carousel slide mt-5"
+          data-bs-ride="carousel"
+        >
           <div className="carousel-inner">
-            {[CarouselImage, CarouselImage1, CarouselImage2].map((image, index) => (
-              <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`}>
-                <img src={image} className="d-block w-100 rounded-lg" alt={`Slide ${index + 1}`} style={{ height: "300px" , borderRadius: "5px"}} />
-              </div>
-            ))}
+            {[CarouselImage, CarouselImage1, CarouselImage2].map(
+              (image, index) => (
+                <div
+                  key={index}
+                  className={`carousel-item ${index === 0 ? "active" : ""}`}
+                >
+                  <img
+                    src={image}
+                    className="d-block w-100 rounded-lg"
+                    alt={`Slide ${index + 1}`}
+                    style={{ height: "300px", borderRadius: "5px" }}
+                  />
+                </div>
+              )
+            )}
           </div>
-          <button className="carousel-control-prev" type="button" data-bs-target="#jobCarousel" data-bs-slide="prev">
+          <button
+            className="carousel-control-prev"
+            type="button"
+            data-bs-target="#jobCarousel"
+            data-bs-slide="prev"
+          >
             <span className="carousel-control-prev-icon"></span>
           </button>
-          <button className="carousel-control-next" type="button" data-bs-target="#jobCarousel" data-bs-slide="next">
+          <button
+            className="carousel-control-next"
+            type="button"
+            data-bs-target="#jobCarousel"
+            data-bs-slide="next"
+          >
             <span className="carousel-control-next-icon"></span>
           </button>
         </div>
@@ -133,29 +161,47 @@ const User = () => {
       </div>
 
       <div className="container mt-4">
-        <h2 className="text-dark mb-4">{showSavedJobs ? "Saved Jobs" : "Jobs you might like"}</h2>
+        <h2 className="text-dark mb-4">
+          {showSavedJobs ? "Saved Jobs" : "Jobs you might like"}
+        </h2>
         {(showSavedJobs ? savedJobs : filteredJobs).map((job) => (
           <div key={job._id} className="card shadow mb-4 con-card">
             <div className="card-body text-start d-flex align-items-center ms-auto ">
-              <button onClick={() => handleDislike(job._id)} className="btn-1 me-2">
+              <button
+                onClick={() => handleDislike(job._id)}
+                className="btn-1 me-2"
+              >
                 👎 {dislikeCounts[job._id] || 0}
               </button>
               <button onClick={() => handleSaveJob(job)} className="btn-1">
-                <Heart fill={savedJobs.some((savedJob) => savedJob._id === job._id) ? 'red' : 'none'}
-                  color={savedJobs.some((savedJob) => savedJob._id === job._id) ? 'red' : 'black'} />
+                <Heart
+                  fill={
+                    savedJobs.some((savedJob) => savedJob._id === job._id)
+                      ? "red"
+                      : "none"
+                  }
+                  color={
+                    savedJobs.some((savedJob) => savedJob._id === job._id)
+                      ? "red"
+                      : "black"
+                  }
+                />
               </button>
             </div>
             <Link to={`/apply/${job._id}`} className="con-btn">
               <div className="card-body text-start">
-                <p className="text-muted">{new Date(job.postedAt).toLocaleDateString()}</p>
+                <p className="text-muted">
+                  {new Date(job.postedAt).toLocaleDateString()}
+                </p>
                 <h5 className="text-dark">{job.jobTitle}</h5>
                 <p className="text-muted">{job.jobDescription}</p>
                 <p className="text-info">Location: {job.location}</p>
                 <p className="text-success">Salary: ₹ {job.salary} / PA</p>
-                <div className="text-dark gap-5 ">
-                  {job.skills.join(' , ')}
-                </div>
-                <p className="text-danger">Deadline: {new Date(job.applicationDeadline).toLocaleDateString()}</p>
+                <div className="text-dark gap-5 ">{job.skills.join(" , ")}</div>
+                <p className="text-danger">
+                  Deadline:{" "}
+                  {new Date(job.applicationDeadline).toLocaleDateString()}
+                </p>
               </div>
             </Link>
           </div>
