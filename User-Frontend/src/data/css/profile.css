@@ -1,0 +1,17 @@
+.profile-img{
+    height: 80px;
+    width: 80px;
+    border: 1px solid black;
+    border-radius: 50%;
+    margin: auto;
+  }
+  .pro-card{
+    margin-top: 4%;
+  }
+  .pro-div{
+    box-shadow: 5px 5px 10px black;
+  
+  }
+  .pro-btn{
+    margin: auto;
+  }

@@ -5,14 +5,26 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 const cors = require("cors");
 const Otp = require('../models/Otpmodel.js')
-// const bodyParser = require("body-parser");
 const crypto = require("crypto");
+const multer = require("multer");
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+ 
+// using multer save profile(offline)image
+const uploadDir =path.join(__dirname,"./profileImage");
+if(!fs.existsSync(uploadDir)){
+  fs.mkdirSync(uploadDir,{recursive:true});
+}
+const storage=multer.diskStorage({
+  destination:(req,file,cb)=>cb(null,uploadDir),
+  filename:(req,file,cb)=>cb(null.Date.now()+"-"+file.originalname)
+});
 
-// const otpStorage = {};
+const upload=multer({storage});
 
 // Configure Nodemailer transporter
 const transporter = nodemailer.createTransport({
@@ -31,7 +43,7 @@ app.post("/send-otp", async (req, res) => {
   if (!email) return res.status(400).json({ message: "Email is required" });
 
   let user = await Admin.findOne({ email })
-console.log( "user",user)
+// console.log( "user",user)
   if (user) {
     res.status(409).send({ message: 'user already exists ..' })
     return
@@ -56,8 +68,6 @@ console.log( "user",user)
       <h4>Thank you,</h4>
       <h2>AmitJobsHub Team</h2>`
   };
-  
-
   try {
     await transporter.sendMail(mailOptions);
     res.status(200).json({ message: "OTP sent successfully" });
@@ -76,7 +86,6 @@ app.post("/verify-otp", async (req, res) => {
   if (user) {
     return res.status(400).json({ success: false, message: "user Already existsss" });
   }
-
   const storedOtp = await Otp.findOne({ email });
   if (!storedOtp) return res.status(400).json({ message: "OTP not found" });
 
@@ -175,5 +184,23 @@ app.delete('/sub/:email', async (req, res) => {
     res.status(500).json({ message: 'Error deleting user', error: err });
   }
 });
+
+app.post('/profileUpdate', upload.single("profileImage"),async(req,res)=>{
+  try {
+    const{username,email,dob,phone,address,gender}=req.body;
+    console.log("reqBody Line : ",req.body);
+    const adminP = await Admin.findOneAndUpdate({email},{username,email,dob,phone,address,gender},{new:true});
+    if(!adminP){
+      res.status(404).json({message:"Details not found"});
+    }
+    console.log("Details line :",adminP);
+    adminP.profileImage=req.file?`profileImage/${req.file.filename}`: null; // for  storing profile image
+    await adminP.save();
+    res.status(200).json({message:"Profile Update Successfully"})
+  } catch (error) {
+    console.log("error",error)
+    res.status(500).json({message:"Server Error",error})
+  }
+})
 
 module.exports = app;

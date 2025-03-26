@@ -25,9 +25,9 @@
   content: "";
   position: absolute;
   left: 50%; /* Start from center */
-  bottom: -2px; /* Position slightly below the text */
+  bottom: 1px; /* Position slightly below the text */
   width: 0;
-  height: 2px;
+  height: 4px;
   background-color:#0984e3 ;
   transition: width 0.7s ease, left 0.7s ease;
 }
@@ -35,23 +35,23 @@
   position: relative;
   text-decoration: none;
   color: black;
-  /* padding-bottom: 3px; Optional: Adds space for the underline */
+  /* padding-bottom: 3px;  */
 }
 
 .nav-link::after {
   content: "";
   position: absolute;
   left: 50%; /* Start from center */
-  bottom: -5px;
-  width: 0; /* No initial width */
-  height: 3px;
-  background: linear-gradient(90deg, #ff6b6b, #ff9f43, #48dbfb, #1dd1a1);
+  bottom: 1px;
+  width: 0; 
+  height: 5px;
+  background: linear-gradient(90deg, #ff6b6b, #ff9f43, #ff6b6b);
   transition: width 0.7s ease, left 0.7s ease;
 }
 
 .nav-link:hover::after {
-  width: 100%; /* Expand fully */
-  left: 0; /* Move left to cover the full width */
+  width: 100%; 
+  left: 0; 
 }
 
 .dark-overlay {
@@ -179,3 +179,20 @@
     margin-top: 12vh;
    }
  }
+ .profile-img{
+  height: 80px;
+  width: 80px;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin: auto;
+}
+.pro-card{
+  margin-top: 4%;
+}
+.pro-div{
+  box-shadow: 5px 5px 10px black;
+
+}
+.pro-btn{
+  margin: auto;
+}

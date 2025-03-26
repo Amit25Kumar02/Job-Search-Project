@@ -8,6 +8,10 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "JobOffer" }],
   userType: { type: String, enum: ["Client", "User"], default: "User" },
+  dob:{type:Date},
+  address:{type:String},
+  profile:{type:String},
+  gender:{type:String ,enum:["Male","Female","Other"]},
   createdAt: { type: Date, default: Date.now }
 });
 
