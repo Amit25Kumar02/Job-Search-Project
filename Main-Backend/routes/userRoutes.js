@@ -28,12 +28,14 @@ app.post("/login", async (req, res) => {
     const { email, password, userType } = req.body;
 
     const user = await User.findOne({ email });
+    console.log(user)
     if (!user) return res.status(400).json({ error: "Invalid email or password" });
 
     if (user.password !== password) return res.status(400).json({ error: "Invalid email or password" });
     if (user.userType !== userType) return res.status(400).json({ error: "Invalid UserType" });
 
-    let  token = JTW.sign({id :user._id , Role: user.userType} ,process.env.JWT_SECRET, { expiresIn: "1h" }) 
+    let  token = await JTW.sign({id :user._id , Role: user.userType} ,process.env.JWT_SECRET, { expiresIn: "1h" }) 
+     console.log(token) 
     res.json({ message: "Login successful",
        user:{Id : user._id,username : user.username , email : user.email ,phone:user.phone, userType :user.userType}
       , token });

@@ -8,9 +8,9 @@ import { FevriotProvider } from './store/fevriot.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthContextProvider>
-      <FevriotProvider>
+      {/* <FevriotProvider> */}
       <App />
-      </FevriotProvider>
+      {/* </FevriotProvider> */}
     </AuthContextProvider>
   </StrictMode>,
 )
