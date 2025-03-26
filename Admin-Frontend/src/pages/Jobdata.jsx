@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './css/data.css';
@@ -26,6 +25,11 @@ const JobData = () => {
   
 
   const deleteItem = async (id) => {
+    const isConfirmed = window.confirm("Are you sure you want to delete this?");
+  
+    if (!isConfirmed) {
+      return; // Stop execution if user cancels
+    }
     try {
       await axios.delete(`http://localhost:5200/api/jobs/delete/${id}`);
       setJobs((prevJobs) => prevJobs.filter((job) => job._id !== id));

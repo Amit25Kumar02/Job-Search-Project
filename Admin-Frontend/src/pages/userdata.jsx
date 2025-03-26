@@ -25,6 +25,11 @@ const Userdata = () => {
   };
   
   async function handleDelete(id) {
+    const isConfirmed = window.confirm("Are you sure you want to delete this?");
+  
+    if (!isConfirmed) {
+      return; // Stop execution if user cancels
+    }
     try {
       await axios.delete(`http://localhost:5200/api/users/del/${id}`,{});
       toast.success("Data Deleted Successfully")
@@ -43,6 +48,7 @@ const Userdata = () => {
               <tr>
                 <th scope="col">Users Name</th>
                 <th scope="col">Users Email</th>
+                <th scope="col">Mob. No.</th>
                 <th scope="col">Role</th>
                 <th scope="col">Actions</th>
               </tr>
@@ -52,6 +58,7 @@ const Userdata = () => {
                 <tr key={user._id}>
                   <td>{user.username}</td>
                   <td>{user.email}</td>
+                  <td>{user.phone}</td>
                   <td>{user.userType}</td>
                   <td>
                     <button onClick={()=>handleDelete(user._id)} className="btn btn-danger btn-sm">

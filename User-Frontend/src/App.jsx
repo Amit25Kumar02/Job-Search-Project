@@ -21,6 +21,8 @@ import ClientNav from './data/client/clientnav.jsx';
 import ClientFooter from './data/client/clientfooter.jsx';
 import Footer from './data/footer.jsx';
 import UserServices from './data/UserServices.jsx';
+import { Clientcontact } from './data/client/Clientcontact.jsx';
+import { Usercontact } from './data/usercontact.jsx';
 
 function ProtectedRoute({ children }) {
   const { token } = useContext(AuthContext);
@@ -46,6 +48,7 @@ function App() {
           <Route path="/apply/:jobId" element={<ProtectedRoute><JobDetails /></ProtectedRoute>} />
           <Route path="/applybtn/:jobId" element={<ProtectedRoute><JobApplyForm /></ProtectedRoute>} />
           <Route path="/home" element={<ProtectedRoute><UserHome /></ProtectedRoute>} />
+          <Route path="/contact" element={<ProtectedRoute><Usercontact /></ProtectedRoute>} />
         </Routes>
         <Footer/>
         </>
@@ -61,6 +64,7 @@ function App() {
           <Route path="/clientprofile" element={<ProtectedRoute><ClientProfile /></ProtectedRoute>} />
           <Route path="/services" element={<ProtectedRoute><ServicesPage /></ProtectedRoute>} />
           <Route path="/jobrequest" element={<ProtectedRoute><JobRequest /></ProtectedRoute>} />
+          <Route path="/clientcontact" element={<ProtectedRoute><Clientcontact /></ProtectedRoute>} />
         </Routes>
         <ClientFooter/>
         </>

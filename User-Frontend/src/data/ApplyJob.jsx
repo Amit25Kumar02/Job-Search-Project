@@ -9,6 +9,7 @@ const JobApplyForm = () => {
     const { job, user } = location.state || {};
 
     const [resume, setResume] = useState(null);
+    const [proposal, setProposal] = useState(""); // Added state for proposal
 
     if (!job || !user) {
         return <h2 className="text-center">Job or User data missing.</h2>;
@@ -16,6 +17,10 @@ const JobApplyForm = () => {
 
     const handleResumeChange = (e) => {
         setResume(e.target.files[0]); 
+    };
+
+    const handleProposalChange = (e) => {
+        setProposal(e.target.value);
     };
 
     const handleApply = async () => {  
@@ -30,6 +35,7 @@ const JobApplyForm = () => {
         formData.append("userName", user.username);
         formData.append("userEmail", user.email);
         formData.append("Phone", user.phone);
+        formData.append("proposal", proposal); // Append proposal
         formData.append("resume", resume);
 
         try {
@@ -41,7 +47,7 @@ const JobApplyForm = () => {
                 toast.success("Application submitted successfully!");
                 setTimeout(() => {
                     navigate("/userjob");
-                  }, 2000);
+                }, 2000);
             } else {
                 toast.error(response.data.message);
             }
@@ -66,6 +72,14 @@ const JobApplyForm = () => {
                 accept=".pdf,.doc,.docx" 
                 onChange={handleResumeChange} 
                 className="form-control mt-3" 
+            />
+            <label><strong>Describe your proposal</strong></label>
+            <textarea 
+                name="proposal" 
+                placeholder="What makes you the best candidate for this project?" 
+                className="form-control mt-3"
+                value={proposal} 
+                onChange={handleProposalChange} 
             />
             <button onClick={handleApply} className="btn btn-success mt-3">Submit Application</button>
         </div>

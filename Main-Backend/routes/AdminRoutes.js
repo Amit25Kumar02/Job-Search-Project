@@ -184,21 +184,21 @@ app.delete('/sub/:email', async (req, res) => {
     res.status(500).json({ message: 'Error deleting user', error: err });
   }
 });
-
+// for profile update routes
 app.post('/profileUpdate', upload.single("profileImage"),async(req,res)=>{
   try {
     const{username,email,dob,phone,address,gender}=req.body;
-    console.log("reqBody Line : ",req.body);
+    // console.log("reqBody Line : ",req.body);
     const adminP = await Admin.findOneAndUpdate({email},{username,email,dob,phone,address,gender},{new:true});
     if(!adminP){
       res.status(404).json({message:"Details not found"});
     }
-    console.log("Details line :",adminP);
+    // console.log("Details line :",adminP);
     adminP.profileImage=req.file?`profileImage/${req.file.filename}`: null; // for  storing profile image
     await adminP.save();
     res.status(200).json({message:"Profile Update Successfully"})
   } catch (error) {
-    console.log("error",error)
+    // console.log("error",error)
     res.status(500).json({message:"Server Error",error})
   }
 })

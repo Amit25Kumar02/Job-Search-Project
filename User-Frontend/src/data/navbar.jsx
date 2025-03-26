@@ -56,8 +56,11 @@ function NavbarSection() {
           </ul>
 
           {/* User Dropdown */}
+
           <div className="dropdown">
+
             <button className="btn btn-secondary dropdown-toggle" type="button" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          {/* <img src={userName.profile} alt="Profile" className="profile-img2 mb-2" /> */}
               {userName ? `Hey, ${userName.username}` : "Account"}
             </button>
             <ul className="dropdown-menu" aria-labelledby="accountDropdown">

@@ -56,7 +56,7 @@ function ClientProfile() {
 
   const saveData = async (data) => {
     try {
-      await axios.post("http://localhost:5200/api/users/profileUpdate", data);
+      await axios.post("http://localhost:5200/api/users/ucprofileUpdate", data);
       localStorage.setItem("user", JSON.stringify(data));
       setUserData(data);
       setIsEditing(false);

@@ -31,6 +31,11 @@ const ApplyJob = () => {
   };
 
   const deleteApplication = async (id) => {
+    const isConfirmed = window.confirm("Are you sure you want to delete this?");
+  
+    if (!isConfirmed) {
+      return; // Stop execution if user cancels
+    }
     try {
       await axios.delete(`http://localhost:5200/api/Ajobs/del/${id}`);
       setApplications((prevApplications) => prevApplications.filter((app) => app._id !== id));
@@ -43,12 +48,12 @@ const ApplyJob = () => {
   return (
     <>
 
-      <div className="con-ajob">
+      <div className="con-d">
         <h1 className="data">Applied Jobs List</h1>
         {applications.length === 0 ? (
           <p>No applications found.</p>
         ) : (
-          <table className="table table-striped tbl">
+          <table className="table table-striped ">
             <thead>
               <tr>
                 <th scope="col">Applicant Name</th>

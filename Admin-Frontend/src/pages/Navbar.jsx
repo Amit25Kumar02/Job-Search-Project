@@ -28,7 +28,7 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="#">AmitJobsHub</Link>
+        <Link className="jobs-nav" to="#">AmitJobsHub</Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -59,7 +59,7 @@ function Navbar() {
             <button className="btn btn-secondary dropdown-toggle" type="button" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
               {userName ? `Hey, ${userName.username}` : "Account"}
             </button>
-            <ul className="dropdown-menu" aria-labelledby="accountDropdown">
+            <ul className="dropdown-menu w-50" aria-labelledby="accountDropdown">
               {userName ? (
                 <>
                   <li><Link className="dropdown-item" to="/adminprofile">Profile</Link></li>

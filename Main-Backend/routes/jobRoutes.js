@@ -31,9 +31,9 @@ app.post("/apply", upload.single("resume"), async (req, res) => {
         return res.status(400).json({ success: false, message: "Resume file is required" });
     }
 
-    const { jobId, userId, userName, userEmail, Phone } = req.body;
+    const { jobId, userId, userName, userEmail, Phone, proposal } = req.body;
 
-    if (!jobId || !userId || !userName || !userEmail || !Phone) {
+    if (!jobId || !userId || !userName || !userEmail || !Phone || !proposal) {
         return res.status(400).json({ success: false, message: "Missing required fields" });
     }
 
@@ -49,6 +49,7 @@ app.post("/apply", upload.single("resume"), async (req, res) => {
             userName,
             userEmail,
             Phone,
+            proposal,
             resume: `${req.protocol}://localhost:5200/uploads/${req.file.filename}`
 
         });

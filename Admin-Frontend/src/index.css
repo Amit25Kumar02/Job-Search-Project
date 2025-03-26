@@ -16,14 +16,57 @@
     pointer-events: none; 
     border-radius: 5px;
   }
+  .jobs-nav{
+    color: #0984e3;
+    position: relative;
+    text-decoration: none;
+    font-size: 25px;
+  }
+  .jobs-nav:hover::after{
+    width: 100%;
+    left: 0;
+  }
+  .jobs-nav::after{
+    content: "";
+    position: absolute;
+    left: 50%; /* Start from center */
+    bottom: 1px; /* Position slightly below the text */
+    width: 0;
+    height: 4px;
+    background-color:#0984e3 ;
+    transition: width 0.7s ease, left 0.7s ease;
+  }
+  .nav-link {
+    position: relative;
+    text-decoration: none;
+    color: black;
+    /* padding-bottom: 3px;  */
+  }
   
-  .footer {
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%; /* Start from center */
+    bottom: 1px;
+    width: 0; 
+    height: 5px;
+    background: linear-gradient(90deg, #ff6b6b, #ff9f43, #ff6b6b);
+    transition: width 0.7s ease, left 0.7s ease;
+  }
+  
+  .nav-link:hover::after {
+    width: 100%; 
+    left: 0; 
+  }
+  
+  
+  /* .footer {
     margin-top: 5%;
     text-align: center;
     background-color: black;
     color: white;
     width: 100%;
-  }
+  } */
   
   .user {
     margin: 5% auto;
@@ -34,7 +77,7 @@
     height: 400px;
     object-fit: cover;
   }
-  
+
   .dropdown-menu {
     max-width: 50px; 
     width: 50px;
@@ -65,82 +108,35 @@
   .con{
     margin-top: 7%;
   }
-  
+  /* .dr-menu{
+    max-width: 50px;
+    width: 90%;
+  } */
+  .dropdown ul {
+    border: 1px solid black;
+   max-width: 40px;
+   width: 90%;
+   margin-right: 10vh;
+
+  }
   @media (max-width: 576px) {
-    .con-d{
-      width: 96%;
+    .con-d {
+      width: 90%;
       text-align: center;
+      overflow-x: auto;
       margin: auto;
       margin-top: 10vh;
+      font-size: 8px;
     }
    
-    .con-ajob {
-      width: 100%;
-      overflow-x: auto;
-      margin-top: 10vh;
-      text-align: center;
-    }
-  
-    .tbl {
-      width: 100%;
-      border-collapse: collapse;
-      display: block;
-      overflow-x: auto;
-      white-space: nowrap;
-    }
-  
-    .tbl thead {
-      display: table;
-      width: 100%;
-    }
-  
-    .tbl tbody {
-      display: block;
-      width: 100%;
-      overflow-x: auto;
-    }
-  
-    .tbl tr {
-      display: table;
-      width: 100%;
-      table-layout: fixed;
-    }
-  
-    .tbl th,
-    .tbl td {
-      padding: 8px;
-      text-align: left;
-      word-wrap: break-word;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  
-    .tbl th {
-      background: #f8f9fa;
-      position: sticky;
-      top: 0;
-    }
-  
-    /* Ensure the table is scrollable */
-    .tbl-container {
-      overflow-x: auto;
-      max-width: 100%;
-    }
   }
+  
   @media (min-width: 576px) and (max-width: 768px){
     .con-d{
       width: 96%;
       text-align: center;
       margin: auto;
       margin-top: 10vh;
-    }
-   
-    .con-ajob {
-      width: 96%;
-      margin: auto;
-      overflow-x: auto;
-      margin-top: 10vh;
-      text-align: center;
     }
   }
   @media (min-width: 768px) and (max-width: 992px){
@@ -150,14 +146,6 @@
       margin: auto;
       margin-top: 10vh;
     }
-   
-    .con-ajob {
-      width: 96%;
-      margin: auto;
-      overflow-x: auto;
-      margin-top: 10vh;
-      text-align: center;
-    }
   }
   @media (min-width: 992px) and (max-width: 1200px){
     .con-d{
@@ -166,28 +154,15 @@
       margin: auto;
       margin-top: 10vh;
     }
-   
-    .con-ajob {
-      width: 96%;
-      margin: auto;
-      overflow-x: auto;
-      margin-top: 10vh;
-      text-align: center;
-    }
   }
   @media (min-width: 1200px){
     .con-d{
-      width: 96%;
+      width: 90%;
       text-align: center;
       margin: auto;
       margin-top: 10vh;
     }
-   
-    .con-ajob {
-      width: 96%;
-      margin: auto;
-      overflow-x: auto;
-      margin-top: 10vh;
-      text-align: center;
-    }
+   .con-d td,th{
+    font-size: 18px;
+   }
   }

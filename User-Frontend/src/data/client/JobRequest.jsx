@@ -30,18 +30,19 @@ const JobRequest = () => {
         {applications?.length === 0 ? (
           <p>No applications found.</p>
         ) : (
-          <div className="d-flex flex-wrap justify-content-around mt-4">
+          <div className="d-flex flex-wrap mt-4 w-100">
             {applications?.map((app) => (
-              <div key={app._id} className="card shadow-lg m-3" style={{ width: "300px" }}>
+              <div key={app._id} className="card shadow-lg m-3 w-100" >
                 <div className="card-body">
-                  <strong>Job Title: {app.jobId?.jobTitle}</strong>
-                  <br />
-                  <strong>Company Name: {app.jobId?.companyName}</strong>
-                  <br />
+                 <p> <strong>Job Title: </strong>{app.jobId?.jobTitle}</p>
+                
+                  <p><strong>Company Name: </strong>{app.jobId?.companyName}</p>
+               
                   <strong>Applied by:</strong>
                   <p><b>Name: </b>{app.userName}</p>
                   <p><b>Email: </b>{app.userEmail}</p>
                   <p><b>Mob. No.: </b>{app.Phone}</p>
+                  <p><b>Proposal: </b>{app.proposal}</p>
                   <a href={app.resume} target="_blank" rel="noopener noreferrer" className="btn btn-outline-success">
                     See Resume
                   </a>

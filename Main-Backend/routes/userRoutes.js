@@ -47,9 +47,10 @@ app.post("/login", async (req, res) => {
     if (user.userType !== userType) return res.status(400).json({ error: "Invalid UserType" });
 
     let  token = JTW.sign({id :user._id , Role: user.userType} ,process.env.JWT_SECRET, { expiresIn: "1h" }) 
-    res.json({ message: "Login successful",
-       user:{Id : user._id,username : user.username , email : user.email ,phone:user.phone, userType :user.userType}
-      , token });
+    let userData = user.toObject();
+    delete userData.password;
+    res.status(200).json({ message: "Login successful",
+      user: userData , token });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -95,15 +96,15 @@ app.delete('/del/:id',async(req,res)=>{
 })
 
 //for profile update
-app.post('/profileUpdate',upload.single("profileImage"),async(req,res)=>{
+app.post('/ucprofileUpdate',upload.single("profileImage"),async(req,res)=>{
   try {
     const {username,email,phone,gender,address,dob}=req.body;
-    console.log("body line : ",req.body);
+    // console.log("body line : ",req.body);
     const userP = await User.findOneAndUpdate({email},{username,email,phone,gender,address,dob},{new:true});
     if(!userP){
       res.status(404).json({message:"User not Found"})
     }
-    console.log("User save line :",userP);
+    // console.log("User save line :",userP);
     await userP.save();
     res.status(200).json({message:"User & Client Profile Update successfully"});
   } catch (error) {

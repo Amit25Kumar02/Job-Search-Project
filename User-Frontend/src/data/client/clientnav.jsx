@@ -26,7 +26,7 @@ function ClientNav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
       <div className="container">
-        <Link className="navbar-brand" to="/">Client-Navbar</Link>
+        <Link className="jobs-nav" to="/">AmitJobsHub</Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -39,7 +39,7 @@ function ClientNav() {
               <Link className="nav-link" to="/clientabout">About</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/contact">Contact</Link>
+              <Link className="nav-link" to="/clientcontact">Contact</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/services">Services</Link>
@@ -51,7 +51,8 @@ function ClientNav() {
 
           <div className="dropdown">
             <button className="btn btn-secondary dropdown-toggle" type="button" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-              {username ? `Hey, ${username.username}` : "Account"}
+            {/* <img src={username.profile} alt="Profile" className="profile-img2 mb-2" /> */}
+              {username ?`${username.username}` : "Account"}
             </button>
             <ul className="dropdown-menu" aria-labelledby="accountDropdown">
               {username ? (
