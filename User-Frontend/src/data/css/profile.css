@@ -5,29 +5,88 @@ body {
 }
 
 .pro-card {
-  display: flex;
+  display: inline-flexbox;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  /* margin-top: 6%; */
+  height: 100%;
+  /* min-height: 200vh; */
+  /* border: 1px solid rgb(109, 109, 109); */
+  margin: 5%;
 }
 
-.pro-div {
-  width: 400px;
+.btn-profile {
+  /* background: rgba(0, 0, 0, 0.6); */
+  color: white;
+  border: none;
+  padding: 2px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  position: absolute;
+  bottom: 0;
+  margin-left: -42%;
+  /* left: -50; */
+}
+
+.main-div {
+  width: 100%;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  /* text-align: center; */
+  border: 2px solid black ;
+  display: inline-block;
 }
 
 /* Profile Image */
 .profile-img {
   width: 120px;
   height: 120px;
-  /* object-fit: cover; */
   border-radius: 50%;
-  border: 5px solid #28a745;
+  position: relative;
+  /* border: 5px solid #28a745; */
+}
+.profile-img p{
+  text-align: center;
+  align-items: center;
+  margin-top: 27%;
+  justify-content: center;
+
+}
+.pro-img-p:hover{
+  background-image: url('../img/job-search-im-unemployed-free-photo.webp');
+  background-size: cover; 
+  background-position: center; 
+  width: 250px; 
+  height: 250px; 
+  z-index: 100;
+  /* opacity: 0; */
+  border-radius: 50%;
+}
+.input-wrapper p:hover{
+  text-decoration: none;
+}
+.pro-img-p{
+  text-align: center;
+  align-items: center;
+  /* margin-top: 47%; */
+  justify-content: center;
+}
+.btn-profile{
+  border: 1px solid #28a745;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  /* margin-top: 10%; */
+}
+.btn-profile-non{
+  border: 1px solid #28a745;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  margin-left: 60%;
+  z-index: 100;
+  margin-top: -30%;
 }
 
 /* Progress Bar */
@@ -45,7 +104,6 @@ body {
 
 /* Buttons */
 .btn {
-  /* width: 100%; */
   padding: 10px;
   border-radius: 5px;
 }
@@ -65,68 +123,829 @@ body {
   opacity: 0.8;
 }
 
+/* Modal card styling */
+.modal-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: 800px;
+  height: 500px;
+  text-align: center;
+  position: relative;
+}
+
+/* Close button */
+.modal-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 600px;
+  height: 500px;
+  text-align: center;
+  position: relative;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 40px;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 1px solid black;
+  background-color: #fff;
+  cursor: pointer;
+  /* margin: 20px auto; */
+}
+.input-wrapper-1{
+  justify-content: center;
+  overflow: hidden;
+
+}
+
+.input-t {
+  position: absolute;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.profile-img-input{
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  justify-content: center;
+}
+
+/* Position buttons at bottom-right */
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 90px;
+}
+
+/* for left side card css */
+.left-card{
+  width: 25%;
+  float: left;
+  border: 1px solid rgb(162, 162, 162);
+  /* padding: 2%; */
+}
+.left-card-right-btn{
+  float: right;
+  width: 20%;
+}
+.left-card-left-pro{
+  width: 80%;
+  float: left;
+  /* margin-top: 4%; */
+}
+
+.left-card-details,.left-card-education,.left-card-language{
+  /* border: 1px solid rgb(162, 162, 162); */
+  float: left;
+  width: 100%;
+  padding: 2%;
+}
+.left-card-education{
+  min-height: 20vh;
+  max-height: auto;
+}
+.education-div{
+  display: flex;
+  /* gap: 40%; */
+  justify-content: space-between;
+}
+.language-p{
+  /* background-color: rgb(228, 225, 225); */
+  width: fit-content;
+  padding: 1% 2%;
+  font-size: 18px;
+  border-radius: 5px;
+}
+.p-card{
+  border: 1px solid rgb(159, 158, 158);
+}
+/* right profile card */
+.right-card{
+  width: 75%;
+  float: right;
+  height: auto;
+  display: block;
+  /* border: 1px solid rgb(219, 26, 26); */
+}
+.right-card-title{
+  border: 1px solid rgb(159, 158, 158);
+  display: flex;
+  height: auto;
+}
+.right-card-profile{
+  width: 100%;
+  /* float: right; */
+  height: 75%;
+  display: flex;
+  border: 1px solid rgb(159, 158, 158);
+}
+.right-card-all-skill{
+  width: 100%;
+
+  height: auto;
+  display: flex;
+  border: 1px solid rgb(159, 158, 158);
+}
+.right-card-all-project{
+  width: 100%;
+  height: auto;
+  display: flex;
+  border: 1px solid rgb(159, 158, 158);
+
+}
+.btn-overview{
+  float: right;
+  border: 1px solid #28a745;
+  border-radius: 50%;
+  height: 40px;
+  font-size: 20px;
+  width: 40px;
+}
+.btn-rate{
+  border: 1px solid #28a745;
+  border-radius: 50%;
+  height: 40px;
+  font-size: 20px;
+  width: 40px;
+}
+.right-card-right{
+  width: 25%;
+  float: right;
+  height: 50px;
+  display: inline-flex;
+}
+.right-card-right-rate{
+  display: inline-flex;
+
+}
+.text-area-rate{
+  width: 150px;
+  height: 50px;
+  float: right;
+  position: absolute;
+  right: 0;
+  border: 2px solid black;
+  border-radius: 10px;
+  margin-right: 5%;
+}
+.right-card-left{
+  width: 75%;
+  float: left;
+  height: auto;
+  /* border-bottom: 1px solid rgb(162, 162, 162); */
+}
+
+.right-card-left-right{
+  float: right;
+  width: 10%;
+  justify-content: center;
+  padding:3px;
+  text-align: end;
+  align-items: center;
+
+}
+.right-card-left-left{
+  float: left;
+  width: 90%;
+  padding:1% 2%;
+}
+.right-card-right-left{
+  float: left;
+  width: 80%;
+  padding:3px 20%;
+}
+.right-card-right-right{
+  float: right;
+  width: 10%;
+  padding:3px;
+
+}
+.right-card-all-left{
+  float: left;
+  width: 80%;
+  /* height: 10vh; */
+  max-height: 40vh;
+  /* overflow-x: scroll; */
+  overflow-y: auto;
+  /* border: 1px solid black; */
+  padding: 2% 5%;
+}
+.right-card-all-skill-left{
+  float: left;
+  width: 80%;
+  height: 100%;
+  padding: 2% 5%;
+  display: block;
+}
+.right-card-all-skill-left-p{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  /* margin: auto; */
+  /* padding: 5px; */
+}
+
+
+.right-card-all-right{
+  float: right;
+  width: 20%;
+  justify-content: center;
+  padding:3% 1%;
+}
+
+.right-card-all-skill-right{
+  float: right;
+  width: 20%;
+  justify-content: center;
+  padding:3% 1%;
+}
+.bgskill {
+  padding: 5px 10px;
+  border-radius: 5px;
+  /* color: white; */
+  display: inline-block;
+  background-color:rgb(245, 232, 232) ;
+  margin: 5px; /* Adds spacing */
+}
+
+.text-area-pro{
+  width: 100%;
+  min-height: 150px;
+  max-height: 150px;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+/* for show modal css */
+.modal-card-1 {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 800px;
+  height: 500px;
+  text-align: center;
+  position: relative;
+}
+.modal-card-2 {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 800px;
+  height: 350px;
+  text-align: center;
+  position: relative;
+}
+.modal-card-3 {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 800px;
+  height: 350px;
+  text-align: center;
+  position: relative;
+}
+.modal-card-e {
+  margin-top: 5%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 800px;
+  height: 650px;
+  /* overflow-y: scroll; */
+  /* text-align: center; */
+  position: relative;
+}
+.input-wrapper-e {
+  position: relative;
+  overflow-y: scroll;
+  width: 100%;
+  height: 450px;
+  cursor: pointer;
+  /* margin: 20px auto; */
+}
+.input-wrapper-e label{
+  font-size: 25px;
+}
+.modal-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 40px;
+}
+.modal-buttons-1{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  float: right;
+  margin-top: 4%;
+}
+.btn-ss{
+  width: 90px;
+}
+.input-wrapper-2 {
+  text-align: left;
+}
+.input-wrapper-2 p{
+  border-top:1px solid rgb(162, 162, 162) ;
+}
+.text-area-title{
+  width: 100%;
+  /* min-height: 150px; */
+  /* max-height: 150px; */
+  border-radius: 10px;
+  padding: 12px;
+}
+.text-1 ,.text-2{
+  height: 50px;
+  width: 47.5%;
+  border-radius: 10px;
+}
+
+.text-2{
+  margin-left: 5%;
+}
 /* Responsive Design */
 /* Extra Small Devices (phones, 0px - 575px) */
-@media (max-width: 575px) {
-  .pro-div {
-    width: 90%;
-    padding: 15px;
+@media (max-width:1600px) {
+  .modal-card {
+    background: white;
+    padding: 2% 1%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 35%;
+    height: auto;
+    text-align: center;
+    position: relative;
+    margin: 5% auto;
+    /* display: inline-block; */
   }
-  .pro-card{
-    margin: -5% auto;
+  .modal-card h5{
+    font-size: 40px;
   }
+  .input-wrapper-1{
+  margin: 5% 35%;
+    float: left;
+    /* margin-top: 5%; */
+  }
+ 
+  .input-wrapper{
+    margin: auto;
+    height: 250px;
+    width: 250px;
+  }
+  .profile-img-input{
+    margin: auto;
+    height: 100%;
+    width: 100%;
+  }
+  .modal-buttons {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .modal-buttons button{
+    font-size: 22px;
+    width: 30%;
 
-  .profile-img {
-    width: 100px;
-    height: 100px;
   }
-
-  .btn {
-    font-size: 14px;
+  /* for profile overview card */
+  .modal-card-1 {
+    background: white;
+    /* padding: ; */
+    border-radius: 10px;
+    margin: auto 3%;
+    width: 800px;
+    height: auto;
+    text-align: center;
+    position: relative;
+    font-size: 24px;
+  }
+  .modal-card-1 h1{
+    font-size: 36px;
+  }
+  .modal-card-1 h3{
+    font-size: 26px;
+  }
+  .modal-buttons-1{
+    display: flex;
+    float: left;
+    /* gap: 30%; */
+    justify-content: space-between;
+  }
+  .modal-buttons-1 button{
+    font-size: 24px;
+    padding: 4% 8%;
+    width: 20vh;
+  }
+  .text-area-pro{
+    max-height: 150px;
+    min-height: 150px;
   }
 }
-
-/* Small Devices (tablets, 576px - 767px) */
-@media (min-width: 576px) and (max-width: 767px) {
-  .pro-div {
-    width: 80%;
-  }
-
-  .profile-img {
-    width: 110px;
-    height: 110px;
-  }
-
-  .btn {
-    font-size: 15px;
-  }
-}
-
-/* Medium Devices (small laptops, 768px - 991px) */
-@media (min-width: 768px) and (max-width: 991px) {
-  .pro-div {
+ @media (max-width:1200px) {
+  .modal-card {
+    background: white;
+    padding: 5% 1%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     width: 70%;
+    height: auto;
+    text-align: center;
+    position: relative;
+    font-size: 36px;
+    /* display: inline-block; */
   }
-
-  .profile-img {
-    width: 120px;
-    height: 120px;
+  .modal-card h5{
+    font-size: 40px;
   }
-}
-
-/* Large Devices (desktops, 992px - 1199px) */
-@media (min-width: 992px) and (max-width: 1199px) {
-  .pro-div {
+  .input-wrapper-1{
+  margin: 5% 20%;
+    float: left;
+    margin-top: 5%;
+  }
+  .input-t{
+    height: 30%;
+    width: 100%;
+  }
+  .input-wrapper{
+    margin: auto;
+    height: 50%;
     width: 50%;
   }
-}
+  .profile-img-input{
+    margin: auto;
+    height: 100%;
+    width: 100%;
+  }
+  .modal-buttons {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .modal-buttons button{
+    font-size: 22px;
+    width: 30%;
+    margin-top: 5%;
 
-/* Extra Large Devices (large screens, 1200px and above) */
-@media (min-width: 1200px) {
-  .pro-div {
-    width: 400px;
   }
-  .pro-card{
-    margin-top:5% ;
+  /* for profile overview card */
+  .modal-card-1 {
+    background: white;
+    /* padding: ; */
+    border-radius: 10px;
+    margin: auto 3%;
+    width: 800px;
+    height: auto;
+    text-align: center;
+    position: relative;
+    font-size: 18px;
   }
-}
+  .modal-card-1 h1{
+    font-size: 28px;
+  }
+  .modal-card-1 h3{
+    font-size: 20px;
+  }
+  .modal-buttons-1{
+    display: flex;
+    float: left;
+    /* gap: 30%; */
+    justify-content: space-between;
+  }
+  .modal-buttons-1 button{
+    font-size: 18px;
+    padding: 4% 8%;
+    width: 20vh;
+  }
+  .text-area-pro{
+    max-height: 120px;
+    min-height: 120px;
+  }
+ }
+ @media (max-width:992px) {
+  .modal-card {
+    background: white;
+    padding: 10% 1%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    height: auto;
+    text-align: center;
+    position: relative;
+    font-size: 34px;
+    /* display: inline-block; */
+  }
+  .modal-card h5{
+    font-size: 40px;
+  }
+  .input-wrapper-1{
+  margin: 5% 20%;
+    float: left;
+    margin-bottom: 5%;
+ 
+  }
+  .input-t{
+    height: 30%;
+    width: 100%;
+  }
+  .input-wrapper{
+    margin: auto;
+    height: 50%;
+    width: 50%;
+  }
+  .profile-img-input{
+    margin: auto;
+    height: 100%;
+    width: 100%;
+  }
+  .modal-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    /* margin-top: 5%; */
+  }
+  .modal-buttons button{
+    font-size: 22px;
+    width: 30%;
+margin-top: 5%;
+  }
+  /* for profile overview card */
+  .modal-card-1 {
+    background: white;
+    /* padding: ; */
+    border-radius: 10px;
+    margin: auto 3%;
+    width: 800px;
+    height: auto;
+    text-align: center;
+    position: relative;
+    font-size: 32px;
+  }
+  .modal-card-1 h1{
+    font-size: 66px;
+  }
+  .modal-card-1 h3{
+    font-size: 36px;
+  }
+  .modal-buttons-1{
+    display: inline-flex;
+    /* float: left; */
+    /* gap: 30%; */
+    justify-content: space-evenly;
+  }
+  .modal-buttons-1 button{
+    font-size: 34px;
+    padding: 4% 8%;
+    width: 20vh;
+  }
+  .text-area-pro{
+    max-height: 250px;
+    min-height: 250px;
+  }
+ }
+ @media (max-width:768px) {
+  .modal-card {
+    background: white;
+    padding: 10% 1%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 75%;
+    height: auto;
+    text-align: center;
+    position: relative;
+    font-size: 22px;
+    /* display: inline-block; */
+  }
+  .modal-card h5{
+    font-size: 35px;
+  }
+  .input-wrapper-1{
+  margin: auto 15%;
+    float: left;
+    margin-top: 5%;
+  }
+  .input-t{
+    height: 30%;
+    width: 100%;
+  }
+  .input-wrapper{
+    margin: auto;
+    height: 50%;
+    width: 50%;
+  }
+  .profile-img-input{
+    margin: auto;
+    height: 100%;
+    width: 100%;
+  }
+  .modal-buttons {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .modal-buttons button{
+    font-size: 22px;
+    width: 30%;
+
+  }
+     /* for profile overview card */
+     .modal-card-1 {
+      background: white;
+      /* padding: ; */
+      border-radius: 10px;
+      margin: auto 3%;
+      width: 800px;
+      height: auto;
+      text-align: center;
+      position: relative;
+      font-size: 30px;
+    }
+    .modal-card-1 h1{
+      font-size: 66px;
+    }
+    .modal-card-1 h3{
+      font-size: 36px;
+    }
+    .modal-buttons-1{
+      display: flex;
+      float: left;
+      /* gap: 30%; */
+      justify-content: space-between;
+    }
+    .modal-buttons-1 button{
+      font-size: 30px;
+      padding: 4% 8%;
+      width: 20vh;
+    }
+    .text-area-pro{
+      max-height: 220px;
+      min-height: 220px;
+    }
+ }
+ @media (max-width:576px) {
+  .modal-card {
+    background: white;
+    padding: 10% 1%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: auto;
+    margin: 10% 10%;
+    height: auto;
+    text-align: center;
+    position: relative;
+    /* font-size: 28px; */
+  }
+  .modal-card h5{
+    font-size: 24px;
+  }
+  .input-wrapper-1{
+  margin: auto 10%;
+    float: left;
+    margin-top: 5%;
+  }
+  .input-wrapper{
+    margin: auto;
+    height: 50%;
+    width: 50%;
+  }
+  .profile-img-input{
+    margin: auto;
+    height: 100%;
+    width: 100%;
+  }
+  .modal-buttons {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .modal-buttons button{
+    font-size: 22px;
+    width: 30%;
+
+  }
+    /* for profile overview card */
+    .modal-card-1 {
+      background: white;
+      /* padding: ; */
+      border-radius: 10px;
+      margin: auto 3%;
+      width: 800px;
+      height: auto;
+      text-align: center;
+      position: relative;
+      font-size: 16px;
+    }
+    .modal-card-1 h1{
+      font-size: 26px;
+    }
+    .modal-card-1 h3{
+      font-size: 18px;
+    }
+    .modal-buttons-1{
+      display: flex;
+      /* float: left; */
+      gap: 10%;
+      justify-content: space-evenly;
+    }
+    .modal-buttons-1 button{
+      font-size: 16px;
+      width: 20vh;
+    }
+    .text-area-pro{
+      max-height: 150px;
+      min-height: 150px;
+    }
+ }
+ @media (max-width:400px) {
+  .modal-card {
+    background: white;
+    padding: 10% 1%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 95%;
+    height: auto;
+    text-align: center;
+    position: relative;
+    font-size: medium;
+    /* display: inline-block; */
+  }
+  .modal-card h5{
+    font-size: 22px;
+  }
+  .input-wrapper-1{
+  margin: 5% 20%;
+    float: left;
+  }
+  .input-wrapper{
+    margin: auto;
+    height: 50%;
+    width: 50%;
+  }
+  .profile-img-input{
+    margin: auto;
+    height: 100%;
+    width: 100%;
+  }
+  .modal-buttons {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .modal-buttons button{
+    font-size: 22px;
+    width: 33%;
+margin-top: -5%;
+  }
+  /* for profile overview card */
+  .modal-card-1 {
+    background: white;
+    /* padding: ; */
+    border-radius: 10px;
+    margin: auto 3%;
+    width: auto;
+    height: auto;
+    text-align: center;
+    position: relative;
+  }
+  .modal-buttons-1{
+    display: flex;
+    /* float: left; */
+    gap: 10%;
+    justify-content: space-evenly;
+  }
+  .modal-buttons-1 button{
+    font-size: 16px;
+    width: 20vh;
+
+  }
+ }

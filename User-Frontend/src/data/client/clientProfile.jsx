@@ -4,7 +4,7 @@ import './css/profile.css'
 
 function ClientProfile() {
   const [userData, setUserData] = useState({
-    profile: "",
+    profileImage: "",
     username: "",
     email: "",
     role: "",
@@ -45,7 +45,7 @@ function ClientProfile() {
     if (selectedFile) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        updatedData = { ...updatedData, profile: reader.result };
+        updatedData = { ...updatedData, profileImage: reader.result };
         saveData(updatedData);
       };
       reader.readAsDataURL(selectedFile);
@@ -56,7 +56,7 @@ function ClientProfile() {
 
   const saveData = async (data) => {
     try {
-      await axios.post("http://localhost:5200/api/users/ucprofileUpdate", data);
+      await axios.post("http://localhost:5200/api/users/clientprofileUpdate", data);
       localStorage.setItem("user", JSON.stringify(data));
       setUserData(data);
       setIsEditing(false);
@@ -69,7 +69,7 @@ function ClientProfile() {
   // Function to calculate profile completeness
   const calculateCompletion = (data) => {
     // Define required fields (exclude optional fields like 'profile' if not mandatory)
-    const requiredFields = ["username", "email", "phone", "dob", "gender", "address","profile"];
+    const requiredFields = ["username", "email", "phone", "dob", "gender", "address","profileImage"];
   
     // Count filled fields (trim to remove spaces and check for valid values)
     const filledFields = requiredFields.filter((field) => data[field] && data[field].trim() !== "").length;
@@ -95,8 +95,8 @@ function ClientProfile() {
         </div>
 
         <div className="mb-3 text-center">
-          {userData.profile ? (
-            <img src={userData.profile} alt="Profile" className="profile-img mb-2" />
+          {userData.profileImage ? (
+            <img src={userData.profileImage} alt="Profile" className="profile-img mb-2" />
           ) : (
             <p className="profile">No Profile Image</p>
           )}
@@ -124,7 +124,7 @@ function ClientProfile() {
             <p><b>Email : </b> - {userData.email}</p>
             <p><b>Mob.No. : </b> - {userData.phone}</p>
             <p><b>Gender : </b> - {userData.gender}</p>
-            <p><b>DOB : </b> - {userData.dob}</p>
+            <p><b>DOB : </b> - {new Date (userData.dob).toLocaleDateString()}</p>
             <p><b>Address : </b> - {userData.address}</p>
             <button className="btn btn-outline-success" onClick={() => setIsEditing(true)}>Edit</button>
           </>

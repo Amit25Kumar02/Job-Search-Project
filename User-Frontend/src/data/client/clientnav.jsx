@@ -52,7 +52,7 @@ function ClientNav() {
           <div className="dropdown">
             <button className="btn btn-secondary dropdown-toggle" type="button" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             {/* <img src={username.profile} alt="Profile" className="profile-img2 mb-2" /> */}
-              {username ?`${username.username}` : "Account"}
+              {username ?`Hey,${username.username}` : "Account"}
             </button>
             <ul className="dropdown-menu" aria-labelledby="accountDropdown">
               {username ? (

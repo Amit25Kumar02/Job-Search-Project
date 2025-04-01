@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.con-job-r{
+    width: 90%;
+    margin: auto;
+}
+
+@media (max-width:576px){
+    .con-job-r{
+        margin-top: 18%;
+    }
+}

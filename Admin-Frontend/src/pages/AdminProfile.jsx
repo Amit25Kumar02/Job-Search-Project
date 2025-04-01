@@ -122,7 +122,7 @@ function AdminProfile() {
             <p><b>Email : </b> - {userData.email}</p>
             <p><b>Mob.No. : </b> - {userData.phone}</p>
             <p><b>Gender : </b> - {userData.gender}</p>
-            <p><b>DOB : </b> - {userData.dob}</p>
+            <p><b>DOB : </b> - {new Date (userData.dob).toLocaleDateString()}</p>
             <p><b>Address : </b> - {userData.address}</p>
             <button className="btn btn-outline-success" onClick={() => setIsEditing(true)}>Edit</button>
           </>

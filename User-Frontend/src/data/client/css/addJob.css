@@ -1,0 +1,105 @@
+/* Backdrop */
+.btn-job{
+    text-align: center;
+    padding: 2%;
+}
+.container-main-job{
+  margin: auto;
+    margin-top: 7%;
+    width: 95%;
+    /* border: 1px solid black; */
+    /* height: 50vh; */
+}
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    /* z-index: 1000; */
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  /* Modal Container */
+  .modal-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1050;
+    width: 90%;
+    /* height: 500px; */
+    max-width: 500px;
+    animation: slideIn 0.5s ease-in-out;
+  }
+ 
+  .modal-body{
+    margin: 5% 2%;
+  }
+  /* Modal Header */
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .modal-header h5{
+    margin: auto;
+  }
+  .addjob-btn{
+    margin: auto;
+    margin-top: 5%;
+    width: 100%;
+  }
+  .modal-body button{
+    margin: auto;
+    justify-content: center;
+  }
+  
+  /* Close Button */
+  .btn-close {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  .job-list{
+    width: 90%;
+    margin: auto;
+  }
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translate(-50%, -60%);
+      opacity: 0.5;
+    }
+    to {
+      transform: translate(-50%, -50%);
+      opacity: 1;
+    }
+  }
+  
+  @media (min-width:300px) and (max-width:576px) {
+    .container-main-job{
+        margin-top: 15%;
+        border: 1px solid black;
+    }
+    .add-job-btn{
+        margin-top: 4vh;
+    }
+    .btn-job{
+        text-align: center;
+    }
+  }

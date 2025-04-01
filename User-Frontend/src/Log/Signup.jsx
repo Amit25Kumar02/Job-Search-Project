@@ -11,12 +11,15 @@ function SignUp() {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
-    phone: "",
     password: "",
     userType: "Client",
+    otp:""
   });
 
   const [loading, setLoading] = useState(false);
+  const [otpSent, setOtpSent] = useState(false);
+  const [otpsending , setIsotpsending] = useState(false)
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,13 +27,11 @@ function SignUp() {
   };
 
   const validateForm = () => {
-    const { username, email, phone, password } = formData;
+    const { username, email, password } = formData;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^[0-9]{10}$/;
 
     if (username.trim().length < 4) return "Username must be at least 3 characters.";
     if (!emailRegex.test(email.trim())) return "Invalid email format.";
-    if (!phoneRegex.test(phone.trim())) return "Phone number must be 10 digits.";
     if (password.trim().length < 6) return "Password must be at least 6 characters.";
 
     return null;
@@ -38,6 +39,7 @@ function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsotpsending(true)
     if (loading) return;
 
     const validationError = validateForm();
@@ -45,14 +47,14 @@ function SignUp() {
       toast.error(validationError, { position: "top-center" });
       return;
     }
+    setIsotpsending(false)
 
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:5200/api/users/signup", {
+      const response = await axios.post("http://localhost:5200/api/users/verify-otp", {
         ...formData,
         username: formData.username.trim(),
         email: formData.email.trim(),
-        phone: formData.phone.trim(),
         password: formData.password.trim(),
       });
 
@@ -66,7 +68,27 @@ function SignUp() {
       toast.error(err.response?.data?.error || "Something went wrong.", { position: "top-center" });
     } finally {
       setLoading(false);
+
     }
+    setIsotpsending(false)
+  };
+    
+  const sendOtp = async () => {
+    setIsotpsending(true)
+    if (!formData.email) {
+      toast.error("Please enter a valid email address.");
+      setIsotpsending(false)
+      return;
+    }
+    try {
+      const response = await axios.post("http://localhost:5200/api/users/send-otp", { email:formData.email });
+      toast.success(response.data.message);
+      setOtpSent(true); // OTP has been sent successfully
+    } catch (error) {
+      toast.error(error.response ? error.response.data.message : "Something went wrong!");
+    }
+    
+    setIsotpsending(false)
   };
 
   return (
@@ -95,19 +117,8 @@ function SignUp() {
                   name="email" 
                   className="form-control" 
                   placeholder="Enter Email..." 
+                  disabled={otpSent}
                   value={formData.email} 
-                  onChange={handleChange} 
-                  required 
-                />
-              </div>
-
-              <div className="mb-3">
-                <input 
-                  type="tel" 
-                  name="phone" 
-                  className="form-control" 
-                  placeholder="Enter Phone No..." 
-                  value={formData.phone} 
                   onChange={handleChange} 
                   required 
                 />
@@ -124,6 +135,7 @@ function SignUp() {
                   required 
                 />
               </div>
+       
 
               <div className="mb-3">
                 <label className="form-label">Select User Type:</label>
@@ -137,10 +149,23 @@ function SignUp() {
                   <option value="User">User</option>
                 </select>
               </div>
-
-              <button type="submit" className="btn btn-primary w-100" disabled={loading}>
-                {loading ? "Signing Up..." : "Sign Up"}
+              {
+         !otpSent && 
+          <button type='button' disabled={otpsending ? true :false} onClick={sendOtp} className="btn btn-primary btn-o">
+            {otpsending?"wait... otp is sending": "Send OTP"}
+          </button>
+          } 
+              {/* OTP Input and Verify OTP Button */}
+              {otpSent && (
+            <>
+              <input type="text" name="otp" placeholder="Enter OTP" onChange={handleChange} value={formData.otp}   className="form-control"  />
+               <input type="submit" value={otpsending ? 'submiting...wait..':"submit"} disabled={otpsending ? true :false} className="btn-o" />
+              {/* Resend OTP Button */}
+              <button type="button" onClick={sendOtp} disabled={otpsending ? true :false} className="btn btn-primary btn-o" >
+              {otpsending?"wait... otp is sending": " Re-Send OTP"}
               </button>
+            </>
+          )}
 
               <div className="text-center mt-3">
                 Already have an account? <Link to="/login">Log In</Link>

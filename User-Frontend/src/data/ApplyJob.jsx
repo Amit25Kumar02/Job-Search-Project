@@ -16,22 +16,22 @@ const JobApplyForm = () => {
     }
 
     const handleResumeChange = (e) => {
-        setResume(e.target.files[0]); 
+        setResume(e.target.files[0]);
     };
 
     const handleProposalChange = (e) => {
         setProposal(e.target.value);
     };
 
-    const handleApply = async () => {  
+    const handleApply = async () => {
         if (!resume) {
             toast.error("Please upload a resume before applying.");
             return;
         }
 
         const formData = new FormData();
-        formData.append("jobId", job._id); 
-        formData.append("userId", user.Id);
+        formData.append("jobId", job._id);
+        formData.append("userId", user._id);
         formData.append("userName", user.username);
         formData.append("userEmail", user.email);
         formData.append("Phone", user.phone);
@@ -58,30 +58,32 @@ const JobApplyForm = () => {
     };
 
     return (
-        <div className="container mt-5">
-            <h2>Apply for {job.jobTitle}</h2>
-            <p><strong>Company : </strong> {job.companyName}</p>
-            <p><strong>Location : </strong> {job.location}</p>
-            <p><strong>ApplicantID : </strong> {user.Id}</p>
-            <p><strong>Applicant : </strong> {user.username}</p>
-            <p><strong>Email : </strong> {user.email}</p>
-            <p><strong>Mob. No. : </strong> {user.phone}</p>
+        <div className="con-d">
+            <div className="card shadow-lg p-4 mx-auto" style={{ maxWidth: "800px" }}>
+                <h2>Apply for {job.jobTitle}</h2>
+                <p><strong>Company : </strong> {job.companyName}</p>
+                <p><strong>Location : </strong> {job.location}</p>
+                <p><strong>ApplicantID : </strong> {user._id}</p>
+                <p><strong>Applicant : </strong> {user.username}</p>
+                <p><strong>Email : </strong> {user.email}</p>
+                <p><strong>Mob. No. : </strong> {user.phone}</p>
 
-            <input 
-                type="file" 
-                accept=".pdf,.doc,.docx" 
-                onChange={handleResumeChange} 
-                className="form-control mt-3" 
-            />
-            <label><strong>Describe your proposal</strong></label>
-            <textarea 
-                name="proposal" 
-                placeholder="What makes you the best candidate for this project?" 
-                className="form-control mt-3"
-                value={proposal} 
-                onChange={handleProposalChange} 
-            />
-            <button onClick={handleApply} className="btn btn-outline-success mt-3">Submit Application</button>
+                <input
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    onChange={handleResumeChange}
+                    className="form-control mt-3"
+                />
+                <label><strong>Describe your proposal</strong></label>
+                <textarea
+                    name="proposal"
+                    placeholder="What makes you the best candidate for this project?"
+                    className="form-control mt-3"
+                    value={proposal}
+                    onChange={handleProposalChange}
+                />
+                <button onClick={handleApply} className="btn btn-outline-success mt-3">Submit Application</button>
+            </div>
         </div>
     );
 };
