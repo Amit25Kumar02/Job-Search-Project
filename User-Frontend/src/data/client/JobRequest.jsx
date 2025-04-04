@@ -3,6 +3,7 @@ import axios from "axios";
 
 const JobRequest = () => {
   const [applications, setApplications] = useState([]);
+  let {Id} =  JSON.parse(localStorage.getItem("user"))
 
   useEffect(() => {
     fetchApplications();
@@ -10,7 +11,7 @@ const JobRequest = () => {
 
   const fetchApplications = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5200/api/Ajobs/applications");
+      const { data } = await axios.get(`http://localhost:5200/api/Ajobs/applications/${Id}`);
       if (data && Array.isArray(data.applications)) {
         setApplications(data.applications);
       } else {

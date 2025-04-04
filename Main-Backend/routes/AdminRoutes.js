@@ -100,7 +100,7 @@ app.post('/login', async (req, res) => {
     if (user.password !== password) {
       res.status(401).json({ message: "Password not match" })
     } else {
-      const token = jwt.sign({ id: user._id }, "amit25", { expiresIn: "1h" });
+      const token = jwt.sign({ id: user._id }, "amit25", { expiresIn: "20d" });
       // console.log(token)
       res.status(200).json({ message: "Login Successfully", user, token })
     }
@@ -143,7 +143,7 @@ app.put('/update/:email', async (req, res) => {
     return res.status(400).json({ error: 'All fields (username, password) are required' });
   }
 
-  try {
+  try { 
     const updatedUser = await Admin.findOneAndUpdate(
       { emailId },
       { username, password },

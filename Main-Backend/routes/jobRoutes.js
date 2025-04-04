@@ -17,6 +17,7 @@ if (!fs.existsSync(uploadDir)) {
 const storage = multer.diskStorage({
     destination: uploadDir,
     filename: (req, file, cb) => {
+    console.log("helloooomulter")
         cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname));
     }
 });
@@ -26,11 +27,11 @@ const upload = multer({ storage });
 app.post("/apply", upload.single("resume"), async (req, res) => {
     // console.log("Received Data:", req.body);
     // console.log("Uploaded File:", req.file);
+    console.log("hello")
 
     if (!req.file) {
         return res.status(400).json({ success: false, message: "Resume file is required" });
     }
-
     const { jobId, userId, userName, userEmail, Phone } = req.body;
 
     if (!jobId || !userId || !userName || !userEmail || !Phone) {
@@ -41,6 +42,11 @@ app.post("/apply", upload.single("resume"), async (req, res) => {
         const job = await JobOffer.findById(jobId);
         if (!job) {
             return res.status(404).json({ success: false, message: "Job not found" });
+        }
+        const jobb = await JobApplication.findOne({jobId,userId });
+        console.log(jobb)
+        if (jobb ) {
+            return res.status(409).json({ success: false, message: "all ready applied" });
         }
 
         const newApplication = new JobApplication({
@@ -62,9 +68,13 @@ app.post("/apply", upload.single("resume"), async (req, res) => {
     }
 });
 
-app.get("/applications", async (req, res) => {
+app.get("/applications/:id", async (req, res) => {
+    let {id} = req.params
+    // Find all jobs that belong to the given client
+    const jobs = await JobOffer.find({ clientId : id }).select('_id');
+    const jobIds = jobs.map(job => job._id); // Extract job IDs
     try {
-        const applications = await JobApplication.find().populate({
+        const applications = await JobApplication.find({ jobId: { $in: jobIds } }).populate({
             path: "jobId",
             model: "JobOffer",
             select: "jobTitle companyName _id"
@@ -94,7 +104,7 @@ app.get("/applications/:id", async (req, res) => {
 app.delete("/del/:id", async (req, res) => {
     try {
         const deletedApplication = await JobApplication.findByIdAndDelete(req.params.id);
-        
+
         if (!deletedApplication) {
             return res.status(404).json({ message: "Application not found" });
         }
