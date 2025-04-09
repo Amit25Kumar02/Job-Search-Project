@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import './css/userMain.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
-import CarouselImage from "./user-img/1735987411225.jpg";
-import CarouselImage1 from "./user-img/240_F_283636229_M3E2FdyD2W6xIsZjKeXx1NeF2ExxKMTW.jpg";
-import CarouselImage2 from "./user-img/gettyimages-956327810-612x612.jpg";
 import { Heart } from 'lucide-react';
+import UserImg from './img/slider-2.jpg';
 
 const User = () => {
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [query, setQuery] = useState("");
   const [savedJobs, setSavedJobs] = useState([]);
-  const [dislikeCounts, setDislikeCounts] = useState({});
   const [showSavedJobs, setShowSavedJobs] = useState(false);
+  const [dislikeCounts, setDislikeCounts] = useState({});
+  const [likeCounts, setLikeCounts] = useState({});
   const [dislikedJobs, setDislikedJobs] = useState(new Set());
+  const [likedJobs, setLikedJobs] = useState(new Set());
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -29,11 +31,14 @@ const User = () => {
           setFilteredJobs(validJobs);
 
           const initialDislikeCounts = {};
+          const initialLikeCounts = {};
           validJobs.forEach((job) => {
-            initialDislikeCounts[job._id] = 0;
-            // window.location.reload();
+            initialDislikeCounts[job._id] = job.dislikes || 0;
+            initialLikeCounts[job._id] = job.likes || 0;
           });
+
           setDislikeCounts(initialDislikeCounts);
+          setLikeCounts(initialLikeCounts);
         } else {
           toast.error("Failed to fetch job offers");
         }
@@ -44,9 +49,17 @@ const User = () => {
 
     fetchJobs();
 
-    // Load saved jobs from localStorage
     const savedJobsFromLocalStorage = JSON.parse(localStorage.getItem("savedJobs")) || [];
     setSavedJobs(savedJobsFromLocalStorage);
+
+    const savedLikedJobs = JSON.parse(localStorage.getItem("LikedJobs")) || [];
+    const savedDislikedJobs = JSON.parse(localStorage.getItem("DislikedJobs")) || [];
+
+    setLikedJobs(new Set(savedLikedJobs));
+    setDislikedJobs(new Set(savedDislikedJobs));
+
+    // const interval = setInterval(fetchJobs, 1000);
+    // return () => clearInterval(interval);
   }, []);
 
   const handleInputChange = (e) => setQuery(e.target.value);
@@ -57,7 +70,6 @@ const User = () => {
       setFilteredJobs(jobs);
       return;
     }
-
     const filtered = jobs.filter(
       (job) =>
         job.companyName.toLowerCase().includes(searchValue) ||
@@ -73,61 +85,153 @@ const User = () => {
       const updatedSavedJobs = prev.some((savedJob) => savedJob._id === job._id)
         ? prev.filter((savedJob) => savedJob._id !== job._id)
         : [...prev, job];
-        
-      // Save the updated saved jobs to localStorage
+
       localStorage.setItem("savedJobs", JSON.stringify(updatedSavedJobs));
       return updatedSavedJobs;
     });
   };
 
+  // for dislike btn
+  const handleDislike = async (jobId) => {
+    const updatedDislikedJobs = new Set(dislikedJobs);
   
-  const handleDislike = (jobId) => {
-    if (!dislikedJobs.has(jobId)) {
-      setDislikeCounts((prevCounts) => ({
-        ...prevCounts,
-        [jobId]: (prevCounts[jobId] || 0) + 1,
-      }));
+    if (dislikedJobs.has(jobId)) {
+      // Remove dislike (undo)
+      try {
+        const response = await axios.post("http://localhost:5200/api/jobs/undislike", { jobId });
   
-      setDislikedJobs((prevDislikedJobs) => new Set(prevDislikedJobs).add(jobId));
+        if (response.data.success) {
+          updatedDislikedJobs.delete(jobId);
+          setDislikedJobs(updatedDislikedJobs);
+          setDislikeCounts((prevCounts) => ({
+            ...prevCounts,
+            [jobId]: response.data.updatedDislikeCount,
+          }));
+  
+          localStorage.setItem("DislikedJobs", JSON.stringify([...updatedDislikedJobs]));
+          toast.info("You removed your dislike.");
+        } else {
+          toast.error("Failed to remove dislike.");
+        }
+      } catch (error) {
+        toast.error("Error removing dislike.", error);
+      }
+    } else {
+      // Dislike the job
+      try {
+        const response = await axios.post("http://localhost:5200/api/jobs/dislike", { jobId });
+  
+        if (response.data.success) {
+          updatedDislikedJobs.add(jobId);
+          setDislikedJobs(updatedDislikedJobs);
+          setDislikeCounts((prevCounts) => ({
+            ...prevCounts,
+            [jobId]: response.data.updatedDislikeCount,
+          }));
+  
+          localStorage.setItem("DislikedJobs", JSON.stringify([...updatedDislikedJobs]));
+          toast.warning("You disliked this job.");
+        } else {
+          toast.error("Failed to dislike job.");
+        }
+      } catch (error) {
+        toast.error("Error disliking job.", error);
+      }
+    }
+  };
+
+  // for like btn
+
+  const handleLike = async (jobId) => {
+    const updatedLikedJobs = new Set(likedJobs);
+  
+    if (likedJobs.has(jobId)) {
+      // Unlike the job
+      try {
+        const response = await axios.post("http://localhost:5200/api/jobs/unlike", { jobId });
+  
+        if (response.data.success) {
+          updatedLikedJobs.delete(jobId);
+          setLikedJobs(updatedLikedJobs);
+          setLikeCounts((prevCounts) => ({
+            ...prevCounts,
+            [jobId]: response.data.updatedLikeCount,
+          }));
+  
+          localStorage.setItem("LikedJobs", JSON.stringify([...updatedLikedJobs]));
+          toast.info("You unliked this job.");
+        } else {
+          toast.error("Failed to unlike job.");
+        }
+      } catch (error) {
+        toast.error("Error unliking job.", error);
+      }
+    } else {
+      // Like the job
+      try {
+        const response = await axios.post("http://localhost:5200/api/jobs/like", { jobId });
+  
+        if (response.data.success) {
+          updatedLikedJobs.add(jobId);
+          setLikedJobs(updatedLikedJobs);
+          setLikeCounts((prevCounts) => ({
+            ...prevCounts,
+            [jobId]: response.data.updatedLikeCount,
+          }));
+  
+          localStorage.setItem("LikedJobs", JSON.stringify([...updatedLikedJobs]));
+          toast.success("You liked this job.");
+        } else {
+          toast.error("Failed to like job.");
+        }
+      } catch (error) {
+        toast.error("Error liking job.", error);
+      }
     }
   };
   
+  const toggleSavedJobs = () => {
+    // if (!savedJobs) {
+    //   toast.success("You saved this job."); // Saving
+    // } else {
+    //   toast.info("You unsaved this job."); // Unsaving
+    // }
 
-  const toggleSavedJobs = () => setShowSavedJobs(!showSavedJobs);
+    // setSavedJobs(!savedJobs); // Toggle saved state
+    setShowSavedJobs(!showSavedJobs);
+  };
+    
 
   return (
     <>
+    <ToastContainer
+  position="top-center"
+  reverseOrder={false}
+/>
       <div className="car-1">
-        <div id="jobCarousel" className="carousel slide mt-5" data-bs-ride="carousel">
-          <div className="carousel-inner">
-            {[CarouselImage, CarouselImage1, CarouselImage2].map((image, index) => (
-              <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`}>
-                <img src={image} className="d-block w-100 rounded-lg" alt={`Slide ${index + 1}`} style={{ height: "300px" , borderRadius: "5px"}} />
-              </div>
-            ))}
+        <div className="user-main-img-div">
+          <img src={UserImg} alt="" />
+        </div>
+        <div className="user-main-text-div">
+          <h1 className="user-main-text-1st-h1">Find</h1>
+          <h1 className="user-main-text-2nd-h1">Great Job Opportunity<br />You Deserve</h1>
+
+          <div className="input-group">
+            <input
+              type="search"
+              placeholder="Search jobs..."
+              value={query}
+              onChange={handleInputChange}
+              className="form-control"
+            />
+            <button className="btn btn-outline-success" onClick={handleSearch}>
+              Search
+            </button>
           </div>
-          <button className="carousel-control-prev" type="button" data-bs-target="#jobCarousel" data-bs-slide="prev">
-            <span className="carousel-control-prev-icon"></span>
-          </button>
-          <button className="carousel-control-next" type="button" data-bs-target="#jobCarousel" data-bs-slide="next">
-            <span className="carousel-control-next-icon"></span>
-          </button>
         </div>
       </div>
 
       <div className="container mt-4">
-        <div className="input-group">
-          <input
-            type="search"
-            placeholder="Search jobs..."
-            value={query}
-            onChange={handleInputChange}
-            className="form-control"
-          />
-          <button className="btn btn-outline-primary" onClick={handleSearch}>
-            Search
-          </button>
-        </div>
         <button className="btn btn-info mt-3" onClick={toggleSavedJobs}>
           {showSavedJobs ? "Show All Jobs" : "Show Saved Jobs"}
         </button>
@@ -139,7 +243,10 @@ const User = () => {
           <div key={job._id} className="card shadow mb-4 con-card">
             <div className="card-body text-start d-flex align-items-center ms-auto ">
               <button onClick={() => handleDislike(job._id)} className="btn-1 me-2">
-                👎 {dislikeCounts[job._id] || 0}
+                👎 {dislikeCounts[job._id] || job.dislikes}
+              </button>
+              <button onClick={() => handleLike(job._id)} className="btn-1 me-2">
+                👍 {likeCounts[job._id] || job.likes}
               </button>
               <button onClick={() => handleSaveJob(job)} className="btn-1">
                 <Heart fill={savedJobs.some((savedJob) => savedJob._id === job._id) ? 'red' : 'none'}
@@ -148,13 +255,13 @@ const User = () => {
             </div>
             <Link to={`/apply/${job._id}`} className="con-btn">
               <div className="card-body text-start">
-                <p className="text-muted">{new Date(job.postedAt).toLocaleDateString()}</p>
+              <p className="text-primery">Posted At : {new Date(job.postedAt).toLocaleDateString()}</p>
                 <h5 className="text-dark">{job.jobTitle}</h5>
                 <p className="text-muted">{job.jobDescription}</p>
                 <p className="text-info">Location: {job.location}</p>
                 <p className="text-success">Salary: ₹ {job.salary} / PA</p>
                 <div className="text-dark gap-5 ">
-                  {job.skills.join(' , ')}
+                  <span> {job.skills.join(' , ')}</span>
                 </div>
                 <p className="text-danger">Deadline: {new Date(job.applicationDeadline).toLocaleDateString()}</p>
               </div>

@@ -17,14 +17,26 @@
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3), 
   -5px -5px 15px rgba(255, 255, 255, 0.5);
   transform-style: preserve-3d;
-  transition: transform 0.3s ease;
+  transition: transform 2s ease;
 }
 
 
-.table:hover {
-  transform: rotateX(5deg) rotateY(5deg);
+/* .table:hover {
+  transform: rotateX(360deg) rotateY(360deg);
   box-shadow: 8px 8px 25px rgba(0, 0, 0, 0.5), 
   -8px -8px 25px rgba(255, 255, 255, 0.5);
+} */
+.move:hover{
+  animation: movee 3s linear  infinite;
+}
+
+@keyframes movee {
+ from{
+  transform: rotateY(0deg);
+ }
+ to{
+  transform: rotateY(360deg);
+ }
 }
 
 

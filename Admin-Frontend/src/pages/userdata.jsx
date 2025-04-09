@@ -43,7 +43,7 @@ const Userdata = () => {
     <>
       <div className="con-d">
         <h1 className="data">Users & Client List</h1>
-          <table className="table table-striped">
+          <table className="table table-striped move">
             <thead>
               <tr>
                 <th scope="col">Users Name</th>

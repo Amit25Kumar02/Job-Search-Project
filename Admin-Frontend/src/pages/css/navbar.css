@@ -1,8 +1,8 @@
 /* Base Navbar Styles */
 .navbar {
-    background-color: #776bff;
+    /* background-color: #776bff; */
     padding: 10px 20px;
-    position: sticky;
+    position: fixed;
     z-index: 1000;
     top: 1px;
     font-family: "Times New Roman", Times, serif;
@@ -62,7 +62,21 @@
   .placeholder-icon {
     font-size: 24px;
   }
-  
+  .nav-ul-li{
+    background-color: aquamarine;
+    align-items: center;
+    justify-content: center;
+    margin-left: 25%;
+  }
+  .nav-ul-li>li{
+    color: black;
+
+  }
+
+  .container-fluid Link{
+    background-color: rgb(249, 77, 77);
+    box-shadow: 2px 2px 10px black;
+  }
   /* Responsive Design */
   
   /* Extra Small Devices (Mobile Phones) */

@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./css/addJob.css"; // Ensure this CSS file exists
+import "./css/addJob.css"; 
 
 function JobOfferForm() {
   const [formData, setFormData] = useState({
@@ -31,13 +31,15 @@ function JobOfferForm() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     fetchJobs();
+    const interval = setInterval(fetchJobs, 1000); 
+    return () => clearInterval(interval);
   }, []);
 
   const fetchJobs = async () => {
     try {
       const response = await axios.get("http://localhost:5200/api/jobs/all");
       if (response.data.success) {
-        setJobs(response.data.jobs); // Make sure the response contains a 'jobs' array
+        setJobs(response.data.jobs); 
       } else {
         throw new Error("Failed to fetch job offers");
       }
@@ -89,7 +91,7 @@ function JobOfferForm() {
 
   // Handle editing a job offer
   const handleEdit = (job) => {
-    setEditingJobId(job._id); // Set job ID for editing
+    setEditingJobId(job._id); 
     setFormData({
       companyName: job.companyName,
       jobTitle: job.jobTitle,
@@ -97,7 +99,7 @@ function JobOfferForm() {
       location: job.location,
       salary: job.salary,
       applicationDeadline: job.applicationDeadline,
-      skills: job.skills.join(", "), // Convert skills array to comma-separated string
+      skills: job.skills.join(", "), 
     });
     setShowModal(true);
   };
@@ -161,6 +163,7 @@ function JobOfferForm() {
         {jobs.map((job) => (
           <div key={job._id} className="card shadow border rounded mb-3">
             <div className="card-body text-start">
+              <h3>👎{job.dislikes}  👍{job.likes} </h3>
               <h3 className="text-primary">{job.companyName}</h3>
               <h5 className="text-dark">{job.jobTitle}</h5>
               <p className="text-muted">{job.jobDescription}</p>

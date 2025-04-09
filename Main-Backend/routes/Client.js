@@ -90,4 +90,57 @@ app.get("/det/:id", async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error" });
   }
 });
+
+// for  dislike 
+app.post("/dislike", async (req, res) => {
+  try {
+    const { jobId } = req.body;
+    const job = await JobOffer.findByIdAndUpdate(jobId,{ $inc: { dislikes: 1 } }, { new: true } );
+    res.json({ success: true, updatedDislikeCount: job.dislikes });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Error disliking job" });
+  }
+});
+// for undislike
+app.post("/undislike", async (req, res) => {
+  const { jobId } = req.body;
+  try {
+    const job = await JobOffer.findById(jobId);
+    if (!job) return res.status(404).json({ success: false, message: "Job not found" });
+
+    job.dislikes = Math.max(0, job.dislikes - 1);
+    await job.save();
+    
+    res.json({ success: true, updatedDislikeCount: job.dislikes });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Error removing dislike", error });
+  }
+});
+ // for like
+app.post("/like", async (req, res) => {
+  try {
+    const { jobId } = req.body;
+   const jobl= await JobOffer.findByIdAndUpdate(jobId, { $inc: { likes: 1 } },{new:true}); 
+    res.json({ success: true, updatedlikeCount: jobl.likes });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Error liking job" });
+  }
+});
+ // for unlike
+app.post("/unlike", async (req, res) => {
+  const { jobId } = req.body;
+  try {
+    const job = await JobOffer.findById(jobId);
+    if (!job) return res.status(404).json({ success: false, message: "Job not found" });
+
+    job.likes = Math.max(0, job.likes - 1);
+    await job.save();
+    
+    res.json({ success: true, updatedLikeCount: job.likes });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Error unliking job", error });
+  }
+});
+
+
 module.exports = app;

@@ -6,7 +6,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Navbar() {
   const [userName, setUserName] = useState(null);
-  // console.log(userName)
  
   useEffect(() => {
     const userData = localStorage.getItem("user");

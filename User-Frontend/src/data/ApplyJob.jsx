@@ -63,7 +63,7 @@ const JobApplyForm = () => {
                 <h2>Apply for {job.jobTitle}</h2>
                 <p><strong>Company : </strong> {job.companyName}</p>
                 <p><strong>Location : </strong> {job.location}</p>
-                <p><strong>ApplicantID : </strong> {user._id}</p>
+                {/* <p><strong>ApplicantID : </strong> {user._id}</p> */}
                 <p><strong>Applicant : </strong> {user.username}</p>
                 <p><strong>Email : </strong> {user.email}</p>
                 <p><strong>Mob. No. : </strong> {user.phone}</p>

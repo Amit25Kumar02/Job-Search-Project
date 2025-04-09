@@ -37,34 +37,16 @@
 }
 /* Standard Navigation Links */
 .nav-link {
-  position: relative;
-  text-decoration: none;
-  color: black;
-  display: inline-block;
-  padding-bottom: 3px;
-}
-.nav-link:hover{
-  color: blue;
-  font-size: 20px;
-}
-.nav-link::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 1px;
-  width: 0;
-  height: 3px;
-  /* color: #0984e3; */
-  background-color: #0984e3;
-  transition: width 0.7s ease, left 0.7s ease; /* Smooth expansion */
-  transform: translateX(-50%); /* Keeps it centered */
+  color: rgb(5, 5, 5) !important;
 }
 
-.nav-link:hover::after {
-  color: #0984e3;
-  width: 100%;
-  left: 50%;
-  transform: translateX(-50%); /* Ensures expansion from center */
+.nav-link.active {
+  color: #0056b3 !important; 
+}
+.nav-link:hover{
+  font-weight: bold; 
+  font-size: 18px;
+  color: #0056b3 !important;
 }
 
 .dark-overlay {
@@ -161,6 +143,30 @@
 .add-job-btn{
   margin-left: 5%;
 }
+.profile-img{
+  height: 80px;
+  width: 80px;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin: auto;
+}
+.pro-card{
+  margin-top: 4%;
+}
+.pro-div{
+  box-shadow: 5px 5px 10px black;
+
+}
+.pro-btn{
+  margin: auto;
+}
+.profile-img2{
+  height: 30px;
+  width: 30px;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin: auto;
+}
 @media (max-width: 576px) {
  .con-d{
   margin-top: 20vh;
@@ -211,27 +217,4 @@
     margin-top: 12vh;
    }
  }
- .profile-img{
-  height: 80px;
-  width: 80px;
-  border: 1px solid black;
-  border-radius: 50%;
-  margin: auto;
-}
-.pro-card{
-  margin-top: 4%;
-}
-.pro-div{
-  box-shadow: 5px 5px 10px black;
-
-}
-.pro-btn{
-  margin: auto;
-}
-.profile-img2{
-  height: 30px;
-  width: 30px;
-  border: 1px solid black;
-  border-radius: 50%;
-  margin: auto;
-}
+ 

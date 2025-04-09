@@ -234,11 +234,13 @@ body {
   float: left;
   width: 100%;
   padding: 2%;
+  
 }
 .left-card-education{
   min-height: 20vh;
   max-height: auto;
 }
+
 .education-div{
   display: flex;
   /* gap: 40%; */
@@ -347,7 +349,7 @@ body {
 .right-card-right-left{
   float: left;
   width: 80%;
-  padding:3px 20%;
+  padding:3px 2%;
 }
 .right-card-right-right{
   float: right;
@@ -473,6 +475,8 @@ body {
   justify-content: center;
   gap: 20px;
   float: right;
+  padding: 2%;
+  font-size: 16px;
   margin-top: 4%;
 }
 .btn-ss{
@@ -489,7 +493,7 @@ body {
   /* min-height: 150px; */
   /* max-height: 150px; */
   border-radius: 10px;
-  padding: 12px;
+  padding: 5px;
 }
 .text-1 ,.text-2{
   height: 50px;
@@ -503,6 +507,9 @@ body {
 /* Responsive Design */
 /* Extra Small Devices (phones, 0px - 575px) */
 @media (max-width:1600px) {
+  .left-card-language , .left-card-education{
+    border-top:1px solid rgb(159, 158, 158);
+  }
   .modal-card {
     background: white;
     padding: 2% 1%;
@@ -516,7 +523,7 @@ body {
     /* display: inline-block; */
   }
   .modal-card h5{
-    font-size: 40px;
+    font-size: 30px;
   }
   .input-wrapper-1{
   margin: 5% 35%;
@@ -526,8 +533,8 @@ body {
  
   .input-wrapper{
     margin: auto;
-    height: 250px;
-    width: 250px;
+    height: 200px;
+    width: 200px;
   }
   .profile-img-input{
     margin: auto;
@@ -539,9 +546,12 @@ body {
     justify-content: space-evenly;
   }
   .modal-buttons button{
-    font-size: 22px;
-    width: 30%;
-
+    font-size: 16px;
+    /* width: 30%; */
+  }
+  .pro-img-p{
+    width: 100%;
+    height: 100%;
   }
   /* for profile overview card */
   .modal-card-1 {
@@ -549,17 +559,17 @@ body {
     /* padding: ; */
     border-radius: 10px;
     margin: auto 3%;
-    width: 800px;
+    width: 600px;
     height: auto;
     text-align: center;
     position: relative;
-    font-size: 24px;
+    font-size: 18px;
   }
   .modal-card-1 h1{
-    font-size: 36px;
+    font-size: 24px;
   }
   .modal-card-1 h3{
-    font-size: 26px;
+    font-size: 20px;
   }
   .modal-buttons-1{
     display: flex;
@@ -568,9 +578,9 @@ body {
     justify-content: space-between;
   }
   .modal-buttons-1 button{
-    font-size: 24px;
-    padding: 4% 8%;
-    width: 20vh;
+    font-size: 16px;
+    padding: 4%;
+    /* width: 20vh; */
   }
   .text-area-pro{
     max-height: 150px;
@@ -578,6 +588,13 @@ body {
   }
 }
  @media (max-width:1200px) {
+  .pro-card{
+    margin-top: 7%;
+
+  }
+  .left-card-language , .left-card-education{
+    border-top:1px solid rgb(159, 158, 158);
+  }
   .modal-card {
     background: white;
     padding: 5% 1%;
@@ -649,7 +666,7 @@ body {
   .modal-buttons-1 button{
     font-size: 18px;
     padding: 4% 8%;
-    width: 20vh;
+    /* width: 20vh; */
   }
   .text-area-pro{
     max-height: 120px;
@@ -657,30 +674,53 @@ body {
   }
  }
  @media (max-width:992px) {
+  .pro-card{
+    width: 94%;
+    display: block;
+    margin:8% auto;
+  }
+  .left-card{
+    width: 100%;
+    display: block;
+  }
+  .right-card{
+    width: 100%;
+    display: block;
+  }
+  .right-card-left{
+    width: 100%;
+    display: block;
+  }
+  .right-card-right{
+    width: 100%;
+    display: block; 
+    border-top:1px solid rgb(159, 158, 158);
+  }
+  .right-card-title{
+    width: 100%;
+    display: block;
+  }
+  .left-card-language , .left-card-education{
+    border-top:1px solid rgb(159, 158, 158);
+  }
   .modal-card {
     background: white;
     padding: 10% 1%;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    width: 90%;
+    width: 95%;
     height: auto;
     text-align: center;
     position: relative;
-    font-size: 34px;
+    font-size: medium;
     /* display: inline-block; */
   }
   .modal-card h5{
-    font-size: 40px;
+    font-size: 22px;
   }
   .input-wrapper-1{
   margin: 5% 20%;
     float: left;
-    margin-bottom: 5%;
- 
-  }
-  .input-t{
-    height: 30%;
-    width: 100%;
   }
   .input-wrapper{
     margin: auto;
@@ -695,199 +735,105 @@ body {
   .modal-buttons {
     display: flex;
     justify-content: space-evenly;
-    /* margin-top: 5%; */
   }
   .modal-buttons button{
     font-size: 22px;
-    width: 30%;
-margin-top: 5%;
+    width: 33%;
+    margin-top: -5%;
   }
   /* for profile overview card */
   .modal-card-1 {
     background: white;
-    /* padding: ; */
     border-radius: 10px;
-    margin: auto 3%;
-    width: 800px;
+    margin: auto;
+    width: 96%;
     height: auto;
     text-align: center;
     position: relative;
-    font-size: 32px;
   }
-  .modal-card-1 h1{
-    font-size: 66px;
+
+  /* for eduction modal card */
+  .modal-card-e{
+    width: 96%;
+    margin: auto;
+    height: auto;
   }
-  .modal-card-1 h3{
-    font-size: 36px;
+
+  .input-wrapper-e{
+    width: 98%;
+    margin: auto;
+  }
+
+  /* for language modal card */
+  .modal-card-3{
+    width: 96%;
+    margin: auto;
+    height: auto;
+  }
+  .input-wrapper-2{
+    width: 98%;
+    margin: auto;
+  }
+  .text-area-rate{
+    width: 20%;
+  }
+
+  /* for title  modal card */
+  .modal-card-2{
+    width: 96%;
+    margin: auto;
+    height: auto;
   }
   .modal-buttons-1{
-    display: inline-flex;
-    /* float: left; */
-    /* gap: 30%; */
-    justify-content: space-evenly;
+    width: 100%;
+    height: fit-content;
+    padding: 2px;
+    /* font-size: 19px; */
   }
-  .modal-buttons-1 button{
-    font-size: 34px;
-    padding: 4% 8%;
-    width: 20vh;
+  .modal-buttons-1>button{
+    height: fit-content;
+    padding: 2px;
+    font-size: 16px;
   }
-  .text-area-pro{
-    max-height: 250px;
-    min-height: 250px;
+  .input-wrapper-2{
+    width: 98%;
+    margin: auto;
   }
  }
  @media (max-width:768px) {
-  .modal-card {
-    background: white;
-    padding: 10% 1%;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    width: 75%;
-    height: auto;
-    text-align: center;
-    position: relative;
-    font-size: 22px;
-    /* display: inline-block; */
+  .pro-card{
+    width: 94%;
+    display: block;
+    margin:8% auto;
   }
-  .modal-card h5{
-    font-size: 35px;
-  }
-  .input-wrapper-1{
-  margin: auto 15%;
-    float: left;
-    margin-top: 5%;
-  }
-  .input-t{
-    height: 30%;
+  .left-card{
     width: 100%;
+    display: block;
   }
-  .input-wrapper{
-    margin: auto;
-    height: 50%;
-    width: 50%;
-  }
-  .profile-img-input{
-    margin: auto;
-    height: 100%;
+  .right-card{
     width: 100%;
+    display: block;
   }
-  .modal-buttons {
-    display: flex;
-    justify-content: space-evenly;
-  }
-  .modal-buttons button{
-    font-size: 22px;
-    width: 30%;
-
-  }
-     /* for profile overview card */
-     .modal-card-1 {
-      background: white;
-      /* padding: ; */
-      border-radius: 10px;
-      margin: auto 3%;
-      width: 800px;
-      height: auto;
-      text-align: center;
-      position: relative;
-      font-size: 30px;
-    }
-    .modal-card-1 h1{
-      font-size: 66px;
-    }
-    .modal-card-1 h3{
-      font-size: 36px;
-    }
-    .modal-buttons-1{
-      display: flex;
-      float: left;
-      /* gap: 30%; */
-      justify-content: space-between;
-    }
-    .modal-buttons-1 button{
-      font-size: 30px;
-      padding: 4% 8%;
-      width: 20vh;
-    }
-    .text-area-pro{
-      max-height: 220px;
-      min-height: 220px;
-    }
- }
- @media (max-width:576px) {
-  .modal-card {
-    background: white;
-    padding: 10% 1%;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    width: auto;
-    margin: 10% 10%;
-    height: auto;
-    text-align: center;
-    position: relative;
-    /* font-size: 28px; */
-  }
-  .modal-card h5{
-    font-size: 24px;
-  }
-  .input-wrapper-1{
-  margin: auto 10%;
-    float: left;
-    margin-top: 5%;
-  }
-  .input-wrapper{
-    margin: auto;
-    height: 50%;
-    width: 50%;
-  }
-  .profile-img-input{
-    margin: auto;
-    height: 100%;
+  .right-card-left{
     width: 100%;
+    display: block;
   }
-  .modal-buttons {
-    display: flex;
-    justify-content: space-evenly;
+  .right-card-right{
+    width: 100%;
+    display: block; 
+    border-top:1px solid rgb(159, 158, 158);
+    /* margin-left: -10px; */
   }
-  .modal-buttons button{
-    font-size: 22px;
-    width: 30%;
-
+  .right-card-right-left{
+    text-align: left;
   }
-    /* for profile overview card */
-    .modal-card-1 {
-      background: white;
-      /* padding: ; */
-      border-radius: 10px;
-      margin: auto 3%;
-      width: 800px;
-      height: auto;
-      text-align: center;
-      position: relative;
-      font-size: 16px;
-    }
-    .modal-card-1 h1{
-      font-size: 26px;
-    }
-    .modal-card-1 h3{
-      font-size: 18px;
-    }
-    .modal-buttons-1{
-      display: flex;
-      /* float: left; */
-      gap: 10%;
-      justify-content: space-evenly;
-    }
-    .modal-buttons-1 button{
-      font-size: 16px;
-      width: 20vh;
-    }
-    .text-area-pro{
-      max-height: 150px;
-      min-height: 150px;
-    }
- }
- @media (max-width:400px) {
+  .right-card-title{
+    width: 100%;
+    display: block;
+  }
+  .left-card-language , .left-card-education{
+    border-top:1px solid rgb(159, 158, 158);
+  }
   .modal-card {
     background: white;
     padding: 10% 1%;
@@ -929,17 +875,15 @@ margin-top: -5%;
   /* for profile overview card */
   .modal-card-1 {
     background: white;
-    /* padding: ; */
     border-radius: 10px;
-    margin: auto 3%;
-    width: auto;
+    margin: auto;
+    width: 96%;
     height: auto;
     text-align: center;
     position: relative;
   }
   .modal-buttons-1{
     display: flex;
-    /* float: left; */
     gap: 10%;
     justify-content: space-evenly;
   }
@@ -947,5 +891,319 @@ margin-top: -5%;
     font-size: 16px;
     width: 20vh;
 
+  }
+  /* for eduction modal card */
+  .modal-card-e{
+    width: 96%;
+    margin: auto;
+    height: auto;
+  }
+  .modal-buttons-1{
+    width: 100%;
+  }
+  .input-wrapper-e{
+    width: 98%;
+    margin: auto;
+  }
+
+  /* for language modal card */
+  .modal-card-3{
+    width: 96%;
+    margin: auto;
+    height: auto;
+  }
+  .modal-buttons-1{
+    width: 100%;
+  }
+  .input-wrapper-2{
+    width: 98%;
+    margin: auto;
+  }
+  .text-area-rate{
+    width: 20%;
+  }
+
+  /* for title  modal card */
+  .modal-card-2{
+    width: 96%;
+    margin: auto;
+    height: auto;
+  }
+  .modal-buttons-1{
+    width: 100%;
+  }
+  .input-wrapper-2{
+    width: 98%;
+    margin: auto;
+  }
+ }
+ @media (max-width:576px) {
+  .pro-card{
+    width: 94%;
+    display: block;
+    margin:8% auto;
+  }
+  .left-card{
+    width: 100%;
+    display: block;
+  }
+  .right-card{
+    width: 100%;
+    display: block;
+  }
+  .right-card-left{
+    width: 100%;
+    display: block;
+  }
+  .right-card-right{
+    width: 100%;
+    display: block; 
+    border-top:1px solid rgb(159, 158, 158);
+    text-align: left;
+  }
+  .right-card-title{
+    width: 100%;
+    display: block;
+  }
+  .left-card-language , .left-card-education{
+    border-top:1px solid rgb(159, 158, 158);
+  }
+  .modal-card {
+    background: white;
+    padding: 10% 1%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 95%;
+    height: auto;
+    text-align: center;
+    position: relative;
+    font-size: medium;
+    /* display: inline-block; */
+  }
+  .modal-card h5{
+    font-size: 22px;
+  }
+  .input-wrapper-1{
+  margin: 5% 20%;
+    float: left;
+  }
+  .input-wrapper{
+    margin: auto;
+    height: 50%;
+    width: 50%;
+  }
+  .profile-img-input{
+    margin: auto;
+    height: 100%;
+    width: 100%;
+  }
+  .modal-buttons {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .modal-buttons button{
+    font-size: 22px;
+    width: 33%;
+margin-top: -5%;
+  }
+  /* for profile overview card */
+  .modal-card-1 {
+    background: white;
+    border-radius: 10px;
+    margin: auto;
+    width: 96%;
+    height: auto;
+    text-align: center;
+    position: relative;
+  }
+  .modal-buttons-1{
+    display: flex;
+    gap: 10%;
+    justify-content: space-evenly;
+  }
+  .modal-buttons-1 button{
+    font-size: 16px;
+    width: 20vh;
+
+  }
+  /* for eduction modal card */
+  .modal-card-e{
+    width: 96%;
+    margin: auto;
+    height: auto;
+  }
+  .modal-buttons-1{
+    width: 100%;
+  }
+  .input-wrapper-e{
+    width: 98%;
+    margin: auto;
+  }
+
+  /* for language modal card */
+  .modal-card-3{
+    width: 96%;
+    margin: auto;
+    height: auto;
+  }
+  .modal-buttons-1{
+    width: 100%;
+  }
+  .input-wrapper-2{
+    width: 98%;
+    margin: auto;
+  }
+  .text-area-rate{
+    width: 20%;
+  }
+
+  /* for title  modal card */
+  .modal-card-2{
+    width: 96%;
+    margin: auto;
+    height: auto;
+  }
+  .modal-buttons-1{
+    width: 100%;
+  }
+  .input-wrapper-2{
+    width: 98%;
+    margin: auto;
+  }
+ }
+ @media (max-width:400px) {
+  .pro-card{
+    width: 94%;
+    display: block;
+    margin:8% auto;
+  }
+  .left-card{
+    width: 100%;
+    display: block;
+  }
+  .right-card{
+    width: 100%;
+    display: block;
+  }
+  .right-card-left{
+    width: 100%;
+    display: block;
+    padding: 2% 1%;
+  }
+  .right-card-right{
+    width: 100%;
+    display: block; 
+    border:1px solid rgb(159, 158, 158);
+    padding: 2%;
+    text-align: left;
+  }
+  .right-card-title{
+    width: 100%;
+    display: block;
+  }
+  .left-card-language , .left-card-education{
+    border-top:1px solid rgb(159, 158, 158);
+  }
+  .modal-card {
+    background: white;
+    padding: 10% 1%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 95%;
+    height: auto;
+    text-align: center;
+    position: relative;
+    font-size: medium;
+    /* display: inline-block; */
+  }
+  .modal-card h5{
+    font-size: 22px;
+  }
+  .input-wrapper-1{
+  margin: 5% 20%;
+    float: left;
+  }
+  .input-wrapper{
+    margin: auto;
+    height: 50%;
+    width: 50%;
+  }
+  .profile-img-input{
+    margin: auto;
+    height: 100%;
+    width: 100%;
+  }
+  .modal-buttons {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .modal-buttons button{
+    font-size: 22px;
+    width: 33%;
+margin-top: -5%;
+  }
+  /* for profile overview card */
+  .modal-card-1 {
+    background: white;
+    border-radius: 10px;
+    margin: auto;
+    width: 96%;
+    height: auto;
+    text-align: center;
+    position: relative;
+  }
+  .modal-buttons-1{
+    display: flex;
+    gap: 10%;
+    justify-content: space-evenly;
+  }
+  .modal-buttons-1 button{
+    font-size: 16px;
+    width: 20vh;
+
+  }
+  /* for eduction modal card */
+  .modal-card-e{
+    width: 96%;
+    margin: auto;
+    height: auto;
+  }
+  .modal-buttons-1{
+    width: 100%;
+  }
+  .input-wrapper-e{
+    width: 98%;
+    margin: auto;
+  }
+
+  /* for language modal card */
+  .modal-card-3{
+    width: 96%;
+    margin: auto;
+    height: auto;
+  }
+  .modal-buttons-1{
+    width: 100%;
+  }
+  .input-wrapper-2{
+    width: 98%;
+    margin: auto;
+  }
+  .text-area-rate{
+    width: 20%;
+  }
+
+  /* for title  modal card */
+  .modal-card-2{
+    width: 96%;
+    margin: auto;
+    height: auto;
+  }
+  .modal-buttons-1{
+    width: 100%;
+  }
+  .input-wrapper-2{
+    width: 98%;
+    margin: auto;
   }
  }

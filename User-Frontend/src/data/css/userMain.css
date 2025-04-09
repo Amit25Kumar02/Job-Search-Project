@@ -1,0 +1,147 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.user-main-img-div{
+    width: 100%;
+    position: relative;
+}
+.user-main-img-div>img{
+    height: 500px;
+    width: 100%;
+    /* object-fit: cover; */
+
+}
+.input-group{
+
+    text-align: left;
+    color: black;
+    padding: 7px;
+    border-radius: 5px;
+    width: 50%;
+    background-color: white;
+}
+.user-main-text-div{
+    position: absolute;
+    top: 30%;
+    left: 0%;
+    text-align: left;
+    transform: translate(10%, 0%);
+    color: rgb(255, 255, 255);
+    width: 50%;
+    /* background-color: white; */
+}
+.user-main-text-1st-h1{
+    font-weight: bold;
+    font-size: 45px;
+    color: #1ca774;
+}
+.user-main-text-2nd-h1{
+    font-size: 45px;
+    font-weight: bold;
+    color: black;
+}
+.dark-overlay-img{
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.8);
+}
+
+/* Extra large devices (1200px and up) */
+@media (min-width: 1200px) {
+    .user-main-text-1st-h1,
+    .user-main-text-2nd-h1 {
+        font-size: 48px;
+    }
+
+    .input-group {
+        width: 50%;
+    }
+
+    .user-main-text-div {
+        width: 50%;
+    }
+}
+
+/* Large devices (992px to 1199px) */
+@media (max-width: 1199px) {
+    .user-main-text-1st-h1,
+    .user-main-text-2nd-h1 {
+        font-size: 40px;
+    }
+
+    .input-group {
+        width: 60%;
+    }
+
+    .user-main-text-div {
+        width: 60%;
+    }
+}
+
+/* Medium devices (768px to 991px) */
+@media (max-width: 991px) {
+    .user-main-text-div {
+        width: 80%;
+        transform: translate(5%, 0%);
+        top: 25%;
+    }
+
+    .input-group {
+        width: 70%;
+    }
+
+    .user-main-text-1st-h1,
+    .user-main-text-2nd-h1 {
+        font-size: 32px;
+    }
+
+    .user-main-img-div>img {
+        height: 400px;
+    }
+}
+
+/* Small devices (576px to 767px) */
+@media (max-width: 767px) {
+    .user-main-text-div {
+        width: 90%;
+        transform: translate(5%, 0%);
+        top: 20%;
+    }
+
+    .input-group {
+        width: 90%;
+    }
+
+    .user-main-text-1st-h1,
+    .user-main-text-2nd-h1 {
+        font-size: 26px;
+    }
+
+    .user-main-img-div>img {
+        height: 350px;
+    }
+}
+
+/* Extra small devices (less than 576px) */
+@media (max-width: 575px) {
+    .user-main-text-div {
+        width: 95%;
+        transform: translate(2%, 0%);
+        top: 18%;
+    }
+
+    .input-group {
+        width: 95%;
+    }
+
+    .user-main-text-1st-h1,
+    .user-main-text-2nd-h1 {
+        font-size: 22px;
+    }
+
+    .user-main-img-div>img {
+        height: 300px;
+    }
+}

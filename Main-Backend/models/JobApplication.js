@@ -6,7 +6,7 @@ const JobApplicationSchema = new mongoose.Schema({
   userName: { type: String, required: true },
   userEmail: { type: String, required: true },
   Phone: { type: String, required: true },
-  proposal:{type:String ,maxlength:[300]},
+  proposal:{type:String },
   resume: { type: String, required: true },
   appliedAt: { type: Date, default: Date.now }
 });

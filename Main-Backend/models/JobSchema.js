@@ -8,6 +8,8 @@ const JobOfferSchema = new mongoose.Schema({
   salary: { type: String, required: true },
   skills: { type: [String], required: true },
   applicationDeadline: { type: Date, required: true },
+  dislikes: { type: Number, default: 0 },
+  likes: { type: Number, default: 0 },
   postedAt: { type: Date, default: Date.now }
 });
 

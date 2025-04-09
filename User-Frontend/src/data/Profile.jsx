@@ -246,7 +246,7 @@ function UserProfile() {
                 <h3>$ {userData.rate} /hr</h3>
               </div>
               <div className="right-card-right-right">
-                <button className="btn-rate" onClick={() => setRateShowModal(true)}>
+                <button className="btn-overview" onClick={() => setRateShowModal(true)}>
                   <LuPencil color="green" />
                 </button>
               </div>
@@ -323,9 +323,9 @@ function UserProfile() {
               <input type="file" name="profileImage" accept="image/*" onChange={handleFileChange} className="input-t" />
             </div>
             {/* Buttons at bottom-right */}
-            <div className="modal-buttons">
-              <button className="btn btn-danger" onClick={() => setShowModal(false)}>Cancel</button>
-              <button className="btn btn-success" onClick={handleSave}>Save</button>
+            <div className="modal-buttons-1">
+              <button className="btn btn-outline-danger" onClick={() => setShowModal(false)}>Cancel</button>
+              <button className="btn btn-outline-success" onClick={handleSave}>Save</button>
             </div>
           </div>
         </div>
@@ -363,9 +363,7 @@ function UserProfile() {
         TitleshowModal && (
           <div className="modal-overlay" onClick={() => setTitleShowModal(false)}>
             <div className="modal-card-2" onClick={(e) => e.stopPropagation()}>
-              <span className="modal-close-btn" onClick={() => setTitleShowModal(false)}>
-                <TbXboxX />
-              </span>
+
               <div className="input-wrapper-2">
                 <h1>Edit your title</h1>
                 <p>Enter a single sentence description of your professional skills/experience (e.g. Expert Web Designer with Ajax experience)</p>
@@ -374,9 +372,9 @@ function UserProfile() {
                 <input type="text" name="title" placeholder="Your Title" value={userData.title} onChange={handleChange} className="text-area-title"></input>
               </div>
               {/* Buttons at bottom-right */}
-              <div className="modal-buttons-1">
-                <button className="btn btn-danger btn-ss" onClick={() => setTitleShowModal(false)}>Cancel</button>
-                <button className="btn btn-success btn-ss" onClick={handleSave}>Save</button>
+              <div className="modal-buttons">
+                <button className="btn btn-outline-danger btn-ss" onClick={() => setTitleShowModal(false)}>Cancel</button>
+                <button className="btn btn-outline-success btn-ss" onClick={handleSave}>Save</button>
               </div>
             </div>
           </div>
@@ -387,9 +385,6 @@ function UserProfile() {
         RateshowModal && (
           <div className="modal-overlay" onClick={() => setRateShowModal(false)}>
             <div className="modal-card-3" onClick={(e) => e.stopPropagation()}>
-              <span className="modal-close-btn" onClick={() => setRateShowModal(false)}>
-                <TbXboxX />
-              </span>
               <div className="input-wrapper-2">
                 <h1>Change hourly rate</h1>
                 <p>Please note that your new hourly rate will only apply to new contracts.</p>
@@ -402,8 +397,8 @@ function UserProfile() {
               </div>
               {/* Buttons at bottom-right */}
               <div className="modal-buttons-1">
-                <button className="btn btn-danger btn-ss" onClick={() => setRateShowModal(false)}>Cancel</button>
-                <button className="btn btn-success btn-ss" onClick={handleSave}>Save</button>
+                <button className="btn btn-outline-danger" onClick={() => setRateShowModal(false)}>Cancel</button>
+                <button className="btn btn-outline-success" onClick={handleSave}>Save</button>
               </div>
             </div>
           </div>
@@ -414,9 +409,6 @@ function UserProfile() {
         SkillshowModal && (
           <div className="modal-overlay" onClick={() => setSkillShowModal(false)}>
             <div className="modal-card-3" onClick={(e) => e.stopPropagation()}>
-              <span className="modal-close-btn" onClick={() => setSkillShowModal(false)}>
-                <TbXboxX />
-              </span>
               <div className="input-wrapper-2">
                 <h1>Edit Skills</h1>
                 <h4>Skills</h4>
@@ -424,8 +416,8 @@ function UserProfile() {
               </div>
               {/* Buttons at bottom-right */}
               <div className="modal-buttons-1">
-                <button className="btn btn-danger btn-ss" onClick={() => setSkillShowModal(false)}>Cancel</button>
-                <button className="btn btn-success btn-ss" onClick={handleSave}>Save</button>
+                <button className="btn btn-outline-danger btn-ss" onClick={() => setSkillShowModal(false)}>Cancel</button>
+                <button className="btn btn-outline-success btn-ss" onClick={handleSave}>Save</button>
               </div>
             </div>
           </div>
@@ -435,9 +427,6 @@ function UserProfile() {
       {ProjectshowModal && (
         <div className="modal-overlay" onClick={() => setProjectShowModal(false)}>
           <div className="modal-card-1" onClick={(e) => e.stopPropagation()}>
-            <span className="modal-close-btn" onClick={() => setProjectShowModal(false)}>
-              <TbXboxX />
-            </span>
             <div className="input-wrapper-2">
               <h1>Project overview</h1>
               <p>Use this space to show clients you have the skills and experience they're looking for.</p>
@@ -450,8 +439,8 @@ function UserProfile() {
             </div>
             {/* Buttons at bottom-right */}
             <div className="modal-buttons-1">
-              <button className="btn btn-danger btn-ss" onClick={() => setProjectShowModal(false)}>Cancel</button>
-              <button className="btn btn-success btn-ss" onClick={handleSave}>Save</button>
+              <button className="btn btn-outline-danger" onClick={() => setProjectShowModal(false)}>Cancel</button>
+              <button className="btn btn-outline-success " onClick={handleSave}>Save</button>
             </div>
           </div>
         </div>
@@ -462,9 +451,6 @@ function UserProfile() {
       {LanguagesshowModal && (
         <div className="modal-overlay" onClick={() => setLanguagesShowModal(false)}>
           <div className="modal-card-3" onClick={(e) => e.stopPropagation()}>
-            <span className="modal-close-btn" onClick={() => setLanguagesShowModal(false)}>
-              <TbXboxX />
-            </span>
             <div className="input-wrapper-2">
               <h1>Add Language</h1>
               <h4>Languages</h4>
@@ -472,8 +458,8 @@ function UserProfile() {
             </div>
             {/* Buttons at bottom-right */}
             <div className="modal-buttons-1">
-              <button className="btn btn-danger btn-ss" onClick={() => setLanguagesShowModal(false)}>Cancel</button>
-              <button className="btn btn-success btn-ss" onClick={handleSave}>Save</button>
+              <button className="btn btn-outline-danger" onClick={() => setLanguagesShowModal(false)}>Cancel</button>
+              <button className="btn btn-outline-success" onClick={handleSave}>Save</button>
             </div>
           </div>
         </div>
@@ -485,15 +471,12 @@ function UserProfile() {
         isEditing && (
           <div className="modal-overlay" onClick={() => setIsEditing(false)}>
             <div className="modal-card-1" onClick={(e) => e.stopPropagation()}>
-              <span className="modal-close-btn" onClick={() => setIsEditing(false)}>
-                <TbXboxX />
-              </span>
               <div className="input-wrapper-2">
                 <h1>Edit Profile</h1>
                 <input type="text" placeholder="Enter Your Username" name="username" value={userData.username} onChange={handleChange} className="text-area-title mb-2" />
                 <input type="email" name="email" value={userData.email} className="text-area-title mb-2" disabled />
                 <input type="text" placeholder="Enter your Mobile No." name="phone" value={userData.phone} onChange={handleChange} className="text-area-title mb-2" />
-                <select name="gender" value={userData.gender} onChange={handleChange} className="form-control mb-2">
+                <select name="gender" value={userData.gender} onChange={handleChange} className="text-area-title mb-2">
                   <option value="">Select Gender</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -504,8 +487,8 @@ function UserProfile() {
               </div>
               {/* Buttons at bottom-right */}
               <div className="modal-buttons-1">
-                <button className="btn btn-danger btn-ss" onClick={() => setIsEditing(false)}>Cancel</button>
-                <button className="btn btn-success btn-ss" onClick={handleSave} disabled={loading}>
+                <button className="btn btn-outline-danger " onClick={() => setIsEditing(false)}>Cancel</button>
+                <button className="btn btn-outline-success " onClick={handleSave} disabled={loading}>
                   {loading ? "Saving..." : "Save"}
                 </button>
               </div>
@@ -519,7 +502,7 @@ function UserProfile() {
           <div className="modal-overlay" onClick={() => setEducationShowModal(false)}>
             <div className="modal-card-e" onClick={(e) => e.stopPropagation()}>
               <div className="education-div">
-                <span className="modal-close-btn" onClick={() => setEducationShowModal(false)}>X</span>
+                {/* <span className="modal-close-btn" onClick={() => setEducationShowModal(false)}>X</span> */}
                 <h2>Edit Education</h2>
               </div>
               <div className="input-wrapper-e">
@@ -549,8 +532,8 @@ function UserProfile() {
               </div>
 
               <div className="modal-buttons-1">
-                <button className="btn btn-danger btn-ss" onClick={() => setEducationShowModal(false)}>Cancel</button>
-                <button className="btn btn-success btn-ss" onClick={handleSave}>Save</button>
+                <button className="btn btn-outline-danger btn-ss" onClick={() => setEducationShowModal(false)}>Cancel</button>
+                <button className="btn btn-outline-success btn-ss" onClick={handleSave}>Save</button>
               </div>
             </div>
           </div>

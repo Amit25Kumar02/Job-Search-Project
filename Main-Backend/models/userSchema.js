@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   phone: { type: String,},
   password: { type: String, required: true },
-  favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "JobOffer" }],
+  savedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: "JobOffer" }],
   userType: { type: String, enum: ["Client", "User"], default: "User" },
   dob:{type:Date},
   address:{type:String},

@@ -10,7 +10,6 @@ import JobDetails from './data/jobdetail.jsx';
 import NavbarSection from './data/navbar.jsx';
 import { AuthContext } from './store/authcontex.jsx';
 import "bootstrap/dist/css/bootstrap.min.css";
-import './App.css';
 import ClientProfile from './data/client/clientProfile.jsx';
 import UserProfile from './data/Profile.jsx';
 import UserAboutPage from './data/UserAbout.jsx';

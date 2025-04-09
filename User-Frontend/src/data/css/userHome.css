@@ -1,0 +1,269 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.main-container{
+    background-color: #dfe6e9;
+    /* height: 100vh; */
+}
+.home-main-cont {
+    position: relative;
+    width: 100%;
+    margin: 5.5% auto;
+}
+
+.img-div {
+    position: relative;
+    width: 100%;
+    /* height: 500px; */
+}
+.img-div>img{
+    height: 500px;
+}
+
+.home-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: black;
+    padding: 20px;
+    width: 80%;
+}
+.text-overlay>h1{
+    font-size: 40px;
+}
+
+.btn-jobs-home {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.btn-jobs-home:hover {
+    background-color: #0056b3;
+}
+.comp-name{
+    height: 170px;
+    background-color: #fed57d;
+    padding: 1%;
+    width: 100%;
+    margin:auto;
+}
+.comp-name>h3{
+    color: #3992ff;
+    text-align: center;
+    
+}
+.comp-name-div{
+    display: flex;
+    gap: 20px;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+}
+.comp-name-div>div{
+    margin-left: 3%;
+}
+.col-img{
+    width:90%;
+    height: auto;
+    margin-top: 7%;
+}
+.get-us-div{
+    display: flex;
+    width: 100%;
+    gap: 40px;
+}
+.get-img-div{
+    width: 50%;
+}
+.get-img-div>img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+.get-text-div{
+    width: 50%;
+    padding: 25px;
+}
+.get-text-div-text{
+    width: 90%;
+}
+.btn-1-success{
+    background-color: rgba(0, 152, 104, 0.12);
+    color: #009868;
+    font-size: 14px;
+    width: fit-content;
+    padding: 2px 10px;
+    border-radius: 5px;
+}
+.get-ul{
+    /* width: 10; */
+    display: flex;
+}
+.get-ul-ul{
+    list-style-type:none;
+    /* list-style-image: -moz-element(); */
+}
+.card-div{
+    padding: 5% 5%;
+    background-color: #01333f;
+    margin-top: 5%;
+}
+.card-div>h2{
+    text-align: center;
+    color: #dfe6e9;
+}
+.card-div>p{
+    color: #fcfcfa;
+    text-align: center;
+}
+.card-div-main{
+    display: flex;
+    gap: 30px;
+    padding: 2% 4%;
+}
+.main-card-div{
+    /* border: 1px solid green; */
+    border-radius: 5px;
+    padding: 2%;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.main-card-div>h1{
+    color: #7bbd15 !important;
+}
+.main-card-div>h5{
+    color: #fcfcfa !important;
+}
+.main-card-div>p{
+    color: rgb(236, 233, 233 ,0.8) !important;
+    font-size: 14px;
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .text-overlay>h1 {
+        font-size: 48px;
+    }
+}
+
+/* Large devices (desktops, 992px to 1199px) */
+@media (max-width: 1199px) {
+    .text-overlay>h1 {
+        font-size: 36px;
+    }
+
+    .get-us-div {
+        gap: 30px;
+    }
+
+    .card-div-main {
+        gap: 20px;
+    }
+}
+
+/* Medium devices (tablets, 768px to 991px) */
+@media (max-width: 991px) {
+    .text-overlay {
+        width: 90%;
+    }
+
+    .text-overlay>h1 {
+        font-size: 30px;
+    }
+
+    .get-us-div {
+        flex-direction: column;
+    }
+
+    .get-img-div,
+    .get-text-div {
+        width: 100%;
+    }
+
+    .card-div-main {
+        flex-direction: column;
+    }
+
+    .comp-name-div {
+        flex-direction: column;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .img-div>img {
+        height: auto;
+    }
+    .col-img{
+        width:70%;
+        height: auto;
+        margin-top: 7%;
+    }
+    .comp-name{
+        height: auto;
+        background-color: #fed57d;
+        padding: 1%;
+        width: 100%;
+        margin:auto;
+    }
+}
+
+/* Small devices (phones, 576px to 767px) */
+@media (max-width: 767px) {
+    .main-container{
+        margin-top: 11%;
+    }
+    .text-overlay>h1 {
+        font-size: 24px;
+    }
+
+    .btn-jobs-home {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .get-text-div-text {
+        width: 100%;
+    }
+
+    .comp-name {
+        height: auto;
+        padding: 2%;
+    }
+}
+
+/* Extra small devices (very small phones, less than 576px) */
+@media (max-width: 575px) {
+    .main-container{
+        margin-top: 14%;
+    }
+    .text-overlay>h1 {
+        font-size: 20px;
+    }
+
+    .btn-jobs-home {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .comp-name-div {
+        font-size: 16px;
+    }
+
+    .main-card-div>p {
+        font-size: 13px;
+    }
+}

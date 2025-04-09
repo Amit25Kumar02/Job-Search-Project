@@ -1,5 +1,6 @@
 const express = require("express");
 const User = require("../models/userSchema");
+const Job = require('../models/JobSchema');
 const JTW = require('jsonwebtoken')
 const app = express();
 const dotenv = require ("dotenv");
@@ -226,4 +227,47 @@ app.post("/clientprofileUpdate", upload.single("profileImage"), async (req, res)
   }
 });
 
+
+// for saved job routes
+
+app.post('/save-job', async (req, res) => {
+  try {
+      const { userId, jobId } = req.body;
+
+      if (!userId || !jobId) {
+          return res.status(400).json({ success: false, message: "User ID and Job ID are required" });
+      }
+
+      // Find the user and update savedJobs
+      const user = await User.findById(userId);
+      if (!user) return res.status(404).json({ success: false, message: "User not found" });
+
+      if (user.savedJobs.includes(jobId)) {
+          // Remove from savedJobs if already present (toggle feature)
+          user.savedJobs = user.savedJobs.filter(id => id.toString() !== jobId);
+      } else {
+          user.savedJobs.push(jobId);
+      }
+
+      await user.save();
+
+      res.status(200).json({ success: true, savedJobs: user.savedJobs });
+  } catch (error) {
+      res.status(500).json({ success: false, message: "Server error", error });
+  }
+});
+
+app.get('/:userId/saved-jobs', async (req, res) => {
+  try {
+      const { userId } = req.params;
+      const user = await User.findById(userId).populate("savedJobs");
+
+      if (!user) return res.status(404).json({ success: false, message: "User not found" });
+
+      res.status(200).json({ success: true, savedJobs: user.favorites });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, message: "Server error" });
+  }
+});
 module.exports = app;

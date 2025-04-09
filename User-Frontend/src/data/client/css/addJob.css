@@ -94,7 +94,7 @@
   @media (min-width:300px) and (max-width:576px) {
     .container-main-job{
         margin-top: 15%;
-        border: 1px solid black;
+        /* border: 1px solid black; */
     }
     .add-job-btn{
         margin-top: 4vh;
