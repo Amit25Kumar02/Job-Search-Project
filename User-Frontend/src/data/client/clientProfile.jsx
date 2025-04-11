@@ -56,7 +56,7 @@ function ClientProfile() {
 
   const saveData = async (data) => {
     try {
-      await axios.post("http://localhost:5200/api/users/clientprofileUpdate", data);
+      await axios.post("https://job-search-project-330t.onrender.com/api/users/clientprofileUpdate", data);
       localStorage.setItem("user", JSON.stringify(data));
       setUserData(data);
       setIsEditing(false);

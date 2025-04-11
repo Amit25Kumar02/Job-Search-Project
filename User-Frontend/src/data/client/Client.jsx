@@ -39,7 +39,8 @@ function JobOfferForm() {
 
   const fetchJobs = async () => {
     try {
-      const response = await axios.get("http://localhost:5200/api/jobs/all");
+      // const response = await axios.get("http://localhost:5200/api/jobs/all");
+      const response = await axios.get("https://job-search-project-330t.onrender.com/api/jobs/all");
       if (response.data.success) {
         setJobs(response.data.jobs);
       } else {
@@ -71,8 +72,8 @@ function JobOfferForm() {
     setLoading(true);
     try {
       const url = editingJobId
-        ? `http://localhost:5200/api/jobs/update/${editingJobId}`
-        : `http://localhost:5200/api/jobs/offer`;
+        ? `https://job-search-project-330t.onrender.com/api/jobs/update/${editingJobId}`
+        : `https://job-search-project-330t.onrender.com/api/jobs/offer`;
       const response = editingJobId
         ? await axios.put(url, formData, { headers: { Authorization: `Bearer ${token}` } })
         : await axios.post(url, formData, { headers: { Authorization: `Bearer ${token}` } });
@@ -112,7 +113,7 @@ function JobOfferForm() {
   const handleDelete = async (jobId) => {
     if (window.confirm("Are you sure you want to delete this job?")) {
       try {
-        await axios.delete(`http://localhost:5200/api/jobs/delete/${jobId}`, {
+        await axios.delete(`https://job-search-project-330t.onrender.com/api/jobs/delete/${jobId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         toast.success("Job deleted successfully!");

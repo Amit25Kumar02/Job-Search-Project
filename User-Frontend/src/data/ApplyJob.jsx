@@ -39,7 +39,7 @@ const JobApplyForm = () => {
         formData.append("resume", resume);
 
         try {
-            const response = await axios.post("http://localhost:5200/api/Ajobs/apply", formData, {
+            const response = await axios.post("https://job-search-project-330t.onrender.com/api/Ajobs/apply", formData, {
                 headers: { "Content-Type": "multipart/form-data" }
             });
 

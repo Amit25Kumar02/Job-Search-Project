@@ -14,7 +14,7 @@ const JobRequest = () => {
 
   const fetchApplications = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5200/api/Ajobs/applications");
+      const { data } = await axios.get("https://job-search-project-330t.onrender.com/api/Ajobs/applications");
       if (data && Array.isArray(data.applications)) {
         setApplications(data.applications);
       } else {
@@ -33,7 +33,7 @@ const JobRequest = () => {
       return;
     }
     try {
-      await axios.delete(`http://localhost:5200/api/Ajobs/del/${id}`);
+      await axios.delete(`https://job-search-project-330t.onrender.com/api/Ajobs/del/${id}`);
       setApplications((prevApplications) => prevApplications.filter((app) => app._id !== id));
       toast.success("Application deleted successfully.");
     } catch (error) {

@@ -109,7 +109,7 @@ function UserProfile() {
 
   const saveData = async (data) => {
     try {
-      await axios.post("http://localhost:5200/api/users/ucprofileUpdate", data
+      await axios.post("https://job-search-project-330t.onrender.com/api/users/ucprofileUpdate", data
         , { headers: { "Content-Type": "multipart/form-data" } }
       );
       setUserData((prev) => ({ ...prev, profileImage: data.imageUrl })); 

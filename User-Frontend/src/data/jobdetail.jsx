@@ -11,7 +11,7 @@ const JobDetails = () => {
     useEffect(() => {
         const fetchJobDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:5200/api/jobs/det/${jobId}`);
+                const response = await axios.get(`https://job-search-project-330t.onrender.com/api/jobs/det/${jobId}`);
                 // console.log("API Response:", response.data);
                 if (response.data.success) {
                     setJob(response.data.job);
