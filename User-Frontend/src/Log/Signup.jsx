@@ -51,7 +51,7 @@ function SignUp() {
 
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:5200/api/users/verify-otp", {
+      const response = await axios.post("https://job-search-project-330t.onrender.com/api/users/verify-otp", {
         ...formData,
         username: formData.username.trim(),
         email: formData.email.trim(),
@@ -81,7 +81,7 @@ function SignUp() {
       return;
     }
     try {
-      const response = await axios.post("http://localhost:5200/api/users/send-otp", { email:formData.email });
+      const response = await axios.post("https://job-search-project-330t.onrender.com/api/users/send-otp", { email:formData.email });
       toast.success(response.data.message);
       setOtpSent(true); // OTP has been sent successfully
     } catch (error) {

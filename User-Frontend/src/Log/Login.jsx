@@ -27,7 +27,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5200/api/users/login", formData);
+      const response = await axios.post("https://job-search-project-330t.onrender.com/api/users/login", formData);
       toast.success(response.data.message, { position: "top-center" });
 
       // Store Token in AuthContext & Local Storage
