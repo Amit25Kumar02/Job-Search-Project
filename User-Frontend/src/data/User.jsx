@@ -279,7 +279,7 @@ const User = () => {
         <div className="user-main-text2-div">
           <h1 className="user-main-text2-1st-h1">Are You Already Working<br/> With Us?</h1>
 
-          <div className="input-group">
+          <div className="input-group-1">
             <input
               type="email"
               placeholder="Enter Your Email"

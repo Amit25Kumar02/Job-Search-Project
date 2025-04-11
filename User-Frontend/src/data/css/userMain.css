@@ -204,10 +204,13 @@
     .user-main-text-div {
         width: 95%;
         transform: translate(2%, 0%);
-        top: 7%;
+        top: 9%;
     }
 
     .input-group {
+        width: 95%;
+    }
+    .input-group-1 {
         width: 95%;
     }
 
@@ -217,7 +220,7 @@
     }
 
     .user-main-img-div>img {
-        height: 300px;
+        height: 350px;
     }
     .user-main-text2-1st-h1{
         font-weight: bold;
