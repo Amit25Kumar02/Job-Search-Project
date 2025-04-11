@@ -12,7 +12,10 @@ const app = express();
 
 app.use(express.json({ limit: "10mb" }));  
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
-app.use(cors());
+app.use(cors({
+  origin: ["https://amitjobhub.netlify.app"],
+  credentials: true
+}));
 app.use("/uploads", express.static("uploads"));
 app.use("/profileImage", express.static("profileImage"));
 
