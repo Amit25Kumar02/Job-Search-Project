@@ -199,7 +199,7 @@
     }
 }
 
-/* Extra small devices (less than 576px) */
+/* Extra small devices like as mobile (less than 576px) */
 @media (max-width: 575px) {
     .user-main-text-div {
         width: 95%;
