@@ -47,6 +47,7 @@ const JobDetails = () => {
                         <p className="text-info">Company: {job.companyName}</p>
                         <p className="text-muted">{job.jobDescription}</p>
                         <p className="text-info">Location: {job.location}</p>
+                        <p className="text-info">Experience: {job.Experience}</p>
                         <p className="text-success">Salary: ₹ {job.salary} / PA</p>
                         <div className="text-dark gap-5 ">
                             {job.skills.join(' , ')}

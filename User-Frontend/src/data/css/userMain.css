@@ -8,8 +8,22 @@
     position: relative;
 }
 .user-main-img-div>img{
-    height: 500px;
+    height: 600px;
     width: 100%;
+    border-bottom-right-radius: 40% 25%;
+    border-bottom-left-radius: 40% 20%;
+    /* object-fit: cover; */
+
+}
+.user-main-img2-div{
+    width: 100%;
+    position: relative;
+}
+.user-main-img2-div>img{
+    height: 600px;
+    width: 100%;
+    border-top-right-radius: 40% 25%;
+    border-bottom-left-radius: 40% 20%;
     /* object-fit: cover; */
 
 }
@@ -42,11 +56,50 @@
     font-weight: bold;
     color: black;
 }
-.dark-overlay-img{
+.car-2 {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+  
+  .user-main-img2-div img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+  }
+  
+  .dark-overlay5-img {
+    position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.8);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    border-top-right-radius: 40% 25%;
+    border-bottom-left-radius: 40% 20%;
+  }
+  
+  /* Make sure text appears above overlay */
+  .user-main-text2-div {
+    position: absolute;
+    z-index: 100;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+    width: 50%;
+    padding: 20px;
+  }
+  
+.user-main-text2-1st-h1{
+    font-weight: bold;
+    font-size: 45px;
+    color: #1ca774;
 }
+  
 
 /* Extra large devices (1200px and up) */
 @media (min-width: 1200px) {
@@ -61,6 +114,12 @@
 
     .user-main-text-div {
         width: 50%;
+        top: 17%;
+    }
+    .user-main-text2-1st-h1{
+        font-weight: bold;
+        font-size: 45px;
+        color: #1ca774;
     }
 }
 
@@ -77,6 +136,12 @@
 
     .user-main-text-div {
         width: 60%;
+        top: 17%;
+    }
+    .user-main-text2-1st-h1{
+        font-weight: bold;
+        font-size: 45px;
+        color: #1ca774;
     }
 }
 
@@ -85,7 +150,7 @@
     .user-main-text-div {
         width: 80%;
         transform: translate(5%, 0%);
-        top: 25%;
+        top: 10%;
     }
 
     .input-group {
@@ -100,6 +165,11 @@
     .user-main-img-div>img {
         height: 400px;
     }
+    .user-main-text2-1st-h1{
+        font-weight: bold;
+        font-size: 40px;
+        color: #1ca774;
+    }
 }
 
 /* Small devices (576px to 767px) */
@@ -107,7 +177,7 @@
     .user-main-text-div {
         width: 90%;
         transform: translate(5%, 0%);
-        top: 20%;
+        top: 9%;
     }
 
     .input-group {
@@ -122,6 +192,11 @@
     .user-main-img-div>img {
         height: 350px;
     }
+    .user-main-text2-1st-h1{
+        font-weight: bold;
+        font-size: 34px;
+        color: #1ca774;
+    }
 }
 
 /* Extra small devices (less than 576px) */
@@ -129,7 +204,7 @@
     .user-main-text-div {
         width: 95%;
         transform: translate(2%, 0%);
-        top: 18%;
+        top: 7%;
     }
 
     .input-group {
@@ -143,5 +218,13 @@
 
     .user-main-img-div>img {
         height: 300px;
+    }
+    .user-main-text2-1st-h1{
+        font-weight: bold;
+        font-size: 30px;
+        color: #1ca774;
+    }
+    .user-main-text2-div{
+        width: 60%;
     }
 }

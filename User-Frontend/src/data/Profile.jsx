@@ -531,9 +531,9 @@ function UserProfile() {
                 <textarea name="description" value={education.description} onChange={handleEduChange} className="text-area-pro mb-2"></textarea>
               </div>
 
-              <div className="modal-buttons-1">
-                <button className="btn btn-outline-danger btn-ss" onClick={() => setEducationShowModal(false)}>Cancel</button>
-                <button className="btn btn-outline-success btn-ss" onClick={handleSave}>Save</button>
+              <div className="modal-buttons-2">
+                <button className="btn btn-outline-danger " onClick={() => setEducationShowModal(false)}>Cancel</button>
+                <button className="btn btn-outline-success " onClick={handleSave}>Save</button>
               </div>
             </div>
           </div>

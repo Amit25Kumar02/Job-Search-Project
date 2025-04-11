@@ -12,6 +12,22 @@ function NavbarSection() {
     if (userData) {
       setUserName(JSON.parse(userData));
     }
+      // 👇 Add scroll event listener
+      const handleScroll = () => {
+        const nav = document.querySelector('.navbar');
+        if (window.scrollY > 0) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      };
+  
+      window.addEventListener('scroll', handleScroll);
+  
+      // Cleanup listener on unmount
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
   }, []);
 
   const handleLogout = () => {
@@ -24,7 +40,7 @@ function NavbarSection() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+    <nav className="navbar navbar-expand-lg  fixed-top">
       <div className="container-fluid">
         <Link className=" jobs-nav" to="#">AmitJobsHub</Link>
         <button
@@ -40,7 +56,7 @@ function NavbarSection() {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul className="navbar-nav me-auto mb-2 ">
             <li className="nav-item">
               <Link className="nav-link active" to="/home">Home</Link>
             </li>
@@ -59,7 +75,7 @@ function NavbarSection() {
           {/* User Dropdown */}
 
           <div className="dropdown">
-            <button className="btn btn-secondary dropdown-toggle" type="button" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <button className="btn btn-success dropdown-toggle" type="button" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
               {/* <img src={userName.profile} alt="Profile" className="profile-img2 mb-2" /> */}
               {userName ? `Hey, ${userName.username}` : "Account"}
             </button>

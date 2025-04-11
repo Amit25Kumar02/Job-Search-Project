@@ -9,7 +9,7 @@
 .about-container {
   position: relative;
   text-align: center;
-  margin: 6% 0;
+  margin: auto;
 }
 
 .dark-overlay {
@@ -21,7 +21,7 @@
 .about-cont-img {
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 500px;
   overflow: hidden;
 }
 
@@ -34,7 +34,7 @@
 .about-text {
   position: absolute;
   top: 15%;
-  transform: translate(15%, 20%);
+  transform: translate(17%, 20%);
   color: white;
   font-size: 24px;
   font-weight: bold;
@@ -44,10 +44,10 @@
 .about-text-p {
   position: absolute;
   width: 60%;
-  top: 45%;
+  top: 40%;
   transform: translate(8%, 20%);
   color: white;
-  font-size: 12px;
+  font-size: 18px;
   text-align: left;
 }
 
@@ -55,7 +55,8 @@
   width: 100%;
   display: flex;
   gap: 10px;
-  margin: 1% auto;
+  margin:  auto;
+  margin-bottom: -10%;
 }
 
 .about-con-2-text {
@@ -88,7 +89,7 @@
       font-size: 20px;
   }
   .about-text-p {
-      font-size: 11px;
+      font-size: 18px;
   }
 }
 
@@ -99,7 +100,7 @@
       transform: translate(10%, 20%);
   }
   .about-text-p {
-      font-size: 10px;
+      font-size: 16px;
       width: 70%;
   }
   .about-con-2 {
@@ -127,7 +128,7 @@
       transform: translate(5%, 10%);
   }
   .about-text-p {
-      font-size: 9px;
+      font-size: 14px;
       width: 80%;
   }
   .about-con-2 {
@@ -154,7 +155,7 @@
       font-size: 14px;
   }
   .about-text-p {
-      font-size: 8px;
+      font-size: 12px;
       width: 90%;
   }
   .about-con-2-text,

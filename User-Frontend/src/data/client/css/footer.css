@@ -4,10 +4,12 @@
     box-sizing: border-box;
 }
 .footer {
-    width: 100%;
+    margin-top: 5%;
+    text-align: center;
+    background-color: black;
     color: white;
-    overflow: hidden;
-}
+    width: 100%;
+  }
 
 .footer-img {
     background-image: url('./img/footer-bg-dark-1.png'); /* Place image in public folder */

@@ -12,11 +12,25 @@ function ClientNav() {
     if (userData) {
       setUsername(JSON.parse(userData));
     }
-  }, []); 
 
- const handleLogout = () => {
-    localStorage.removeItem('token'); 
-    localStorage.removeItem("user"); 
+    // Scroll behavior
+    const handleScroll = () => {
+      const nav = document.querySelector('.navbar');
+      if (window.scrollY > 0) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem("user");
     setUsername(null);
     toast.success('Logged out successfully');
     navigate("/login");
@@ -24,10 +38,10 @@ function ClientNav() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+    <nav className="navbar navbar-expand-lg fixed-top">
       <div className="container">
         <Link className="jobs-nav" to="/">AmitJobsHub</Link>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
@@ -50,17 +64,16 @@ function ClientNav() {
           </ul>
 
           <div className="dropdown">
-            <button className="btn btn-secondary dropdown-toggle" type="button" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            {/* <img src={username.profile} alt="Profile" className="profile-img2 mb-2" /> */}
-              {username ?`Hey,${username.username}` : "Account"}
+            <button className="btn btn-success dropdown-toggle" type="button" id="accountDropdown" data-bs-toggle="dropdown">
+              {username ? `Hey, ${username.username}` : "Account"}
             </button>
             <ul className="dropdown-menu" aria-labelledby="accountDropdown">
-              {username ? (
+              {username && (
                 <>
                   <li><Link className="dropdown-item" to="/clientprofile">Profile</Link></li>
                   <li><button className="dropdown-item" onClick={handleLogout}>Log-out</button></li>
                 </>
-              ) : null}
+              )}
             </ul>
           </div>
         </div>

@@ -5,7 +5,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import { Heart } from 'lucide-react';
+import { SlLike } from "react-icons/sl";
 import UserImg from './img/slider-2.jpg';
+import UserImg2 from './img/video-bg.webp';
 
 const User = () => {
   const [jobs, setJobs] = useState([]);
@@ -62,10 +64,11 @@ const User = () => {
     // return () => clearInterval(interval);
   }, []);
 
-  const handleInputChange = (e) => setQuery(e.target.value);
-
-  const handleSearch = () => {
-    const searchValue = query.toLowerCase().trim();
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setQuery(value);
+  
+    const searchValue = value.toLowerCase().trim();
     if (searchValue === "") {
       setFilteredJobs(jobs);
       return;
@@ -79,6 +82,7 @@ const User = () => {
     );
     setFilteredJobs(filtered);
   };
+  
 
   const handleSaveJob = (job) => {
     setSavedJobs((prev) => {
@@ -204,10 +208,7 @@ const User = () => {
 
   return (
     <>
-    <ToastContainer
-  position="top-center"
-  reverseOrder={false}
-/>
+    <ToastContainer position="top-center" reverseOrder={false}/>
       <div className="car-1">
         <div className="user-main-img-div">
           <img src={UserImg} alt="" />
@@ -224,7 +225,7 @@ const User = () => {
               onChange={handleInputChange}
               className="form-control"
             />
-            <button className="btn btn-outline-success" onClick={handleSearch}>
+            <button className="btn btn-outline-success" >
               Search
             </button>
           </div>
@@ -259,6 +260,7 @@ const User = () => {
                 <h5 className="text-dark">{job.jobTitle}</h5>
                 <p className="text-muted">{job.jobDescription}</p>
                 <p className="text-info">Location: {job.location}</p>
+                {/* <p className="text-info">Experience: {job.Experience}</p> */}
                 <p className="text-success">Salary: ₹ {job.salary} / PA</p>
                 <div className="text-dark gap-5 ">
                   <span> {job.skills.join(' , ')}</span>
@@ -268,6 +270,26 @@ const User = () => {
             </Link>
           </div>
         ))}
+      </div>
+      <div className="car-2">
+          <div className="dark-overlay5-img"/>
+        <div className="user-main-img2-div">
+          <img src={UserImg2} alt="" />
+        </div>
+        <div className="user-main-text2-div">
+          <h1 className="user-main-text2-1st-h1">Are You Already Working<br/> With Us?</h1>
+
+          <div className="input-group">
+            <input
+              type="email"
+              placeholder="Enter Your Email"
+              className="form-control"
+            />
+            <button className="btn btn-outline-success">
+              Subscribe
+            </button>
+          </div>
+        </div>
       </div>
     </>
   );

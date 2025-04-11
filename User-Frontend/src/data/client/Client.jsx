@@ -3,7 +3,8 @@ import { Navigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./css/addJob.css"; 
+import "./css/addJob.css";
+import UserImg from './css/img/lg-product_page-7.png';
 
 function JobOfferForm() {
   const [formData, setFormData] = useState({
@@ -14,6 +15,7 @@ function JobOfferForm() {
     salary: "",
     applicationDeadline: "",
     skills: "",
+    Experience: "",
   });
 
   const token = localStorage.getItem("token");
@@ -31,7 +33,7 @@ function JobOfferForm() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     fetchJobs();
-    const interval = setInterval(fetchJobs, 1000); 
+    const interval = setInterval(fetchJobs, 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -39,7 +41,7 @@ function JobOfferForm() {
     try {
       const response = await axios.get("http://localhost:5200/api/jobs/all");
       if (response.data.success) {
-        setJobs(response.data.jobs); 
+        setJobs(response.data.jobs);
       } else {
         throw new Error("Failed to fetch job offers");
       }
@@ -58,6 +60,7 @@ function JobOfferForm() {
       salary: "",
       applicationDeadline: "",
       skills: "",
+      Experience: "",
     });
     setEditingJobId(null);
   };
@@ -91,7 +94,7 @@ function JobOfferForm() {
 
   // Handle editing a job offer
   const handleEdit = (job) => {
-    setEditingJobId(job._id); 
+    setEditingJobId(job._id);
     setFormData({
       companyName: job.companyName,
       jobTitle: job.jobTitle,
@@ -99,7 +102,8 @@ function JobOfferForm() {
       location: job.location,
       salary: job.salary,
       applicationDeadline: job.applicationDeadline,
-      skills: job.skills.join(", "), 
+      skills: job.skills.join(", "),
+      Experience: job.Experience,
     });
     setShowModal(true);
   };
@@ -121,12 +125,24 @@ function JobOfferForm() {
 
   return (
     <div className="container-main-job">
-      <div className="btn-job">
-      <button className="btn btn-primary add-job-btn mb-3"
-        onClick={() => { resetForm(); setShowModal(true); }}>
-        Add New Job
-      </button>
+      <div className="dark-overlay-img1"/>
+      <div className="img-div1">
+        <img src={UserImg} className="client-img" alt="Job Search" />
+        <div className="text-overlay-1">
+          <div className="btn-job">
+            <button className="btn btn-primary"
+              onClick={() => { resetForm(); setShowModal(true); }}>
+              Add New Job
+            </button>
+          </div>
+          <h1 className=" fw-bold mt-2 text-center">
+          Connecting Talent with <br />Opportunity
+          </h1>
+        </div>
       </div>
+
+
+
       <ToastContainer />
 
       {/* Modal with CSS Animation */}
@@ -145,6 +161,7 @@ function JobOfferForm() {
                   <input type="text" name="jobTitle" placeholder="Job Title" value={formData.jobTitle} onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })} className="form-control mb-2" />
                   <textarea name="jobDescription" placeholder="Job Description" value={formData.jobDescription} onChange={(e) => setFormData({ ...formData, jobDescription: e.target.value })} className="form-control mb-2" />
                   <input type="text" name="location" placeholder="Location" value={formData.location} onChange={(e) => setFormData({ ...formData, location: e.target.value })} className="form-control mb-2" />
+                  <input type="text" name="Experience" placeholder="Experience" value={formData.Experience} onChange={(e) => setFormData({ ...formData, Experience: e.target.value })} className="form-control mb-2" />
                   <input type="text" name="salary" placeholder="Salary" value={formData.salary} onChange={(e) => setFormData({ ...formData, salary: e.target.value })} className="form-control mb-2" />
                   <input type="date" name="applicationDeadline" value={formData.applicationDeadline} onChange={(e) => setFormData({ ...formData, applicationDeadline: e.target.value })} className="form-control mb-2" />
                   <input type="text" name="skills" placeholder="Skills (comma-separated)" value={formData.skills} onChange={(e) => setFormData({ ...formData, skills: e.target.value })} className="form-control mb-2" />
@@ -168,6 +185,7 @@ function JobOfferForm() {
               <h5 className="text-dark">{job.jobTitle}</h5>
               <p className="text-muted">{job.jobDescription}</p>
               <p className="text-info">Location: {job.location}</p>
+              <p className="text-info">Experience: {job.Experience}</p>
               <p className="text-success">Salary: ₹{job.salary} / PA</p>
               <p className="text-dark">Skills: {job.skills.join(", ")}</p>
               <p className="text-danger">Deadline: {new Date(job.applicationDeadline).toLocaleDateString()}</p>

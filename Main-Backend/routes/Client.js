@@ -5,13 +5,13 @@ const app = express();
 // Route to create a new job offer
 app.post("/offer", async (req, res) => {
   try {
-    const { companyName, jobTitle, jobDescription, location, salary, applicationDeadline, skills } = req.body;
+    const { companyName, jobTitle, jobDescription, location, salary, applicationDeadline, skills,Experience } = req.body;
 
     if (!companyName || !jobTitle || !jobDescription || !location || !salary || !applicationDeadline || !skills) {
       return res.status(400).json({ success: false, message: "All fields are required!" });
     }
 
-    const newJob = new JobOffer({ companyName, jobTitle, jobDescription, location, salary, applicationDeadline, skills});
+    const newJob = new JobOffer({ companyName, jobTitle, jobDescription, location, salary, applicationDeadline, skills,Experience});
 
     await newJob.save();
     res.json({ success: true, message: "Job offer created successfully!", job: newJob });
@@ -25,7 +25,7 @@ app.post("/offer", async (req, res) => {
 // Route to update a job offer
 app.put("/update/:id", async (req, res) => {
   const { id } = req.params;
-  const { companyName, jobTitle, jobDescription, location, salary, applicationDeadline, skills } = req.body;
+  const { companyName, jobTitle, jobDescription, location, salary, applicationDeadline, skills ,Experience} = req.body;
 
   try {
     const updatedJobOffer = await JobOffer.findByIdAndUpdate(
@@ -38,6 +38,7 @@ app.put("/update/:id", async (req, res) => {
         salary,
         applicationDeadline,
         skills,
+        Experience,
       },
       { new: true }
     );
@@ -104,14 +105,16 @@ app.post("/dislike", async (req, res) => {
 // for undislike
 app.post("/undislike", async (req, res) => {
   const { jobId } = req.body;
+
   try {
     const job = await JobOffer.findById(jobId);
     if (!job) return res.status(404).json({ success: false, message: "Job not found" });
-
     job.dislikes = Math.max(0, job.dislikes - 1);
     await job.save();
     
     res.json({ success: true, updatedDislikeCount: job.dislikes });
+  
+
   } catch (error) {
     res.status(500).json({ success: false, message: "Error removing dislike", error });
   }

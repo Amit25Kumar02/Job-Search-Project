@@ -5,10 +5,8 @@
 }
 .container-main-job{
   margin: auto;
-    margin-top: 7%;
-    width: 95%;
-    /* border: 1px solid black; */
-    /* height: 50vh; */
+    /* margin-top: 7%; */
+    width: 100%;
 }
 .modal-backdrop {
     position: fixed;
@@ -70,15 +68,48 @@
     width: 90%;
     margin: auto;
   }
+
+  .img-div1 {
+    position: relative;
+    width: 100%;
+    margin-bottom: 4%;
+    /* height: 500px; */
+}
+.client-img{
+    height: 600px;
+    width: 100%;
+    border-bottom-right-radius: 60% 75%;
+    border-bottom-left-radius: 40% 20%;
+
+}
+.text-overlay-1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: black;
+  padding: 20px;
+  width: 80%;
+  z-index: 100;
+}
+.text-overlay-1>h1{
+  font-size: 40px;
+  color: #fff;
+}
+
+.dark-overlay-img1 {
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 600px;
+  background-color: rgba(0, 0, 0, 0.5);  
+  z-index: 10; 
+  border-bottom-right-radius: 60% 75%;
+  border-bottom-left-radius: 40% 20%;
+}
   /* Animations */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
   
   @keyframes slideIn {
     from {
@@ -92,10 +123,6 @@
   }
   
   @media (min-width:300px) and (max-width:576px) {
-    .container-main-job{
-        margin-top: 15%;
-        /* border: 1px solid black; */
-    }
     .add-job-btn{
         margin-top: 4vh;
     }

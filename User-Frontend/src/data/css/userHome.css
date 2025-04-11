@@ -5,12 +5,12 @@
 }
 .main-container{
     background-color: #dfe6e9;
-    /* height: 100vh; */
+   
 }
 .home-main-cont {
     position: relative;
     width: 100%;
-    margin: 5.5% auto;
+    margin:  auto;
 }
 
 .img-div {
@@ -19,7 +19,9 @@
     /* height: 500px; */
 }
 .img-div>img{
-    height: 500px;
+    height: 600px;
+    /* border-top-right-radius: 40% 25%; */
+    /* border-bottom-left-radius: 40% 20%; */
 }
 
 .home-img {
@@ -27,7 +29,9 @@
     height: auto;
     display: block;
 }
-
+.mar-div{
+    display: flex;
+}
 .text-overlay {
     position: absolute;
     top: 50%;
@@ -94,6 +98,7 @@
     width: 100%;
     height: 100%;
     border-radius: 10px;
+
 }
 .get-text-div{
     width: 50%;
@@ -158,6 +163,7 @@
     .text-overlay>h1 {
         font-size: 48px;
     }
+    
 }
 
 /* Large devices (desktops, 992px to 1199px) */
@@ -224,7 +230,7 @@
 /* Small devices (phones, 576px to 767px) */
 @media (max-width: 767px) {
     .main-container{
-        margin-top: 11%;
+        margin-top: 0;
     }
     .text-overlay>h1 {
         font-size: 24px;
@@ -248,7 +254,11 @@
 /* Extra small devices (very small phones, less than 576px) */
 @media (max-width: 575px) {
     .main-container{
-        margin-top: 14%;
+        margin-top: 0;
+        height: 100%;
+    }
+    .img-div>img{
+        height: 40vh;
     }
     .text-overlay>h1 {
         font-size: 20px;
