@@ -1,6 +1,6 @@
 const express = require("express");
 const User = require("../models/userSchema");
-const JTW = require('jsonwebtoken')
+const Jwt = require('jsonwebtoken')
 const app = express();
 const dotenv = require ("dotenv");
 dotenv.config();
@@ -34,8 +34,9 @@ app.post("/login", async (req, res) => {
     if (user.password !== password) return res.status(400).json({ error: "Invalid email or password" });
     if (user.userType !== userType) return res.status(400).json({ error: "Invalid UserType" });
 
-    let  token = await JTW.sign({id :user._id , Role: user.userType} ,process.env.JWT_SECRET, { expiresIn: "20d" }) 
-     console.log(token) 
+    let  token = await Jwt.sign({id :user._id , Role: user.userType} , process.env.JWT_SECRET, { expiresIn: "20d" }) 
+     console.log("hello",token) 
+  
     res.json({ message: "Login successful",
        user:{Id : user._id,username : user.username , email : user.email ,phone:user.phone, userType :user.userType}
       , token });

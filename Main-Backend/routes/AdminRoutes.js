@@ -31,7 +31,7 @@ app.post("/send-otp", async (req, res) => {
   if (!email) return res.status(400).json({ message: "Email is required" });
 
   let user = await Admin.findOne({ email })
-console.log( "user",user)
+ console.log( "user",user)
   if (user) {
     res.status(409).send({ message: 'user already exists ..' })
     return
@@ -100,7 +100,7 @@ app.post('/login', async (req, res) => {
     if (user.password !== password) {
       res.status(401).json({ message: "Password not match" })
     } else {
-      const token = jwt.sign({ id: user._id }, "amit25", { expiresIn: "20d" });
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "20d" });
       // console.log(token)
       res.status(200).json({ message: "Login Successfully", user, token })
     }

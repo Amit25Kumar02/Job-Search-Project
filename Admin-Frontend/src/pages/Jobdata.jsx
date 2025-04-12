@@ -1,13 +1,15 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import { AuthContext } from "../store/authcontex";
 
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import './css/data.css';
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./css/data.css";
 
 const JobData = () => {
   const [jobs, setJobs] = useState([]);
+
+  let { token } = useContext(AuthContext);
 
   useEffect(() => {
     fetchJobs();
@@ -15,15 +17,19 @@ const JobData = () => {
 
   const fetchJobs = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5200/api/jobs/all");
+      const { data } = await axios.get("http://localhost:5200/api/jobs/all", {
+        headers: {
+          Authorization: `Bearer ${token}`, // Sending token in Authorization header
+        },
+      });
       console.log("API Response:", data);
       setJobs(Array.isArray(data) ? data : data.jobs || []);
       // window.location.reload();
     } catch (error) {
-      toast.error("Failed to fetch jobs.",error);
+      console.log(error)
+      toast.error("Failed to fetch jobs.", error);
     }
   };
-  
 
   const deleteItem = async (id) => {
     try {
@@ -31,13 +37,12 @@ const JobData = () => {
       setJobs((prevJobs) => prevJobs.filter((job) => job._id !== id));
       toast.success("Job deleted successfully.");
     } catch (error) {
-      toast.error("Error deleting job.",error);
+      toast.error("Error deleting job.", error);
     }
   };
 
   return (
     <>
-    
       <div className="con-d">
         <h1 className="data">Job List</h1>
         {jobs.length === 0 ? (

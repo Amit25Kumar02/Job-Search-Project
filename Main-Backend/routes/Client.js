@@ -72,6 +72,7 @@ app.delete("/delete/:id", async (req, res) => {
 
 // Route to fetch all job offers
 app.get("/all", async (req, res) => {
+  console.log('/all')
   try {
     const jobs = await JobOffer.find(req.user.Role == "Client"?{
       clientId : req.user.id}:{});

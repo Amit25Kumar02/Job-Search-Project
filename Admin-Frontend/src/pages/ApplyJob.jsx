@@ -15,7 +15,7 @@ const ApplyJob = () => {
 
   const fetchApplications = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5200/api/Ajobs/applications");
+      const { data } = await axios.get("http://localhost:5200/api/Ajobs/applications/admin");
       console.log("API Response:", data);
       // window.location.reload();
 

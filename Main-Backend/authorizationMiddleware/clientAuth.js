@@ -8,14 +8,16 @@ const verifyToken = (req, res, next) => {
     }
 
     const token = authHeader.split(" ")[1]; // Extract token after 'Bearer '
+     console.log(token)
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET); // Verify token
+        const decoded =  jwt.verify(token,process.env.JWT_SECRET); // Verify token
+         console.log( "14 line",decoded)
         req.user = decoded; // Attach user data to request object
-        console.log(req.user)
+        console.log("user", req.user)
         next(); // Proceed to next middleware/controller
     } catch (error) {
-        console.log(error)  
-        res.status(500).json({ success: false, error: err.message });
+        console.log( "error",error)  
+        res.status(500).json({ success: false, error: error.message });
     }
 };
 
