@@ -51,7 +51,7 @@ app.post("/apply", upload.single("resume"), async (req, res) => {
             userEmail,
             Phone,
             proposal,
-            resume: `${req.protocol}://localhost:5200/uploads/${req.file.filename}`
+            resume: `${req.protocol}://job-search-project-330t.onrender.com/uploads/${req.file.filename}`
 
         });
 

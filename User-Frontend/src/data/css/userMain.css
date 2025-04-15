@@ -10,10 +10,13 @@
 .user-main-img-div>img{
     height: 600px;
     width: 100%;
-    border-bottom-right-radius: 20% 15%;
-    border-bottom-left-radius: 40% 20%;
+    /* border-bottom-right-radius: 20% 15%; */
+    /* border-bottom-left-radius: 40% 20%; */
     /* object-fit: cover; */
 
+}
+.con-btn-job{
+    z-index: 10000;
 }
 .user-main-img2-div{
     width: 100%;

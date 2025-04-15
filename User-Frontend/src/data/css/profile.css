@@ -496,8 +496,9 @@ body {
 .input-wrapper-2 {
   text-align: left;
 }
-.input-wrapper-2 p{
+.input-wrapper-2 >p{
   border-top:1px solid rgb(162, 162, 162) ;
+  font-size: 20px;
 }
 .text-area-title{
   width: 100%;
@@ -866,7 +867,7 @@ body {
   }
   .modal-card {
     background: white;
-    padding: 10% 1%;
+    padding: 2% 4%;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     width: 70%;
@@ -876,8 +877,9 @@ body {
     font-size: medium;
     /* display: inline-block; */
   }
-  .modal-card h5{
-    font-size: 22px;
+  .modal-card>h5{
+    font-size: 26px;
+    margin-bottom: 10%;
   }
   .input-wrapper-1{
   margin: 5% 20%;
@@ -885,8 +887,8 @@ body {
   }
   .input-wrapper{
     margin: auto;
-    height: 50%;
-    width: 50%;
+    height: 150px;
+    width: 150px;
   }
   .profile-img-input{
     margin: auto;
@@ -970,8 +972,31 @@ margin-top: -5%;
   .pro-card{
     width: 94%;
     display: block;
-    margin:8% auto;
+    margin:12% auto;
   }
+  .btn-overview{
+    float: right;
+    border: 1px solid #28a745;
+    border-radius: 50%;
+    height: 30px;
+    font-size: 16px;
+    width: 30px;
+  }
+  .btn-profile{
+    border: 1px solid #28a745;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    /* margin-top: 10%; */
+  }
+  /* Profile Image */
+.profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: relative;
+  /* border: 5px solid #28a745; */
+}
   .left-card{
     width: 100%;
     display: block;
@@ -1018,8 +1043,8 @@ margin-top: -5%;
   }
   .input-wrapper{
     margin: auto;
-    height: 50%;
-    width: 50%;
+    height: 150px;
+    width: 150px;
   }
   .profile-img-input{
     margin: auto;
@@ -1111,6 +1136,29 @@ margin-top: -5%;
     display: block;
     margin:8% auto;
   }
+  .btn-overview{
+    float: right;
+    border: 1px solid #28a745;
+    border-radius: 50%;
+    height: 30px;
+    font-size: 16px;
+    width: 30px;
+  }
+  .btn-profile{
+    border: 1px solid #28a745;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    /* margin-top: 10%; */
+  }
+  /* Profile Image */
+.profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: relative;
+  /* border: 5px solid #28a745; */
+}
   .left-card{
     width: 100%;
     display: block;
@@ -1159,8 +1207,8 @@ margin-top: -5%;
   }
   .input-wrapper{
     margin: auto;
-    height: 50%;
-    width: 50%;
+    height: 150px;
+    width: 150px;
   }
   .profile-img-input{
     margin: auto;

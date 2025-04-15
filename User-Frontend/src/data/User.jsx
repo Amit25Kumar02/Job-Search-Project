@@ -9,8 +9,8 @@ import { SlLike } from "react-icons/sl";
 import UserImg from './img/slider-2.jpg';
 import UserImg2 from './img/video-bg.webp';
 
-// const API_URL = 'https://job-search-project-330t.onrender.com';
-const API_URL = "http://localhost:5200";
+const API_URL = 'https://job-search-project-330t.onrender.com';
+// const API_URL = "http://localhost:5200";
 
 
 const User = () => {
@@ -199,13 +199,7 @@ const User = () => {
   };
   
   const toggleSavedJobs = () => {
-    // if (!savedJobs) {
-    //   toast.success("You saved this job."); // Saving
-    // } else {
-    //   toast.info("You unsaved this job."); // Unsaving
-    // }
-
-    // setSavedJobs(!savedJobs); // Toggle saved state
+  
     setShowSavedJobs(!showSavedJobs);
   };
     

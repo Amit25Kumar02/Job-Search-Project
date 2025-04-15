@@ -95,12 +95,13 @@ html, body {
 /* Small devices (max width: 575px) */
 @media (max-width: 575px) {
   .con-job-r {
-    margin-top: 18%;
-    /* padding: 10% ; */
+    /* margin-top: 10%; */
+    padding-top: 14% ;
   }
 
   .text-j {
     font-size: 1.5rem;
+    margin-bottom: -20%;
   }
 
   .btn-rd {
@@ -114,7 +115,7 @@ html, body {
     width: 90%;
     margin: auto;
     justify-content: center;
-    /* margin-left: -5% !important; */
+    /* margin-top:-20% ; */
   }
   .btn-rd>a{
     width: fit-content;

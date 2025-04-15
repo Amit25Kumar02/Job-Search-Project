@@ -4,6 +4,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './css/contact.css';
 
+const API_URL = 'https://job-search-project-330t.onrender.com';
+// const API_URL = "http://localhost:5200";
+
 export const Usercontact = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -19,7 +22,7 @@ export const Usercontact = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:5200/api/con/contact', formData);
+            const res = await axios.post(`${API_URL}/api/con/contact`, formData);
             toast.success(res.data.message || "Submitted successfully", {
                 position: "top-right",
                 autoClose: 3000,

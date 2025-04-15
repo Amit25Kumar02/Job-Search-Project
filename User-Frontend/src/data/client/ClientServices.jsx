@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 const ServicesPage = () => {
   return (
     <>
-      <div className="container-con1 mt-7">
+      <div className="container-con1 ">
        
-        <div className="card shadow-lg p-4 mx-auto" style={{ maxWidth: "800px" }}>
+        <div className="card shadow-lg p-4 mx-auto mt-5" style={{ maxWidth: "800px" }}>
           <h3 className="text-center mb-4">Our Services</h3>
           <p className="text-justify">
             We provide a range of services designed to simplify the job search and hiring process. Whether you're looking for your 

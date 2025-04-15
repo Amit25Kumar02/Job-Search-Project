@@ -4,8 +4,8 @@ import { useParams, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import './css/JobDetails.css'
 
-// const API_URL = 'https://job-search-project-330t.onrender.com';
-const API_URL = "http://localhost:5200";
+const API_URL = 'https://job-search-project-330t.onrender.com';
+// const API_URL = "http://localhost:5200";
 
 const JobDetails = () => {
     const [job, setJob] = useState(null);

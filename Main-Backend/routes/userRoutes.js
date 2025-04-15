@@ -190,7 +190,7 @@ app.post('/ucprofileUpdate', upload.single('profileImage'), async (req, res) => 
 
     // Handle file upload
     if (req.file) {
-      updateData.profileImage = `http://localhost:5200/uploads/profile-images/${req.file.filename}`;
+      updateData.profileImage = `http://job-search-project-330t.onrender.com/uploads/profile-images/${req.file.filename}`;
       
     }
 
@@ -211,7 +211,7 @@ app.post("/clientprofileUpdate", upload.single("profileImage"), async (req, res)
 
     // Handle profile image update
     if (req.file) {
-      updateData.profileImage = `http://localhost:5200/profileImage/${req.file.filename}`;
+      updateData.profileImage = `http://job-search-project-330t.onrender.com/profileImage/${req.file.filename}`;
     }
     // Find and update user profile
     const updatedUser = await User.findOneAndUpdate({ email }, updateData, { new: true });

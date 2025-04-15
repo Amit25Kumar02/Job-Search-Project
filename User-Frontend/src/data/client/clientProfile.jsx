@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import './css/profile.css'
-// const API_URL = 'https://job-search-project-330t.onrender.com';
-const API_URL = "http://localhost:5200"
+
+const API_URL = 'https://job-search-project-330t.onrender.com';
+// const API_URL = "http://localhost:5200"
 
 function ClientProfile() {
   const [userData, setUserData] = useState({

@@ -4,7 +4,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import './css/JobApply.css';
 
-const API_URL = "http://localhost:5200"; 
+const API_URL = 'https://job-search-project-330t.onrender.com';
+// const API_URL = "http://localhost:5200";
 
 const JobApplyForm = () => {
     const location = useLocation();

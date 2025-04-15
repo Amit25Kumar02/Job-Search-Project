@@ -351,7 +351,6 @@ function UserProfile() {
                 <ul>
                   <li>Describe your strengths and skills</li>
                   <li>Highlight projects, accomplishments and education</li>
-                  <li>Keep it short and make sure it's error-free</li>
                 </ul>
                 <h3>Profile overview</h3>
                 <textarea name="overview" placeholder="Profile overview" value={userData.overview} onChange={handleChange} className="text-area-pro"></textarea>

@@ -5,7 +5,7 @@ const UserServices = () => {
     return (
         <>
             <div className="container-con1">
-                <div className="card shadow-lg p-4 mx-auto" style={{ maxWidth: "800px" }}>
+                <div className="card shadow-lg p-4 mx-auto mt-5" style={{ maxWidth: "800px" }}>
                     <h3 className="text-center mb-4">Our Services for Users</h3>
                     <p className="text-justify">
                         We provide a range of services designed to streamline the hiring process and help businesses connect with top talent.
