@@ -100,7 +100,7 @@ function SignUp() {
       <div className="row justify-content-center">
         <div className="col-md-6 col-lg-4">
           <div className="card p-4 shadow rounded">
-            <h3 className="text-center mb-4">Sign Up</h3>
+            <h3 className="text-center text-dark mb-4">Sign Up</h3>
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <input 
@@ -142,7 +142,7 @@ function SignUp() {
        
 
               <div className="mb-3">
-                <label className="form-label">Select User Type:</label>
+                <label className="form-label text-dark">Select User Type:</label>
                 <select 
                   name="userType" 
                   className="form-select" 
@@ -171,7 +171,7 @@ function SignUp() {
             </>
           )}
 
-              <div className="text-center mt-3">
+              <div className="text-center text-dark mt-3">
                 Already have an account? <Link to="/login">Log In</Link>
               </div>
             </form>

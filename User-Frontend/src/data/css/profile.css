@@ -31,9 +31,10 @@ body {
 .main-div {
   width: 100%;
   background: #fff;
+  margin-top: 3%;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  border: 2px solid black ;
+  /* border: 2px solid black ; */
   display: inline-block;
 }
 
@@ -52,19 +53,7 @@ body {
   justify-content: center;
 
 }
-.pro-img-p:hover{
-  background-image: url('../img/job-search-im-unemployed-free-photo.webp');
-  background-size: cover; 
-  background-position: center; 
-  width: 250px; 
-  height: 250px; 
-  z-index: 100;
-  /* opacity: 0; */
-  border-radius: 50%;
-}
-.input-wrapper p:hover{
-  text-decoration: none;
-}
+
 .pro-img-p{
   text-align: center;
   align-items: center;
@@ -184,6 +173,11 @@ body {
   background-color: #fff;
   cursor: pointer;
   /* margin: 20px auto; */
+}
+.input-wrapper>h6{
+  font-size: 25vh;
+  /* align-items: center; */
+ 
 }
 .input-wrapper-1{
   justify-content: center;
@@ -535,11 +529,39 @@ body {
   .modal-card h5{
     font-size: 30px;
   }
-  .input-wrapper-1{
-  margin: 5% 35%;
-    float: left;
-    /* margin-top: 5%; */
+  .input-wrapper-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
   }
+  
+  .input-file-hidden {
+    display: none;
+  }
+  
+  .custom-file-label {
+    display: inline-block;
+    color: white;
+    /* padding: 12px 20px; */
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 30px;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  }
+  
+  .custom-file-label:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  }
+  
+  .custom-file-label:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  
  
   .input-wrapper{
     margin: auto;
@@ -582,13 +604,11 @@ body {
   }
   .modal-buttons-1{
     display: flex;
-    float: left;
-    /* gap: 30%; */
     justify-content: space-between;
   }
-  .modal-buttons-1 >button{
-    font-size: 22px;
-    padding: 1%;
+  .modal-buttons-1>button{
+    font-size: 18px;
+    padding: 1% 2%;
     /* width: 20vh; */
   }
   .text-area-pro{
@@ -630,10 +650,37 @@ body {
   .modal-card h5{
     font-size: 40px;
   }
-  .input-wrapper-1{
-  margin: 5% 20%;
-    float: left;
-    margin-top: 5%;
+  .input-wrapper-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
+  }
+  
+  .input-file-hidden {
+    display: none;
+  }
+  
+  .custom-file-label {
+    display: inline-block;
+    color: white;
+    /* padding: 12px 20px; */
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 30px;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  }
+  
+  .custom-file-label:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  }
+  
+  .custom-file-label:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   }
   .input-t{
     height: 30%;
@@ -641,8 +688,8 @@ body {
   }
   .input-wrapper{
     margin: auto;
-    height: 50%;
-    width: 50%;
+    height: 200px;
+    width: 200px;
   }
   .profile-img-input{
     margin: auto;
@@ -749,9 +796,37 @@ body {
   .modal-card h5{
     font-size: 22px;
   }
-  .input-wrapper-1{
-  margin: 5% 20%;
-    float: left;
+  .input-wrapper-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
+  }
+  
+  .input-file-hidden {
+    display: none;
+  }
+  
+  .custom-file-label {
+    display: inline-block;
+    color: white;
+    /* padding: 12px 20px; */
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 30px;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  }
+  
+  .custom-file-label:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  }
+  
+  .custom-file-label:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   }
   .input-wrapper{
     margin: auto;
@@ -881,9 +956,37 @@ body {
     font-size: 26px;
     margin-bottom: 10%;
   }
-  .input-wrapper-1{
-  margin: 5% 20%;
-    float: left;
+  .input-wrapper-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
+  }
+  
+  .input-file-hidden {
+    display: none;
+  }
+  
+  .custom-file-label {
+    display: inline-block;
+    color: white;
+    /* padding: 12px 20px; */
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 30px;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  }
+  
+  .custom-file-label:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  }
+  
+  .custom-file-label:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   }
   .input-wrapper{
     margin: auto;
@@ -974,6 +1077,9 @@ margin-top: -5%;
     display: block;
     margin:12% auto;
   }
+  .main-div{
+    margin-top: 8%;
+  }
   .btn-overview{
     float: right;
     border: 1px solid #28a745;
@@ -1037,14 +1143,46 @@ margin-top: -5%;
   .modal-card h5{
     font-size: 22px;
   }
-  .input-wrapper-1{
-  margin: 5% 20%;
-    float: left;
+  .input-wrapper-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
+  }
+  
+  .input-file-hidden {
+    display: none;
+  }
+  
+  .custom-file-label {
+    display: inline-block;
+    color: white;
+    /* padding: 12px 20px; */
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 30px;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  }
+  
+  .custom-file-label:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  }
+  
+  .custom-file-label:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   }
   .input-wrapper{
     margin: auto;
     height: 150px;
     width: 150px;
+  }
+  .input-wrapper>h6{
+    width: 100px;
+    height: 100px;
   }
   .profile-img-input{
     margin: auto;
@@ -1058,7 +1196,7 @@ margin-top: -5%;
   .modal-buttons>button{
     font-size: 30px;
     /* width: 33%; */
-margin-top: -5%;
+    margin-top: -5%;
   }
   /* for profile overview card */
   .modal-card-1 {
@@ -1072,14 +1210,15 @@ margin-top: -5%;
   }
   .modal-buttons-1{
     display: flex;
-    /* gap: 10%; */
+    padding: 2%;
     justify-content: space-between;
+    margin-top: 15%;
     width: 100%;
   }
   .modal-buttons-1>button{
-    font-size: 30px;
+    font-size: 26px;
     /* width: 20vh; */
-    padding: 1%;
+    padding: 1% 2%;
   }
   .modal-buttons-2{
     display: flex;
@@ -1135,6 +1274,9 @@ margin-top: -5%;
     width: 94%;
     display: block;
     margin:8% auto;
+  }
+  .main-div{
+    margin-top: 10%;
   }
   .btn-overview{
     float: right;
@@ -1201,9 +1343,37 @@ margin-top: -5%;
   .modal-card h5{
     font-size: 22px;
   }
-  .input-wrapper-1{
-  margin: 5% 20%;
-    float: left;
+  .input-wrapper-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
+  }
+  
+  .input-file-hidden {
+    display: none;
+  }
+  
+  .custom-file-label {
+    display: inline-block;
+    color: white;
+    /* padding: 12px 20px; */
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 30px;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  }
+  
+  .custom-file-label:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  }
+  
+  .custom-file-label:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   }
   .input-wrapper{
     margin: auto;
@@ -1222,7 +1392,7 @@ margin-top: -5%;
   .modal-buttons>button{
     font-size: 30px;
     /* width: 33%; */
-margin-top: -5%;
+    margin-top: -5%;
   }
   /* for profile overview card */
   .modal-card-1 {
@@ -1239,9 +1409,11 @@ margin-top: -5%;
     width: 100%;
     /* gap: 10%; */
     justify-content: space-between;
+    margin-top: 15%;
+    padding: 2%;
   }
   .modal-buttons-1>button{
-    font-size: 30px;
+    font-size: 26px;
     padding: 1%;
     /* width: 20vh; */
   }
@@ -1291,4 +1463,5 @@ margin-top: -5%;
     width: 98%;
     margin: auto;
   }
+
  }

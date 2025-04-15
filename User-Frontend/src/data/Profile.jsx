@@ -7,8 +7,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./css/profile.css";
 
-// const API_URL = 'https://job-search-project-330t.onrender.com';
-const API_URL = "http://localhost:5200";
+
+const API_URL = 'https://job-search-project-330t.onrender.com';
+// const API_URL = "http://localhost:5200";
 
 function UserProfile() {
   const [userData, setUserData] = useState({
@@ -144,9 +145,9 @@ function UserProfile() {
     }
   };
   return (
-    <div className="pro-card">
-      <h2 className="text-center ">Profile Page</h2>
+    <div className="pro-card ">
       <div className="main-div">
+      {/* <h2 className="text-center ">Profile Page</h2> */}
         {/* Profile Section */}
         <div className="row">
           <div className="col">
@@ -240,7 +241,7 @@ function UserProfile() {
           <div className="right-card-title">
             <div className="right-card-left">
               <div className="right-card-left-left">
-                <h3>{userData.title}</h3>
+                <h3>{userData?.title || "Enter Your Title"}</h3>
               </div>
               <div className="right-card-left-right">
                 <button className="btn-overview" onClick={() => setTitleShowModal(true)}>
@@ -324,12 +325,23 @@ function UserProfile() {
               {previewImage ? (
                 <img src={previewImage} alt="Profile Preview" className="profile-img-input" />
               ) : (
-                <p className="pro-img-p">No Image Selected</p>
+               <h6></h6>
               )}
             </div>
             <div className="input-wrapper-1">
-              <input type="file" name="profileImage" accept="image/*" onChange={handleFileChange} className="input-t" />
-            </div>
+  <input
+    type="file"
+    name="profileImage"
+    accept="image/*"
+    id="profileImage"
+    onChange={handleFileChange}
+    className="input-file-hidden"
+  />
+  <label htmlFor="profileImage" className="custom-file-label">
+    📁 
+  </label>
+</div>
+
             {/* Buttons at bottom-right */}
             <div className="modal-buttons-1">
               <button className="btn btn-outline-danger" onClick={() => setShowModal(false)}>Cancel</button>

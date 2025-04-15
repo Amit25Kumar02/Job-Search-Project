@@ -13,37 +13,39 @@
     margin:  auto;
 }
 
-.img-div {
+.img-div{
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    /* height: 500px; */
-}
-.img-div>img{
     height: 600px;
- 
+    overflow: hidden;
+    text-align: center;
+}
+.img-div::before {
+    content: "";
+    background-image: url(../img/pngtree-top-view-working-desk-with-keyboard-mouse-and-notebook-on-white-picture-image_15719793.jpg);
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 100%;
+    /* object-fit: cover; */
+    /* z-index: 1; */
+    filter: brightness(1);
+    background-size: 100% 100%;
+    background-position: center;
+}
+.text-overlay{
+    z-index: 1000;
 }
 
-.home-img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
 .mar-div{
     display: flex;
 }
-.text-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: black;
-    padding: 20px;
-    width: 80%;
-}
-.text-overlay>h1{
-    font-size: 40px;
-}
+
 
 .btn-jobs-home {
     background-color: #007bff;
@@ -161,9 +163,7 @@
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
-    .text-overlay>h1 {
-        font-size: 48px;
-    }
+  
     .comp-name{
         margin: 2% auto;
     }
@@ -171,9 +171,7 @@
 
 /* Large devices (desktops, 992px to 1199px) */
 @media (max-width: 1199px) {
-    .text-overlay>h1 {
-        font-size: 36px;
-    }
+ 
 
     .get-us-div {
         gap: 30px;
@@ -192,7 +190,9 @@
     .text-overlay {
         width: 90%;
     }
-
+    .img-div{
+        height: 35vh;
+    }
     .text-overlay>h1 {
         font-size: 30px;
     }
@@ -210,11 +210,6 @@
         flex-direction: column;
     }
 
- 
-
-    .img-div>img {
-        height: auto;
-    }
 
     .comp-name{
         height: auto;
@@ -229,6 +224,9 @@
 @media (max-width: 767px) {
     .main-container{
         margin-top: 0;
+    }
+    .img-div{
+        height: 35vh;
     }
     .text-overlay>h1 {
         font-size: 24px;
@@ -256,11 +254,36 @@
         margin-top: 0;
         height: 100%;
     }
-    .img-div>img{
-        height: 50vh;
+    .img-div{
+        height: 40vh;
     }
-    .text-overlay{
-        margin-top: 5%;
+    .text-overlay>h1 {
+        font-size: 20px;
+    }
+    .comp-name{
+        margin: 2% auto;
+    }
+    .comp-name>h3{
+        font-size: 16px;
+        width: 60%;
+        margin: auto;
+    }
+   
+    .btn-jobs-home {
+        width: 100%;
+        padding: 10px;
+    }
+    .main-card-div>p {
+        font-size: 13px;
+    }
+}
+@media (max-width: 400px) {
+    .main-container{
+        margin-top: 0;
+        height: 100%;
+    }
+    .img-div{
+        height: 55vh;
     }
     .text-overlay>h1 {
         font-size: 20px;

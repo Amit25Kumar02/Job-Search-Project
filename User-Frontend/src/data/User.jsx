@@ -6,8 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import { Heart } from 'lucide-react';
 import { SlLike } from "react-icons/sl";
-import UserImg from './img/slider-2.jpg';
-import UserImg2 from './img/video-bg.webp';
 
 const API_URL = 'https://job-search-project-330t.onrender.com';
 // const API_URL = "http://localhost:5200";
@@ -208,9 +206,6 @@ const User = () => {
     <>
     <ToastContainer position="top-center" reverseOrder={false}/>
       <div className="car-1">
-        <div className="user-main-img-div">
-          <img src={UserImg} alt="" />
-        </div>
         <div className="user-main-text-div">
           <h1 className="user-main-text-1st-h1">Find</h1>
           <h1 className="user-main-text-2nd-h1">Great Job Opportunity<br />You Deserve</h1>
@@ -270,13 +265,8 @@ const User = () => {
         ))}
       </div>
       <div className="car-2">
-          <div className="dark-overlay5-img"/>
-        <div className="user-main-img2-div">
-          <img src={UserImg2} alt="" />
-        </div>
         <div className="user-main-text2-div">
           <h1 className="user-main-text2-1st-h1">Are You Already Working<br/> With Us?</h1>
-
         </div>
       </div>
     </>

@@ -16,7 +16,7 @@ function UserHome() {
             <div className="main-container">
                 <div className="home-main-cont">
                     <div className="img-div">
-                        <img src={Image} className="home-img" alt="Job Search" />
+                        {/* <img src={Image} className="home-img" alt="Job Search" /> */}
                         <div className="text-overlay">
                             <Link to="/userjob">
                                 <button className="btn btn-outline-success">Get Your Hot Jobs</button>
@@ -27,7 +27,6 @@ function UserHome() {
                             <p className="text-muted text-center">
                                 Getting a new job is never easy. Check what new jobs we have in store for you on AmitJobsHub.
                             </p>
-
                         </div>
                     </div>
                     <div className="comp-name">

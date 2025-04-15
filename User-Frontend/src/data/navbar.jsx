@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -12,22 +12,22 @@ function NavbarSection() {
     if (userData) {
       setUserName(JSON.parse(userData));
     }
-      // 👇 Add scroll event listener
-      const handleScroll = () => {
-        const nav = document.querySelector('.navbar');
-        if (window.scrollY > 0) {
-          nav.classList.add('scrolled');
-        } else {
-          nav.classList.remove('scrolled');
-        }
-      };
-  
-      window.addEventListener('scroll', handleScroll);
-  
-      // Cleanup listener on unmount
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
+    // 👇 Add scroll event listener
+    const handleScroll = () => {
+      const nav = document.querySelector('.navbar');
+      if (window.scrollY > 0) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup listener on unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const handleLogout = () => {
@@ -42,7 +42,7 @@ function NavbarSection() {
   return (
     <nav className="navbar navbar-expand-lg  fixed-top">
       <div className="container-fluid">
-        <Link className=" jobs-nav" to="#">AmitJobsHub</Link>
+        <NavLink className=" jobs-nav" to="#">AmitJobsHub</NavLink>
         <button
           className="navbar-toggler"
           type="button"
@@ -56,18 +56,38 @@ function NavbarSection() {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto mb-2 ">
+          <ul className="navbar-nav me-auto mb-2">
             <li className="nav-item">
-              <Link className="nav-link active" to="/home">Home</Link>
+              <NavLink
+                to="/home"
+                className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+              >
+                Home
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link " to="/userabout">About</Link>
+              <NavLink
+                to="/userabout"
+                className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+              >
+                About
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/contact">Contact</Link>
+              <NavLink
+                to="/contact"
+                className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+              >
+                Contact
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link " to="/userservices">Services</Link>
+              <NavLink
+                to="/userservices"
+                className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+              >
+                Services
+              </NavLink>
             </li>
           </ul>
 
@@ -82,7 +102,7 @@ function NavbarSection() {
             <ul className="dropdown-menu" aria-labelledby="accountDropdown">
               {userName ? (
                 <>
-                  <li><Link className="dropdown-item" to="/userprofile">Profile</Link></li>
+                  <li><NavLink className="dropdown-item" to="/userprofile">Profile</NavLink></li>
                   <li><button className="dropdown-item" onClick={handleLogout}>Log-out</button></li>
                 </>
               ) : null}

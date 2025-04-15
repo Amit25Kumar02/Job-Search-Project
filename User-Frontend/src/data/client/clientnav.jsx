@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from "react";
@@ -38,28 +38,28 @@ function ClientNav() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg fixed-top ">
+    <nav className="navbar navbar-expand-lg fixed-top main-nav">
       <div className="container">
-        <Link className="jobs-nav" to="/">AmitJobsHub</Link>
+        <NavLink className="jobs-nav" to="/">AmitJobsHub</NavLink>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link" to="/client">Home</Link>
+              <NavLink className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} to="/client">Home</NavLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/clientabout">About</Link>
+              <NavLink className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} to="/clientabout">About</NavLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/clientcontact">Contact</Link>
+              <NavLink className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} to="/clientcontact">Contact</NavLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/services">Services</Link>
+              <NavLink className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} to="/services">Services</NavLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/jobrequest">Job-Request</Link>
+              <NavLink className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} to="/jobrequest">Job-Request</NavLink>
             </li>
           </ul>
 
@@ -70,7 +70,7 @@ function ClientNav() {
             <ul className="dropdown-menu" aria-labelledby="accountDropdown">
               {username && (
                 <>
-                  <li><Link className="dropdown-item" to="/clientprofile">Profile</Link></li>
+                  <li><NavLink className="dropdown-item" to="/clientprofile">Profile</NavLink></li>
                   <li><button className="dropdown-item" onClick={handleLogout}>Log-out</button></li>
                 </>
               )}
