@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const UserServices = () => {
     return (
         <>
-            <div className="con-d mt-7">
+            <div className="container-con1">
                 <div className="card shadow-lg p-4 mx-auto" style={{ maxWidth: "800px" }}>
                     <h3 className="text-center mb-4">Our Services for Users</h3>
                     <p className="text-justify">
@@ -12,7 +12,7 @@ const UserServices = () => {
                         Whether you're a startup or an enterprise, we offer tailored solutions to meet your recruitment needs.
                     </p>
 
-                    <h4 className="text-primary mb-3">For Employers</h4>
+                    <h4 className="text mb-3">For Employers</h4>
                     <ul>
                         <li>
                             <strong>Job Listings:</strong> Explore thousands of job opportunities from top

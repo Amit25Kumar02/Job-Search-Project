@@ -61,16 +61,21 @@ app.post("/send-otp", async (req, res) => {
     from: `"AmitJobsHub" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: "🔐 Email Verification OTP for AmitJobsHub",
-    html: `  <div style="font-family: Arial, sans-serif; color: #333; padding: 20px; line-height: 1.6;">
-      <h2 style="color: #2c3e50;">Dear User,</h2>
-      <h3>Your One-Time Password (OTP) for email verification is: 
-          <span style="color: #007bff; font-weight: bold;">${otp}</span>.
-      </h3>
-      <h4>Please use this OTP within the next <strong>5 minutes</strong> to complete your verification process.</h4>
-      <p>If you did not request this verification, please ignore this email.</p>
-      <h4>Best Regards,</h4>
-      <h3 style="color: #2c3e50;">AmitJobsHub Team</h3>
-  </div>`
+    html: ` <div style="max-width: 600px; margin: auto; font-family: Arial, sans-serif; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
+      <div style="background-color: #00b894; padding: 20px; text-align: center;">
+        <h1 style="color: white; margin: 0;">AmitJobHub</h1>
+      </div>
+      <div style="padding: 30px; text-align: center;">
+        <img src="https://i.ibb.co/hRW1BJZS/8133820.png" alt="Verify Icon" width="60" style="margin-bottom: 20px;" />
+        <h2>Verify Your Email Address</h2>
+        <p style="font-size: 16px; color: #444;">Verify your email to finish signing up with AmitJobHub. Use the following verification code:</p>
+        <div style="font-size: 32px; font-weight: bold; margin: 20px 0; color: #00b894;">${otp}</div>
+        <p style="color: #888;">The verification code is valid for 5 minutes.</p>
+      </div>
+      <div style="padding: 20px; background-color: #f9f9f9; text-align: center; font-size: 12px; color: #666;">
+        For any queries or concerns, feel free to contact us by replying to this email.
+      </div>
+    </div>`
   };
   try {
     await transporter.sendMail(mailOptions);

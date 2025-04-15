@@ -10,7 +10,7 @@
 .user-main-img-div>img{
     height: 600px;
     width: 100%;
-    border-bottom-right-radius: 40% 25%;
+    border-bottom-right-radius: 20% 15%;
     border-bottom-left-radius: 40% 20%;
     /* object-fit: cover; */
 
@@ -202,16 +202,16 @@
 /* Extra small devices like as mobile (less than 576px) */
 @media (max-width: 575px) {
     .user-main-text-div {
-        width: 95%;
+        width: 90%;
         transform: translate(2%, 0%);
-        top: 9%;
+        top: 14%;
     }
 
     .input-group {
-        width: 95%;
+        width: 90%;
     }
     .input-group-1 {
-        width: 95%;
+        width: 90%;
     }
 
     .user-main-text-1st-h1,
@@ -225,9 +225,12 @@
     .user-main-text2-1st-h1{
         font-weight: bold;
         font-size: 30px;
-        color: #1ca774;
+        color: #1ca71e;
+        align-items: center;
+        justify-items: center;
+        margin-top: 25%;
     }
     .user-main-text2-div{
-        width: 60%;
+        width: 90%;
     }
 }

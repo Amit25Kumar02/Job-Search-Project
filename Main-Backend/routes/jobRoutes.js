@@ -24,23 +24,24 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.post("/apply", upload.single("resume"), async (req, res) => {
-    // console.log("Received Data:", req.body);
-    // console.log("Uploaded File:", req.file);
-
+ 
     if (!req.file) {
-        return res.status(400).json({ success: false, message: "Resume file is required" });
+        res.status(400).json({ success: false, message: "Resume file is required" });
+        return 
     }
 
     const { jobId, userId, userName, userEmail, Phone, proposal } = req.body;
-
+  
     if (!jobId || !userId || !userName || !userEmail || !Phone || !proposal) {
-        return res.status(400).json({ success: false, message: "Missing required fields" });
+        res.status(400).json({ success: false, message: "Missing required fields" });
+        return 
     }
 
     try {
         const job = await JobOffer.findById(jobId);
         if (!job) {
-            return res.status(404).json({ success: false, message: "Job not found" });
+            res.status(404).json({ success: false, message: "Job not found" });
+            return 
         }
 
         const newApplication = new JobApplication({
@@ -60,6 +61,20 @@ app.post("/apply", upload.single("resume"), async (req, res) => {
     } catch (error) {
         console.error("Error applying for job:", error);
         res.status(500).json({ success: false, message: "Server error", error: error.message });
+    }
+});
+app.get('/check-application', async (req, res) => {
+    try {
+        const { jobId, userId } = req.query;
+        
+        const existingApplication = await JobApplication.findOne({ 
+            jobId, 
+            userId 
+        });
+        
+        res.json({ hasApplied: !!existingApplication });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 });
 

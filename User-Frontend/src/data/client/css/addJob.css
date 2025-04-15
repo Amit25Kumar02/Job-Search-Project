@@ -4,9 +4,18 @@
     padding: 2%;
 }
 .container-main-job{
-  margin: auto;
-    /* margin-top: 7%; */
     width: 100%;
+    min-height: 100vh;
+    padding-bottom:4% ;
+    margin: auto;
+    margin-bottom: -5%;
+    background-color: #01333f;
+    background-image: url('./img/bg2.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: white;
 }
 .modal-backdrop {
     position: fixed;
@@ -109,6 +118,10 @@
   border-bottom-right-radius: 60% 75%;
   border-bottom-left-radius: 40% 20%;
 }
+.card-2{
+  margin: auto;
+  padding: 2%;
+}
   /* Animations */
   
   @keyframes slideIn {
@@ -130,3 +143,122 @@
         text-align: center;
     }
   }
+  /* Large desktops and up (1400px+) */
+@media (min-width: 1400px) {
+  .job-list .job-card {
+    width: 85%;
+  }
+
+  .text-overlay-1 h1 {
+    font-size: 48px;
+  }
+}
+
+/* Desktops (1200px) */
+@media (min-width: 1200px)  {
+  .job-list .job-card {
+    width: 90% !important;
+  }
+
+  .text-overlay-1 h1 {
+    font-size: 42px;
+  }
+
+  .modal-container {
+    max-width: 500px;
+  }
+}
+
+/* Laptops (1199px) */
+@media (max-width: 1199px) {
+  .job-list .job-card {
+    width: 90%;
+  }
+
+  .text-overlay-1 h1 {
+    font-size: 38px;
+  }
+
+  .modal-container {
+    max-width: 480px;
+  }
+}
+
+/* Tablets ( 991px) */
+@media (max-width: 991px) {
+  .job-list .job-card {
+    width: 95%;
+  }
+
+  .text-overlay-1 h1 {
+    font-size: 34px;
+  }
+
+  .modal-container {
+    max-width: 460px;
+  }
+
+  .client-img,
+  .dark-overlay-img1 {
+    height: 500px;
+  }
+}
+
+/* Landscape phones & small tablets (767px) */
+@media (max-width: 767px) {
+  .job-list .job-card {
+    width: 98%;
+  }
+
+  .text-overlay-1 h1 {
+    font-size: 30px;
+  }
+
+  .modal-container {
+    max-width: 95%;
+  }
+
+  .client-img,
+  .dark-overlay-img1 {
+    height: 450px;
+  }
+}
+
+/* Phones (max-width: 575px) */
+@media (max-width: 575px) {
+  .job-list .job-card {
+    width: 100%;
+  }
+
+  .text-overlay-1 h1 {
+    font-size: 24px;
+  }
+
+  .modal-container {
+    max-width: 95%;
+    padding: 10px;
+  }
+
+  .modal-body {
+    margin: 4% 1%;
+  }
+
+  .client-img,
+  .dark-overlay-img1 {
+    height: 400px;
+  }
+
+  .btn-job {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .addjob-btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .modal-header h5 {
+    font-size: 18px;
+  }
+}

@@ -7,6 +7,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./css/profile.css";
 
+// const API_URL = 'https://job-search-project-330t.onrender.com';
+const API_URL = "http://localhost:5200";
+
 function UserProfile() {
   const [userData, setUserData] = useState({
     profileImage: null,
@@ -23,7 +26,6 @@ function UserProfile() {
     skills: "",
     project: "",
     languages: '',
-    // education: [],
   });
   // const [educationData, setEducationData] = useState([]);
   const [education, setEducation] = useState({
@@ -72,21 +74,27 @@ function UserProfile() {
   };
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewImage(reader.result); 
-  
-        // Update userData with the new image (assuming userData has an 'image' key)
-        setUserData((prevUserData) => ({
-          ...prevUserData,
-          image: reader.result, 
-        }));
-  
-        setSelectedFile(file);
-      };
-      reader.readAsDataURL(file);
+    if (!file) return;
+
+    // Validate file type
+    const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    if (!validTypes.includes(file.type)) {
+      toast.error("Please upload a valid image (JPEG, PNG, GIF)");
+      return;
     }
+
+    // Validate file size (2MB max)
+    if (file.size > 2 * 1024 * 1024) {
+      toast.error("Image must be less than 2MB");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPreviewImage(reader.result);
+      setSelectedFile(file);
+    };
+    reader.readAsDataURL(file);
   };
   
 
@@ -109,7 +117,7 @@ function UserProfile() {
 
   const saveData = async (data) => {
     try {
-      await axios.post("https://job-search-project-330t.onrender.com/api/users/ucprofileUpdate", data
+      await axios.post(`${API_URL}/api/users/ucprofileUpdate`, data
         , { headers: { "Content-Type": "multipart/form-data" } }
       );
       setUserData((prev) => ({ ...prev, profileImage: data.imageUrl })); 

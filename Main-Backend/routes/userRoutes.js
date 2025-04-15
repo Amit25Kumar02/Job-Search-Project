@@ -16,15 +16,19 @@ app.use(express.json());
 app.use(cors());
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "public/profileImage/");
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/profile-images/');
   },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname);
-  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+  }
 });
 
-const upload = multer({ storage });
+const upload = multer({ 
+  storage: storage,
+  limits: { fileSize: 2 * 1024 * 1024 } // 2MB limit
+});
 // Configure Nodemailer transporter
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -46,7 +50,7 @@ app.post("/send-otp", async (req, res) => {
     res.status(409).send({ message: 'user already exists ..' })
     return
   }
-  const otp = generateOTP()
+  const otp = generateOTP() 
   // Save OTP in MongoDB (Overwrite if already exists)
   await Otp.findOneAndUpdate(
     { email },
@@ -174,37 +178,28 @@ app.delete('/del/:id',async(req,res)=>{
 })
 
 //for profile update
-app.post("/ucprofileUpdate", upload.single("profileImage"), async (req, res) => {
+app.post('/ucprofileUpdate', upload.single('profileImage'), async (req, res) => {
   try {
-    const {username, email, phone, gender, address, dob, overview,
-           title, rate,skills, project, languages} = req.body;
+    const userId = req.body._id || req.user._id;
+    const updateData = { ...req.body };
 
-    // Ensure education is always an array
-    const education = JSON.parse(req.body.education || "[]");
-    // console.log(education);
-    // Build update object
-    let updateData = {username, email, phone, gender, address, dob,
-      overview, title, rate,skills, project, languages, education,};
+    // Handle education data
+    if (req.body.education) {
+      updateData.education = JSON.parse(JSON.stringify(req.body.education));
+    }
 
-    // Handle profile image update
+    // Handle file upload
     if (req.file) {
-      updateData.profileImage = `http://localhost:5200/profileImage/${req.file.filename}`;
+      updateData.profileImage = `http://localhost:5200/uploads/profile-images/${req.file.filename}`;
+      
     }
-    // Find and update user profile
-    const updatedUser = await User.findOneAndUpdate({ email }, updateData,education, { new: true });
 
-    if (!updatedUser) {
-      return res.status(404).json({ message: "User not Found" });
-    }
-    // Return updated user data
-    res.status(200).json({
-      message: "User Profile Updated Successfully",
-      user: updatedUser,
-    });
+    const updatedUser = await User.findByIdAndUpdate(userId,updateData, { new: true });
+    res.status(201).json({ message: "Profile updated successfully", user: updatedUser,});
 
   } catch (error) {
-    console.error("Error updating profile:", error);
-    res.status(500).json({ message: "Server error" });
+    console.error("Profile update error:", error);
+    res.status(500).json({ message: "Error updating profile",error: error.message });
   }
 });
 

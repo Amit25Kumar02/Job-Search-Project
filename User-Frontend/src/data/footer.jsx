@@ -3,7 +3,7 @@ import './client/css/footer.css';
 
 function Footer() {
     return (
-        <footer className="footer text-white">
+        <footer className="footer text-white mt-7">
             <div className="footer-img">
                 <div className="footer-content">
                     <div className="footer-section">

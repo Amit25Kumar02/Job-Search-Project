@@ -13,6 +13,7 @@ import { AuthContext } from './store/authcontex';
 import { useContext } from 'react';
 import Navbar from './pages/Navbar';
 import Footer from './pages/footer';
+import ConData from './pages/ConData';
 
 // eslint-disable-next-line react/prop-types
 const SecureRoute = ({ children }) => {
@@ -33,6 +34,7 @@ function App() {
             <Route path='/jobdata' element={<SecureRoute> <JobData /></SecureRoute>} />
             <Route path='/adminprofile' element={<SecureRoute> <AdminProfile /></SecureRoute>} />
             <Route path='/applyjob' element={<SecureRoute> <ApplyJob /></SecureRoute>} />
+            <Route path='/conData' element={<SecureRoute> <ConData /></SecureRoute>} />
             <Route path='/login' element={!token && <Login />} />
             <Route path='/signup' element={!token && <Signup />} />
             <Route path='/update' element={!token && <UpdateUser />} />

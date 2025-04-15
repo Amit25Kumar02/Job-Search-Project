@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import './css/profile.css'
+// const API_URL = 'https://job-search-project-330t.onrender.com';
+const API_URL = "http://localhost:5200"
 
 function ClientProfile() {
   const [userData, setUserData] = useState({
@@ -56,7 +58,7 @@ function ClientProfile() {
 
   const saveData = async (data) => {
     try {
-      await axios.post("https://job-search-project-330t.onrender.com/api/users/clientprofileUpdate", data);
+      await axios.post(`${API_URL}/api/users/clientprofileUpdate`, data);
       localStorage.setItem("user", JSON.stringify(data));
       setUserData(data);
       setIsEditing(false);
@@ -120,12 +122,12 @@ function ClientProfile() {
           </>
         ) : (
           <>
-            <p><b>UserName : </b> - {userData.username}</p>
-            <p><b>Email : </b> - {userData.email}</p>
-            <p><b>Mob.No. : </b> - {userData.phone}</p>
-            <p><b>Gender : </b> - {userData.gender}</p>
-            <p><b>DOB : </b> - {new Date (userData.dob).toLocaleDateString()}</p>
-            <p><b>Address : </b> - {userData.address}</p>
+            <p className="text-primary"><b>UserName : </b> - {userData.username}</p>
+            <p className="text-info"><b>Email : </b> - {userData.email}</p>
+            <p className="text-info"><b>Mob.No. : </b> - {userData.phone}</p>
+            <p className="text-primary"><b>Gender : </b> - {userData.gender}</p>
+            <p className="text-success"><b>DOB : </b> - {new Date (userData.dob).toLocaleDateString()}</p>
+            <p className="text-danger"><b>Address : </b> - {userData.address}</p>
             <button className="btn btn-outline-success" onClick={() => setIsEditing(true)}>Edit</button>
           </>
         )}

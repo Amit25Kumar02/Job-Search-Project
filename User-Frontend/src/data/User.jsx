@@ -9,6 +9,10 @@ import { SlLike } from "react-icons/sl";
 import UserImg from './img/slider-2.jpg';
 import UserImg2 from './img/video-bg.webp';
 
+// const API_URL = 'https://job-search-project-330t.onrender.com';
+const API_URL = "http://localhost:5200";
+
+
 const User = () => {
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
@@ -23,7 +27,7 @@ const User = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get("https://job-search-project-330t.onrender.com/api/jobs/all");
+        const response = await axios.get(`${API_URL}/api/jobs/all`);
         if (response.data.success) {
           const currentDate = new Date();
           const validJobs = response.data.jobs.filter(
@@ -102,7 +106,7 @@ const User = () => {
     if (dislikedJobs.has(jobId)) {
       // Remove dislike (undo)
       try {
-        const response = await axios.post("https://job-search-project-330t.onrender.com/api/jobs/undislike", { jobId });
+        const response = await axios.post(`${API_URL}/api/jobs/undislike`, { jobId });
   
         if (response.data.success) {
           updatedDislikedJobs.delete(jobId);
@@ -123,7 +127,7 @@ const User = () => {
     } else {
       // Dislike the job
       try {
-        const response = await axios.post("https://job-search-project-330t.onrender.com/api/jobs/dislike", { jobId });
+        const response = await axios.post(`${API_URL}/api/jobs/dislike`, { jobId });
   
         if (response.data.success) {
           updatedDislikedJobs.add(jobId);
@@ -152,7 +156,7 @@ const User = () => {
     if (likedJobs.has(jobId)) {
       // Unlike the job
       try {
-        const response = await axios.post("https://job-search-project-330t.onrender.com/api/jobs/unlike", { jobId });
+        const response = await axios.post(`${API_URL}/api/jobs/unlike`, { jobId });
   
         if (response.data.success) {
           updatedLikedJobs.delete(jobId);
@@ -173,7 +177,7 @@ const User = () => {
     } else {
       // Like the job
       try {
-        const response = await axios.post("https://job-search-project-330t.onrender.com/api/jobs/like", { jobId });
+        const response = await axios.post(`${API_URL}/api/jobs/like`, { jobId });
   
         if (response.data.success) {
           updatedLikedJobs.add(jobId);
@@ -241,7 +245,7 @@ const User = () => {
       <div className="container mt-4">
         <h2 className="text-dark mb-4">{showSavedJobs ? "Saved Jobs" : "Jobs you might like"}</h2>
         {(showSavedJobs ? savedJobs : filteredJobs).map((job) => (
-          <div key={job._id} className="card shadow mb-4 con-card">
+          <div key={job._id} className="card-2 shadow mb-4 con-card">
             <div className="card-body text-start d-flex align-items-center ms-auto ">
               <button onClick={() => handleDislike(job._id)} className="btn-1 me-2">
                 👎 {dislikeCounts[job._id] || job.dislikes}
@@ -256,7 +260,7 @@ const User = () => {
             </div>
             <Link to={`/apply/${job._id}`} className="con-btn">
               <div className="card-body text-start">
-              <p className="text-primery">Posted At : {new Date(job.postedAt).toLocaleDateString()}</p>
+              <p className="text-primary">Posted At : {new Date(job.postedAt).toLocaleDateString()}</p>
                 <h5 className="text-dark">{job.jobTitle}</h5>
                 <p className="text-muted">{job.jobDescription}</p>
                 <p className="text-info">Location: {job.location}</p>
@@ -279,16 +283,6 @@ const User = () => {
         <div className="user-main-text2-div">
           <h1 className="user-main-text2-1st-h1">Are You Already Working<br/> With Us?</h1>
 
-          <div className="input-group-1">
-            <input
-              type="email"
-              placeholder="Enter Your Email"
-              className="form-control"
-            />
-            <button className="btn btn-outline-success">
-              Subscribe
-            </button>
-          </div>
         </div>
       </div>
     </>

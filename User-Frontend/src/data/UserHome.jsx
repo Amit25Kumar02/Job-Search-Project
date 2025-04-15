@@ -32,8 +32,6 @@ function UserHome() {
                     </div>
                     <div className="comp-name">
                         <h3>The fastedt-growing companies use AmitJobsHub</h3>
-                  
-                            <marquee >
                                 <div className="comp-name-div">
                                     <div className="col"><img src={logoImg1} className='col-img'></img></div>
                                     <div className="col"><img src={logoImg2} className='col-img'></img></div>
@@ -41,8 +39,6 @@ function UserHome() {
                                     <div className="col"><img src={logoImg4} className='col-img'></img></div>
                                     <div className="col"><img src={logoImg5} className='col-img'></img></div>
                                 </div>
-                            </marquee>
-                       
                     </div>
                 </div>
                 <div className="get-us-div">

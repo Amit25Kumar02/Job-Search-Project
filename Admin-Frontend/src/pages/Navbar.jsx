@@ -51,6 +51,9 @@ function Navbar() {
             <li className="nav-item">
               <Link className="nav-link" to="/applyjob">Apply-Jobs</Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/conData">ContactUs-Data</Link>
+            </li>
           </ul>
 
           {/* User Dropdown */}

@@ -17,6 +17,7 @@ function Footer() {
                         <li><a href="/userdata">Home</a></li>
                         <li><a href="/jobdata">Jobs</a></li>
                         <li><a href="/applyjob">Apply-Job</a></li>
+                        <li><a href="/conData">ContactUs-Data</a></li>
                         
                     </ul>
                 </div>

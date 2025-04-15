@@ -5,6 +5,10 @@ import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
+// const API_URL = 'https://job-search-project-330t.onrender.com';
+const API_URL = "http://localhost:5200";
+
 function SignUp() {
   const navigate = useNavigate();
 
@@ -51,7 +55,7 @@ function SignUp() {
 
     setLoading(true);
     try {
-      const response = await axios.post("https://job-search-project-330t.onrender.com/api/users/verify-otp", {
+      const response = await axios.post(`${API_URL}/api/users/verify-otp`, {
         ...formData,
         username: formData.username.trim(),
         email: formData.email.trim(),
@@ -81,7 +85,7 @@ function SignUp() {
       return;
     }
     try {
-      const response = await axios.post("https://job-search-project-330t.onrender.com/api/users/send-otp", { email:formData.email });
+      const response = await axios.post(`${API_URL}/api/users/send-otp`, { email:formData.email });
       toast.success(response.data.message);
       setOtpSent(true); // OTP has been sent successfully
     } catch (error) {

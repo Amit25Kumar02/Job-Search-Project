@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 const ServicesPage = () => {
   return (
     <>
-      <div className="con-d mt-7">
+      <div className="container-con1 mt-7">
+       
         <div className="card shadow-lg p-4 mx-auto" style={{ maxWidth: "800px" }}>
           <h3 className="text-center mb-4">Our Services</h3>
           <p className="text-justify">
@@ -13,7 +14,7 @@ const ServicesPage = () => {
           </p>
 
           {/* Job Seeker Services */}
-          <h4 className="text-primary mb-3">For Job Seekers</h4>
+          <h4 className="text mb-3">For Job Seekers</h4>
           <ul>
             <li>
               <strong>Job Search and Application:</strong> Easily browse and search for job opportunities based on your skills, 
@@ -32,7 +33,7 @@ const ServicesPage = () => {
           </ul>
 
           {/* Employer Services */}
-          <h4 className="text-primary mb-3">For Employers</h4>
+          <h4 className="text mb-3">For Employers</h4>
           <ul>
             <li>
               <strong>Post Job Openings:</strong> Easily create and post job offers to attract top talent. Specify requirements, 
@@ -53,7 +54,7 @@ const ServicesPage = () => {
           </ul>
 
           {/* Additional Services */}
-          <h4 className="text-primary mb-3">Additional Services</h4>
+          <h4 className="text mb-3">Additional Services</h4>
           <ul>
             <li>
               <strong>Job Matching:</strong> We offer job matching services to recommend the best-fit candidates for your open 

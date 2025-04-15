@@ -1,0 +1,79 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
+import 'react-toastify/dist/ReactToastify.css';
+import './css/data.css';
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+
+
+const ConData = () => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const getUsers = async () => {
+    try {
+      const {data}= await axios.get("http://localhost:5200/api/con/getContact");
+      setUsers(data);
+      // console.log(data)
+    } catch (error) {
+      console.error("Error fetching rooms:", error);
+    }
+  };
+  
+  async function handleDelete(id) {
+    const isConfirmed = window.confirm("Are you sure you want to delete this?");
+  
+    if (!isConfirmed) {
+      return; // Stop execution if user cancels
+    }
+    try {
+      await axios.delete(`http://localhost:5200/api/con/del/${id}`,{});
+      toast.success("Data Deleted Successfully")
+      getUsers();
+    } catch (error) {
+      console.error("Error deleting room:", error);
+    }
+  }
+  
+  return (
+    <>
+      <div className="con-d">
+        <h1 className="data">ContactUs Data List</h1>
+          <table className="table table-striped move">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Mob. No.</th>
+                <th scope="col">Message</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user._id}>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.phone}</td>
+                  <td>{user.message}</td>
+                  <td>
+                    <button onClick={()=>handleDelete(user._id)} className="btn btn-danger btn-sm">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+      </div>
+      <ToastContainer/>
+
+    </>
+  );
+};
+
+export default ConData;

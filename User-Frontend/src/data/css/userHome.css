@@ -20,8 +20,7 @@
 }
 .img-div>img{
     height: 600px;
-    /* border-top-right-radius: 40% 25%; */
-    /* border-bottom-left-radius: 40% 20%; */
+ 
 }
 
 .home-img {
@@ -60,32 +59,34 @@
     background-color: #0056b3;
 }
 .comp-name{
-    height: 170px;
+    height: auto;
     background-color: #fed57d;
     padding: 1%;
     width: 100%;
-    margin:auto;
+    margin: 2% auto;
+    display: block;
+    /* display: flex; */
 }
 .comp-name>h3{
     color: #3992ff;
     text-align: center;
     
 }
-.comp-name-div{
+.comp-name-div {
     display: flex;
-    gap: 20px;
-    font-size: 20px;
-    align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
-}
-.comp-name-div>div{
-    margin-left: 3%;
-}
-.col-img{
-    width:90%;
+    align-items: center;
+    gap: 20px;
+    overflow-x: auto;
+
+  }  
+  .col-img {
+    width: 100%;
     height: auto;
-    margin-top: 7%;
-}
+    object-fit: contain;
+  }
+  
 .get-us-div{
     display: flex;
     width: 100%;
@@ -163,7 +164,9 @@
     .text-overlay>h1 {
         font-size: 48px;
     }
-    
+    .comp-name{
+        margin: 2% auto;
+    }
 }
 
 /* Large devices (desktops, 992px to 1199px) */
@@ -178,6 +181,9 @@
 
     .card-div-main {
         gap: 20px;
+    }
+    .comp-name{
+        margin: 2% auto;
     }
 }
 
@@ -204,26 +210,18 @@
         flex-direction: column;
     }
 
-    .comp-name-div {
-        flex-direction: column;
-        font-size: 18px;
-        text-align: center;
-    }
+ 
 
     .img-div>img {
         height: auto;
     }
-    .col-img{
-        width:70%;
-        height: auto;
-        margin-top: 7%;
-    }
+
     .comp-name{
         height: auto;
         background-color: #fed57d;
         padding: 1%;
         width: 100%;
-        margin:auto;
+        margin:2% auto;
     }
 }
 
@@ -248,6 +246,7 @@
     .comp-name {
         height: auto;
         padding: 2%;
+        margin: 2% auto;
     }
 }
 
@@ -258,21 +257,27 @@
         height: 100%;
     }
     .img-div>img{
-        height: 40vh;
+        height: 50vh;
+    }
+    .text-overlay{
+        margin-top: 5%;
     }
     .text-overlay>h1 {
         font-size: 20px;
     }
-
+    .comp-name{
+        margin: 2% auto;
+    }
+    .comp-name>h3{
+        font-size: 16px;
+        width: 60%;
+        margin: auto;
+    }
+   
     .btn-jobs-home {
         width: 100%;
         padding: 10px;
     }
-
-    .comp-name-div {
-        font-size: 16px;
-    }
-
     .main-card-div>p {
         font-size: 13px;
     }

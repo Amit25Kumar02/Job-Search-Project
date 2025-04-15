@@ -6,6 +6,9 @@ import "react-toastify/dist/ReactToastify.css";
 import "./css/addJob.css";
 import UserImg from './css/img/lg-product_page-7.png';
 
+// const API_URL = 'https://job-search-project-330t.onrender.com';
+const API_URL = "http://localhost:5200";
+
 function JobOfferForm() {
   const [formData, setFormData] = useState({
     companyName: "",
@@ -23,24 +26,21 @@ function JobOfferForm() {
   const [showModal, setShowModal] = useState(false);
   const [jobs, setJobs] = useState([]);
   const [editingJobId, setEditingJobId] = useState(null);
+  const [expandedDescriptions, setExpandedDescriptions] = useState({});
 
   if (!token) {
     toast.error("Unauthorized! Please log in.", { position: "top-center" });
     return <Navigate to="/login" />;
   }
 
-  // Fetch jobs from the API
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     fetchJobs();
-    const interval = setInterval(fetchJobs, 1000);
-    return () => clearInterval(interval);
   }, []);
 
   const fetchJobs = async () => {
     try {
-      // const response = await axios.get("http://localhost:5200/api/jobs/all");
-      const response = await axios.get("https://job-search-project-330t.onrender.com/api/jobs/all");
+      const response = await axios.get(`${API_URL}/api/jobs/all`);
       if (response.data.success) {
         setJobs(response.data.jobs);
       } else {
@@ -51,7 +51,6 @@ function JobOfferForm() {
     }
   };
 
-  // Reset form data
   const resetForm = () => {
     setFormData({
       companyName: "",
@@ -66,14 +65,13 @@ function JobOfferForm() {
     setEditingJobId(null);
   };
 
-  // Handle form submission (add or edit job)
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
       const url = editingJobId
-        ? `https://job-search-project-330t.onrender.com/api/jobs/update/${editingJobId}`
-        : `https://job-search-project-330t.onrender.com/api/jobs/offer`;
+        ? `${API_URL}/api/jobs/update/${editingJobId}`
+        : `${API_URL}/api/jobs/offer`;
       const response = editingJobId
         ? await axios.put(url, formData, { headers: { Authorization: `Bearer ${token}` } })
         : await axios.post(url, formData, { headers: { Authorization: `Bearer ${token}` } });
@@ -93,7 +91,6 @@ function JobOfferForm() {
     }
   };
 
-  // Handle editing a job offer
   const handleEdit = (job) => {
     setEditingJobId(job._id);
     setFormData({
@@ -109,11 +106,10 @@ function JobOfferForm() {
     setShowModal(true);
   };
 
-  // Handle deleting a job offer
   const handleDelete = async (jobId) => {
     if (window.confirm("Are you sure you want to delete this job?")) {
       try {
-        await axios.delete(`https://job-search-project-330t.onrender.com/api/jobs/delete/${jobId}`, {
+        await axios.delete(`${API_URL}/api/jobs/delete/${jobId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         toast.success("Job deleted successfully!");
@@ -124,29 +120,32 @@ function JobOfferForm() {
     }
   };
 
+  const toggleDescription = (id) => {
+    setExpandedDescriptions((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
   return (
     <div className="container-main-job">
-      <div className="dark-overlay-img1"/>
+      <div className="dark-overlay-img1" />
       <div className="img-div1">
         <img src={UserImg} className="client-img" alt="Job Search" />
         <div className="text-overlay-1">
           <div className="btn-job">
-            <button className="btn btn-primary"
-              onClick={() => { resetForm(); setShowModal(true); }}>
+            <button className="btn btn-primary" onClick={() => { resetForm(); setShowModal(true); }}>
               Add New Job
             </button>
           </div>
-          <h1 className=" fw-bold mt-2 text-center">
-          Connecting Talent with <br />Opportunity
+          <h1 className="fw-bold mt-2 text-center">
+            Connecting Talent with <br />Opportunity
           </h1>
         </div>
       </div>
 
-
-
       <ToastContainer />
 
-      {/* Modal with CSS Animation */}
       {showModal && (
         <>
           <div className="modal-backdrop" onClick={() => setShowModal(false)}></div>
@@ -166,7 +165,7 @@ function JobOfferForm() {
                   <input type="text" name="salary" placeholder="Salary" value={formData.salary} onChange={(e) => setFormData({ ...formData, salary: e.target.value })} className="form-control mb-2" />
                   <input type="date" name="applicationDeadline" value={formData.applicationDeadline} onChange={(e) => setFormData({ ...formData, applicationDeadline: e.target.value })} className="form-control mb-2" />
                   <input type="text" name="skills" placeholder="Skills (comma-separated)" value={formData.skills} onChange={(e) => setFormData({ ...formData, skills: e.target.value })} className="form-control mb-2" />
-                  <button type="submit" className="btn btn-primary addjob-btn " disabled={loading}>
+                  <button type="submit" className="btn btn-primary addjob-btn" disabled={loading}>
                     {loading ? (editingJobId ? "Updating..." : "Submitting...") : editingJobId ? "Update Job Offer" : "Submit Job Offer"}
                   </button>
                 </form>
@@ -176,20 +175,30 @@ function JobOfferForm() {
         </>
       )}
 
-      {/* Job List */}
       <div className="job-list mt-2">
         {jobs.map((job) => (
-          <div key={job._id} className="card shadow border rounded mb-3">
+          <div key={job._id} className="card-2 shadow border rounded mb-3 job-card-1">
             <div className="card-body text-start">
-              <h3>👎{job.dislikes}  👍{job.likes} </h3>
-              <h3 className="text-primary">{job.companyName}</h3>
-              <h5 className="text-dark">{job.jobTitle}</h5>
-              <p className="text-muted">{job.jobDescription}</p>
-              <p className="text-info">Location: {job.location}</p>
-              <p className="text-info">Experience: {job.Experience}</p>
-              <p className="text-success">Salary: ₹{job.salary} / PA</p>
-              <p className="text-dark">Skills: {job.skills.join(", ")}</p>
-              <p className="text-danger">Deadline: {new Date(job.applicationDeadline).toLocaleDateString()}</p>
+              <h3 >👎{job.dislikes}  👍{job.likes}</h3>
+              <h3 >{job.companyName}</h3>
+              <h5 >{job.jobTitle}</h5>
+
+              <p >
+                {expandedDescriptions[job._id]
+                  ? job.jobDescription
+                  : job.jobDescription?.substring(0, 150) + (job.jobDescription.length > 150 ? "..." : "")}
+                {job.jobDescription.length > 150 && (
+                  <button className="btn btn-link p-0 ps-2" onClick={() => toggleDescription(job._id)}>
+                    {expandedDescriptions[job._id] ? "See Less" : "See More"}
+                  </button>
+                )}
+              </p>
+
+              <p>Location: {job.location}</p>
+              <p>Experience: {job.Experience}</p>
+              <p>Salary: ₹{job.salary} / PA</p>
+              <p>Skills: {job.skills.join(", ")}</p>
+              <p>Deadline: {new Date(job.applicationDeadline).toLocaleDateString()}</p>
               <button className="btn btn-warning me-2" onClick={() => handleEdit(job)}>Update</button>
               <button className="btn btn-danger" onClick={() => handleDelete(job._id)}>Delete</button>
             </div>

@@ -1,14 +1,122 @@
-*{
-    margin: 0;
-    padding: 0;
-}
-.con-job-r{
-    width: 90%;
-    margin: auto;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (max-width:576px){
-    .con-job-r{
-        margin-top: 18%;
-    }
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.con-job-r {
+  width: 100%;
+  min-height: 100vh;
+  margin: auto;
+  padding: 5% 0;
+  margin-bottom: -5%;
+  background-color: #01333f;
+  background-image: url('./img/bg2.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  color: white;
+}
+
+.text-j {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 4%;
+  margin-top: 1%;
+}
+
+.con-job-a {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 50px;
+  justify-items: center;
+  width: 80%;
+  max-width: 100%;
+  margin: auto;
+  height: fit-content;
+  /* padding: 1%; */
+}
+
+.card {
+  background: white;
+  color: #000;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.btn-rd {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2%;
+}
+
+/* Extra large devices (max width: 1200px) */
+@media (max-width: 1200px) {
+  .con-job-a {
+    grid-template-columns: repeat(2, 1fr);
+    /* width: 90%; */
+  }
+}
+
+/* Large devices (max width: 991px) */
+@media (max-width: 991px) {
+  .con-job-a {
+    grid-template-columns: repeat(2, 1fr);
+    width: 90%;
+  }
+}
+
+/* Medium devices (max width: 767px) */
+@media (max-width: 767px) {
+  .con-job-a {
+    grid-template-columns: 1fr;
+    justify-content: center !important;
+    margin: auto !important;
+    /* margin-left: -5%; */
+  }
+}
+
+/* Small devices (max width: 575px) */
+@media (max-width: 575px) {
+  .con-job-r {
+    margin-top: 18%;
+    /* padding: 10% ; */
+  }
+
+  .text-j {
+    font-size: 1.5rem;
+  }
+
+  .btn-rd {
+    /* display: block; */
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  .con-job-a {
+    /* grid-template-columns: 1fr; */
+    width: 90%;
+    margin: auto;
+    justify-content: center;
+    /* margin-left: -5% !important; */
+  }
+  .btn-rd>a{
+    width: fit-content;
+  }
 }
