@@ -76,7 +76,7 @@ const UserAboutPage = () => {
               <img src={AmitImg} className="card-img-top" alt="..." />
               <div className="card-body">
                 <h5 className="card-title">Amit Kumar</h5>
-                <p className="card-text">Web Developer</p>
+                <p className="card-text">SEO</p>
               </div>
             </div>
           </div>

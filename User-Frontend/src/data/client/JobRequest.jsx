@@ -54,51 +54,56 @@ const JobRequest = () => {
 
   return (
     <>
-        <div className="con-job-r">
-          <h1 className="text-j">Applied Jobs</h1>
-          {applications?.length === 0 ? (
-            <p>No applications found.</p>
-          ) : (
-            <div className=" con-job-a ">
-              {applications?.map((app) => {
-                const isExpanded = expandedProposals[app._id];
-                return (
-                  <div key={app._id} className="card shadow-lg m-3 w-100">
-                    <div className="card-body">
-                      <p><strong>Job Title: </strong>{app.jobId?.jobTitle}</p>
-                      <p><strong>Company Name: </strong>{app.jobId?.companyName}</p>
-                      <strong>Applied by: <b>{app.userName}</b></strong>
-                      <p><b>Email: </b>{app.userEmail}</p>
-                      <p><b>Mob. No.: </b>{app.Phone}</p>
-                      <p><b>Applied At: </b>{new Date(app.appliedAt).toLocaleDateString()}</p>
+      <div className="con-job-r">
+        <h1 className="text-j">Applied Jobs</h1>
+        {applications?.length === 0 ? (
+          <p>No applications found.</p>
+        ) : (
+          <div className=" con-job-a ">
+            {applications?.map((app) => {
+              const isExpanded = expandedProposals[app._id];
+              return (
+                <div key={app._id} className="card shadow-lg m-3 w-100">
+                  <div className="card-body">
+                    <p><strong>Job Title: </strong>{app.jobId?.jobTitle}</p>
+                    <p><strong>Company Name: </strong>{app.jobId?.companyName}</p>
+                    <strong>Applied by: <b>{app.userName}</b></strong>
+                    <p><b>Email: </b>{app.userEmail}</p>
+                    <p><b>Mob. No.: </b>{app.Phone}</p>
+                    <p><b>Applied At: </b>{new Date(app.appliedAt).toLocaleDateString()}</p>
 
-                      {/* Proposal with See More/Less */}
-                      <p>
-                        <b>Proposal: </b>
-                        {isExpanded ? app.proposal : `${app.proposal.substring(0, 150)}...`}
-                        {app.proposal.length > 150 && (
-                          <button
-                            onClick={() => toggleProposal(app._id)}
-                            className="btn btn-link p-0"
-                          >
-                            {isExpanded ? " See Less" : " See More"}
-                          </button>
-                        )}
-                      </p>
+                    {/* Proposal with See More/Less */}
+                    <p>
+                      <b>Proposal: </b>
+                      {isExpanded
+                        ? app.proposal
+                        : app.proposal
+                          ? `${app.proposal.substring(0, 1)}...`
+                          : "No proposal"}
+                      {app.proposal && app.proposal.length > 150 && (
+                        <button
+                          onClick={() => toggleProposal(app._id)}
+                          className="btn btn-link p-0"
+                        >
+                          {isExpanded ? " See Less" : " See More"}
+                        </button>
+                      )}
+                    </p>
 
-                      <div className="btn-rd">
-                        <a href={app.resume} target="_blank" rel="noopener noreferrer" className="btn btn-outline-success">
-                          See Resume
-                        </a>
-                        <button onClick={() => deleteApplication(app._id)} className="btn btn-outline-danger">Delete</button>
-                      </div>
+
+                    <div className="btn-rd">
+                      <a href={app.resume} target="_blank" rel="noopener noreferrer" className="btn btn-outline-success">
+                        See Resume
+                      </a>
+                      <button onClick={() => deleteApplication(app._id)} className="btn btn-outline-danger">Delete</button>
                     </div>
                   </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
       <ToastContainer />
     </>
   );

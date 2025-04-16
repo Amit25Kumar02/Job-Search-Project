@@ -37,7 +37,7 @@ function UserProfile() {
     areaOfStudy: "",
     description: "",
   });
-  
+
   const [isEditing, setIsEditing] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewImage, setPreviewImage] = useState("");
@@ -59,7 +59,7 @@ function UserProfile() {
         const parsedData = JSON.parse(storedUserData);
         setUserData(parsedData);
         setPreviewImage(parsedData.profile || "");
-         setEducation(parsedData);
+        setEducation(parsedData);
       } catch (error) {
         console.error("Error parsing user data:", error);
       }
@@ -97,12 +97,12 @@ function UserProfile() {
     };
     reader.readAsDataURL(file);
   };
-  
+
 
   const handleSave = async () => {
     setLoading(true);
     let updatedData = { ...userData };
-    let updatedEducation = {...education};
+    let updatedEducation = { ...education };
     if (selectedFile) {
       const reader = new FileReader();
       reader.onloadend = async () => {
@@ -112,7 +112,7 @@ function UserProfile() {
       };
       reader.readAsDataURL(selectedFile);
     } else {
-      await saveData(updatedData,updatedEducation);
+      await saveData(updatedData, updatedEducation);
     }
   };
 
@@ -121,7 +121,7 @@ function UserProfile() {
       await axios.post(`${API_URL}/api/users/ucprofileUpdate`, data
         , { headers: { "Content-Type": "multipart/form-data" } }
       );
-      setUserData((prev) => ({ ...prev, profileImage: data.imageUrl })); 
+      setUserData((prev) => ({ ...prev, profileImage: data.imageUrl }));
       localStorage.setItem("user", JSON.stringify(data));
       setUserData(data);
       setPreviewImage(data.profileImage);
@@ -147,7 +147,7 @@ function UserProfile() {
   return (
     <div className="pro-card ">
       <div className="main-div">
-      {/* <h2 className="text-center ">Profile Page</h2> */}
+        {/* <h2 className="text-center ">Profile Page</h2> */}
         {/* Profile Section */}
         <div className="row">
           <div className="col">
@@ -325,22 +325,22 @@ function UserProfile() {
               {previewImage ? (
                 <img src={previewImage} alt="Profile Preview" className="profile-img-input" />
               ) : (
-               <h6></h6>
+                <h6></h6>
               )}
             </div>
             <div className="input-wrapper-1">
-  <input
-    type="file"
-    name="profileImage"
-    accept="image/*"
-    id="profileImage"
-    onChange={handleFileChange}
-    className="input-file-hidden"
-  />
-  <label htmlFor="profileImage" className="custom-file-label">
-    📁 
-  </label>
-</div>
+              <input
+                type="file"
+                name="profileImage"
+                accept="image/*"
+                id="profileImage"
+                onChange={handleFileChange}
+                className="input-file-hidden"
+              />
+              <label htmlFor="profileImage" className="custom-file-label">
+                📁
+              </label>
+            </div>
 
             {/* Buttons at bottom-right */}
             <div className="modal-buttons-1">
@@ -501,6 +501,7 @@ function UserProfile() {
                   <option value="Female">Female</option>
                   <option value="Other">Other</option>
                 </select>
+                <label>D.O.B</label>
                 <input type="date" name="dob" value={userData.dob} onChange={handleChange} className="text-area-title mb-2" />
                 <input type="text" placeholder="Enter your Address" name="address" value={userData.address} onChange={handleChange} className="text-area-title mb-2" />
               </div>

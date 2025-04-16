@@ -217,10 +217,12 @@
     .user-main-text2-div {
         width: 90%;
     }
-
+    .car-1{
+        height: 50vh;
+    }
     .car-2 {
         width: 96%;
-        /* padding: 10%; */
+        height: 50vh;
         text-align: center;
         margin: 2%;
     }
