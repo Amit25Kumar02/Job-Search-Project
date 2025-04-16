@@ -96,12 +96,12 @@ html, body {
 @media (max-width: 575px) {
   .con-job-r {
     /* margin-top: 10%; */
-    padding-top: 14% ;
+    padding-top: 20% ;
   }
 
   .text-j {
     font-size: 1.5rem;
-    margin-bottom: -20%;
+    margin-bottom: 2%;
   }
 
   .btn-rd {
