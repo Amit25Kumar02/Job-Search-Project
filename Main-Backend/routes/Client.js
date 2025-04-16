@@ -1,7 +1,8 @@
 const express = require("express");
 const JobOffer = require("../models/JobSchema");
 const app = express();
-const verifyToken = require("../authorizationMiddleware/clientAuth"); // this should decode token & set req.user
+// const authenticate = require("../authorizationMiddleware/clientAuth"); // assumed client role middleware
+const verifyToken = require("../authorizationMiddleware/verifyToken"); // this should decode token & set req.user
 
 // CREATE Job Offer (Client only)
 app.post("/offer", verifyToken, async (req, res) => {
@@ -30,7 +31,9 @@ app.put("/update/:id", verifyToken, async (req, res) => {
     const updatedJobOffer = await JobOffer.findByIdAndUpdate(
       id,
       {companyName,jobTitle,jobDescription,location,salary,
-        applicationDeadline,skills,Experience,},{ new: true });
+        applicationDeadline,skills,Experience,},
+      { new: true }
+    );
 
     if (!updatedJobOffer) {
       return res.status(404).json({ success: false, error: "Job not found" });
