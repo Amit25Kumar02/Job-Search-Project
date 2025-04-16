@@ -2,7 +2,7 @@ const express = require("express");
 const JobOffer = require("../models/JobSchema");
 const app = express();
 // const authenticate = require("../authorizationMiddleware/clientAuth"); // assumed client role middleware
-const verifyToken = require("../authorizationMiddleware/verifyToken"); // this should decode token & set req.user
+const verifyToken = require("../authorizationMiddleware/clientAuth"); // this should decode token & set req.user
 
 // CREATE Job Offer (Client only)
 app.post("/offer", verifyToken, async (req, res) => {
