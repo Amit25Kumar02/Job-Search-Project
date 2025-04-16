@@ -55,12 +55,25 @@
   font-size: 22px;
   border-bottom: 2px solid #eb4d4b;
 }
+.container-fluid>button{
+  background-color: whitesmoke;
+  border-color:black ;
+  z-index: 1050;
+  color: black;
+  filter: brightness(1.5);  
+}
+.container>button{
+  background-color: whitesmoke;
+  border-color:black ;
+  z-index: 1050;
+  color: black;
+  filter: brightness(1.5);  
+}
 
-/* .nav-link:hover{
-  font-weight: bold; 
-  font-size: 18px;
-  color: #eb4d4b !important;
-} */
+.navbar-toggler>span{
+  z-index: 1050; 
+  color: black;
+}
 .navbar.scrolled {
   background-color: #fffefe !important;
   color: rgb(9, 9, 9);
