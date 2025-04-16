@@ -46,7 +46,7 @@ const JobDetails = () => {
             <div className="job-card shadow">
               <div className="job-card-body">
                 <Link to='/userjob' className="back-button">🔙 Back to Jobs</Link>
-                <p className="job-posted-date">{new Date(job.postedAt).toLocaleDateString()}</p>
+                <p className="job-posted-date">Published Date{new Date(job.postedAt).toLocaleDateString()}</p>
                 <h2 className="job-title">{job.jobTitle}</h2>
                 <p className="job-meta job-company">Company: {job.companyName}</p>
                 <p className="job-description">{job.jobDescription}</p>

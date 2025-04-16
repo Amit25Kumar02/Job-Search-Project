@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
+const User = require("./userSchema")
 
 const JobOfferSchema = new mongoose.Schema({
+  clientId:{type :mongoose.Schema.Types.ObjectId , ref: 'User'},
   jobTitle: { type: String, required: true },
   companyName: { type: String, required: true },
   jobDescription: { type: String, required: true },

@@ -1,26 +1,23 @@
 const express = require("express");
 const JobOffer = require("../models/JobSchema"); 
 const app = express();
-
+const authenticate = require("../authorizationMiddleware/clientAuth");
 // Route to create a new job offer
-app.post("/offer", async (req, res) => {
+app.post("/offer", authenticate, async (req, res) => {
   try {
-    const { companyName, jobTitle, jobDescription, location, salary, applicationDeadline, skills,Experience } = req.body;
+    const { companyName, jobTitle, jobDescription, location, salary, applicationDeadline, skills, Experience } = req.body;
 
-    if (!companyName || !jobTitle || !jobDescription || !location || !salary || !applicationDeadline || !skills) {
-      return res.status(400).json({ success: false, message: "All fields are required!" });
-    }
-
-    const newJob = new JobOffer({ companyName, jobTitle, jobDescription, location, salary, applicationDeadline, skills,Experience});
+    // Create new job and link user
+    const newJob = new JobOffer({ companyName,jobTitle,jobDescription,location,
+      salary,applicationDeadline,skills,Experience,clientId: req.user.id, });
 
     await newJob.save();
-    res.json({ success: true, message: "Job offer created successfully!", job: newJob });
-
-  } catch (error) {
-    res.status(500).json({ success: false, message: "Server error", error: error.message });
+    res.status(201).json({ success: true, job: newJob });
+  } catch (err) {
+    console.error("Error in job offer:", err.message);
+    res.status(500).json({ success: false, error: "Server error" });
   }
 });
-
 
 // Route to update a job offer
 app.put("/update/:id", async (req, res) => {
@@ -30,17 +27,8 @@ app.put("/update/:id", async (req, res) => {
   try {
     const updatedJobOffer = await JobOffer.findByIdAndUpdate(
       id,
-      {
-        companyName,
-        jobTitle,
-        jobDescription,
-        location,
-        salary,
-        applicationDeadline,
-        skills,
-        Experience,
-      },
-      { new: true }
+      {companyName,jobTitle,jobDescription,location,salary,
+        applicationDeadline,skills,Experience,},{ new: true }
     );
 
     if (!updatedJobOffer) {
@@ -71,11 +59,17 @@ app.delete("/delete/:id", async (req, res) => {
 });
 
 // Route to fetch all job offers
-app.get("/all", async (req, res) => {
+app.get("/all", authenticate, async (req, res) => {
+  console.log('/api/jobs/all');
+
   try {
-    const jobs = await JobOffer.find();
+    // Conditionally filter by clientId if the user is a Client
+    const filter = req.user.Role === "Client" ? { clientId: req.user.id } : {};
+
+    const jobs = await JobOffer.find(filter);
     res.json({ success: true, jobs });
   } catch (err) {
+    console.error("Fetch jobs error:", err.message);
     res.status(500).json({ success: false, error: err.message });
   }
 });
