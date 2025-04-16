@@ -145,6 +145,7 @@
   
   .application-card {
     padding: 30px;
+    margin-top: 2%;
   }
   
   .application-header {
@@ -156,6 +157,7 @@
 @media (max-width: 576px) {
   .application-card {
     padding: 25px;
+    margin-top: 7%;
   }
   
   .application-header {
@@ -176,6 +178,7 @@
   
   .application-card {
     padding: 20px;
+    margin-top: 7%;
   }
   
   .application-header {
