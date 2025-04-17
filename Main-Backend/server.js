@@ -8,6 +8,7 @@ const AdminRoutes =  require('./routes/AdminRoutes');
 const JobRoutes = require("./routes/jobRoutes");
 const Favroit = require("./routes/favroit")
 const ContactRoutes = require('./routes/contactUsRoutes');
+const path = require('path');
 require ('dotenv').config();
 const app = express();
 
@@ -20,6 +21,8 @@ app.use(cors({
 }));
 app.use("/uploads", express.static("uploads"));
 app.use("/profileImage", express.static("profileImage"));
+app.use('/profileImage', express.static(path.join(__dirname, 'uploads')));
+
 
  
 connectDB();

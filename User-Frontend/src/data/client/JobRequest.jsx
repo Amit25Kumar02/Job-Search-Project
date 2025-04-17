@@ -11,14 +11,15 @@ const API_URL = 'https://job-search-project-330t.onrender.com';
 const JobRequest = () => {
   const [applications, setApplications] = useState([]);
   const [expandedProposals, setExpandedProposals] = useState({});
-
+  let {Id} =  JSON.parse(localStorage.getItem("user"))
   useEffect(() => {
     fetchApplications();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchApplications = async () => {
     try {
-      const { data } = await axios.get(`${API_URL}/api/Ajobs/applications`);
+      const { data } = await axios.get(`${API_URL}/api/Ajobs/applications/${Id}`);
       if (data && Array.isArray(data.applications)) {
         setApplications(data.applications);
       } else {

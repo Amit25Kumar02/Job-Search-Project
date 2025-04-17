@@ -16,7 +16,7 @@ const verifyToken = (req, res, next) => {
         // console.log("user", req.user)
         next(); // Proceed to next middleware/controller
     } catch (error) {
-        // console.log( "error",error)  
+        console.log( "error",error)  
         res.status(500).json({ success: false, error: error.message });
     }
 };

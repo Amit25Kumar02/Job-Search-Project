@@ -78,13 +78,27 @@ app.get('/check-application', async (req, res) => {
     }
 });
 
-app.get("/applications", async (req, res) => {
+app.get("/applications/:id", async (req, res) => {
+    let {id} = req.params
+    // Find all jobs that belong to the given client
     try {
-        const applications = await JobApplication.find().populate({
-            path: "jobId",
-            model: "JobOffer",
-            select: "jobTitle companyName _id"
-        });
+        let applications = []
+        if(id == "admin"){
+        applications = await JobApplication.find({}).populate({
+                path: "jobId",
+                model: "JobOffer",
+                select: "jobTitle companyName _id"
+            });
+        }else{
+
+            const jobs = await JobOffer.find({ clientId : id }).select('_id');
+            const jobIds = jobs.map(job => job._id); // Extract job IDs
+           applications = await JobApplication.find({ jobId: { $in: jobIds } }).populate({
+                path: "jobId",
+                model: "JobOffer",
+                select: "jobTitle companyName _id"
+            });
+        }
         res.json({ success: true, applications });
     } catch (error) {
         res.status(500).json({ success: false, message: "Failed to fetch applications", error: error.message });

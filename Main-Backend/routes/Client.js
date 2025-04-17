@@ -7,6 +7,7 @@ const verifyToken = require("../authorizationMiddleware/clientAuth"); // this sh
 // CREATE Job Offer (Client only)
 app.post("/offer", verifyToken, async (req, res) => {
   try {
+    console.log('hello')
     const {companyName,jobTitle,jobDescription,location,salary,
       applicationDeadline,skills,Experience,} = req.body;
 
