@@ -97,7 +97,7 @@ const JobRequest = () => {
                       {isExpanded
                         ? app.proposal
                         : app.proposal
-                          ? `${app.proposal.substring(0, 1)}...`
+                          ? `${app.proposal.substring(0, 150)}...`
                           : "No proposal"}
                       {app.proposal && app.proposal.length > 150 && (
                         <button
