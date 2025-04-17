@@ -24,32 +24,42 @@ const User = () => {
 
   useEffect(() => {
     const fetchJobs = async () => {
+      const Token = localStorage.getItem("token");
       try {
-        const response = await axios.get(`${API_URL}/api/jobs/all`);
-        if (response.data.success) {
-          const currentDate = new Date();
-          const validJobs = response.data.jobs.filter(
-            (job) => new Date(job.applicationDeadline) >= currentDate
+        const response = await axios.get(`${API_URL}/api/jobs/all`, {
+          headers: {
+            Authorization: `Bearer ${Token}`,
+          },
+        });
+    
+        const { jobs, success } = response.data;
+    
+        if (success) {
+          const currentDate = Date.now();
+          const validJobs = jobs.filter(
+            (job) => new Date(job.applicationDeadline).getTime() >= currentDate
           );
           setJobs(validJobs);
           setFilteredJobs(validJobs);
-
+    
           const initialDislikeCounts = {};
           const initialLikeCounts = {};
           validJobs.forEach((job) => {
             initialDislikeCounts[job._id] = job.dislikes || 0;
             initialLikeCounts[job._id] = job.likes || 0;
           });
-
+    
           setDislikeCounts(initialDislikeCounts);
           setLikeCounts(initialLikeCounts);
         } else {
           toast.error("Failed to fetch job offers");
         }
       } catch (err) {
-        toast.error("Error fetching jobs", err);
+        toast.error("Error fetching jobs");
+        console.error(err);
       }
     };
+    
 
     fetchJobs();
 
