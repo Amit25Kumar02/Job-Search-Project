@@ -20,8 +20,9 @@ app.use(cors({
   credentials: true
 }));
 app.use("/uploads", express.static("uploads"));
-app.use("/profileImage", express.static("profileImage"));
-app.use('/profileImage', express.static(path.join(__dirname, 'uploads')));
+app.use("/profileImage", express.static("uploads"));
+
+
 
 
  

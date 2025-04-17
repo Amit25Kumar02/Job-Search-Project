@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { jwtDecode } from "jwt-decode"; 
 
 function NavbarSection() {
   const [userName, setUserName] = useState(null);
@@ -9,9 +10,32 @@ function NavbarSection() {
 
   useEffect(() => {
     const userData = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
     if (userData) {
       setUserName(JSON.parse(userData));
     }
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        const now = Date.now() / 1000; 
+
+        if (decoded.exp < now) {
+          handleLogout(); 
+        } else {
+          // Set timeout to auto logout when token expires
+          const timeout = setTimeout(() => {
+            handleLogout();
+          }, (decoded.exp - now) * 1000); // in ms
+
+          return () => clearTimeout(timeout); // clear on unmount
+        }
+      } catch (error) {
+        console.error("Invalid token:", error);
+        handleLogout(); // In case of error
+      }
+    }
+
+
     // 👇 Add scroll event listener
     const handleScroll = () => {
       const nav = document.querySelector('.navbar');
@@ -28,6 +52,7 @@ function NavbarSection() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleLogout = () => {

@@ -7,7 +7,7 @@ const AdminSchema = new mongoose.Schema({
   dob:{type:Date},
   phone:{type:String},
   address:{type:String},
-  profile:{type:String},
+  profileImage:{type:String},
   gender:{type:String ,enum:["Male","Female","Other"]},
   CreatedAt:{type:Date,default:Date.now} 
 })

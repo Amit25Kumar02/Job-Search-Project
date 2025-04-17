@@ -33,7 +33,11 @@ const JobDetails = () => {
     }, [jobId]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div class="d-flex justify-content-center mt-5">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
     }
 
     if (!job) {

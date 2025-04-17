@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import './css/profile.css'
+import './css/profile.css';
 
 const API_URL = 'https://job-search-project-330t.onrender.com';
-// const API_URL = "http://localhost:5200"
+// const API_URL = "http://localhost:5200";
 
 function ClientProfile() {
   const [userData, setUserData] = useState({
@@ -16,17 +16,17 @@ function ClientProfile() {
     gender: "",
     address: "",
   });
+
   const [isEditing, setIsEditing] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [profileCompletion, setProfileCompletion] = useState(0);
 
   useEffect(() => {
-    const userData = localStorage.getItem("user");
-    if (userData) {
-      const parsedData = (JSON.parse(userData));
-      setUserData(parsedData);
-      calculateCompletion(parsedData);
-
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setUserData(parsedUser);
+      calculateCompletion(parsedUser);
     }
   }, []);
 
@@ -34,65 +34,68 @@ function ClientProfile() {
     const updatedData = { ...userData, [e.target.name]: e.target.value };
     setUserData(updatedData);
     calculateCompletion(updatedData);
-
   };
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setSelectedFile(file);
+    setSelectedFile(e.target.files[0]);
   };
-
   const handleSave = async () => {
-    let updatedData = { ...userData };
-
-    if (selectedFile) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        updatedData = { ...updatedData, profileImage: reader.result };
-        saveData(updatedData);
-      };
-      reader.readAsDataURL(selectedFile);
-    } else {
-      saveData(updatedData);
-    }
-  };
-
-  const saveData = async (data) => {
     try {
-      await axios.post(`${API_URL}/api/users/clientprofileUpdate`, data);
-      localStorage.setItem("user", JSON.stringify(data));
-      setUserData(data);
+      const formData = new FormData();
+      formData.append("username", userData.username);
+      formData.append("email", userData.email);
+      formData.append("phone", userData.phone);
+      formData.append("gender", userData.gender);
+      formData.append("address", userData.address);
+      formData.append("dob", userData.dob);
+  
+      if (selectedFile) {
+        formData.append("profileImage", selectedFile);
+      }
+  
+      const response = await axios.post(
+        `${API_URL}/api/users/clientprofileUpdate`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+  
+      // Save updated user to localStorage
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      setUserData(response.data.user);
       setIsEditing(false);
-      calculateCompletion(data);
+      calculateCompletion(response.data.user);
       window.location.reload();
     } catch (error) {
-      console.error("Error saving data:", error);
+      console.error("Error saving profile:", error);
     }
   };
-  // Function to calculate profile completeness
+  
+
   const calculateCompletion = (data) => {
-    // Define required fields (exclude optional fields like 'profile' if not mandatory)
-    const requiredFields = ["username", "email", "phone", "dob", "gender", "address","profileImage"];
-  
-    // Count filled fields (trim to remove spaces and check for valid values)
-    const filledFields = requiredFields.filter((field) => data[field] && data[field].trim() !== "").length;
-  
-    // Calculate percentage correctly
+    const requiredFields = ["username", "email", "phone", "dob", "gender", "address", "profileImage"];
+    const filledFields = requiredFields.filter((field) => data[field] && data[field].toString().trim() !== "").length;
     const completionPercentage = Math.round((filledFields / requiredFields.length) * 100);
-    
     setProfileCompletion(completionPercentage);
   };
 
   return (
-    <div className="d-flex  pro-card">
+    <div className="d-flex pro-card">
       <div className="card p-4 pro-div" style={{ width: "400px" }}>
         <h2 className="text-center mb-4">Profile Page</h2>
 
-        {/* Profile Completion Progress */}
         <div className="progress mb-3">
-          <div className="progress-bar" role="progressbar" style={{ width: `${profileCompletion}%` }}
+          <div
+            className="progress-bar"
+            role="progressbar"
+            style={{ width: `${profileCompletion}%` }}
             aria-valuenow={profileCompletion}
-            aria-valuemin="0" aria-valuemax="100" >
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
             {profileCompletion}%
           </div>
         </div>
@@ -127,7 +130,7 @@ function ClientProfile() {
             <p className="text-info"><b>Email : </b> - {userData.email}</p>
             <p className="text-info"><b>Mob.No. : </b> - {userData.phone}</p>
             <p className="text-primary"><b>Gender : </b> - {userData.gender}</p>
-            <p className="text-success"><b>DOB : </b> - {new Date (userData.dob).toLocaleDateString()}</p>
+            <p className="text-success"><b>DOB : </b> - {userData.dob ? new Date(userData.dob).toLocaleDateString() : ""}</p>
             <p className="text-danger"><b>Address : </b> - {userData.address}</p>
             <button className="btn btn-outline-success" onClick={() => setIsEditing(true)}>Edit</button>
           </>

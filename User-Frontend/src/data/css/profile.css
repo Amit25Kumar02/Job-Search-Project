@@ -401,8 +401,8 @@ body {
 
 .text-area-pro{
   width: 100%;
-  min-height: 150px;
-  max-height: 150px;
+  /* min-height: 150px; */
+  max-height: 100px;
   border-radius: 10px;
   padding: 12px;
 }
@@ -466,10 +466,10 @@ body {
 }
 .modal-buttons-1{
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
   padding: 2%;
-  margin-top: 10%;
+  margin-top: 5%;
   /* border: 1px solid black; */
 }
 .modal-buttons-1>button{
@@ -612,12 +612,12 @@ body {
     /* width: 20vh; */
   }
   .text-area-pro{
-    max-height: 150px;
-    min-height: 150px;
+    /* max-height: 150px; */
+    min-height: 100px;
   }
   .modal-buttons-2{
     display: flex;
-    float: left;
+    /* float: left; */
     /* gap: 30%; */
     justify-content: space-between;
   }
@@ -726,8 +726,6 @@ body {
   }
   .modal-buttons-1{
     display: flex;
-    float: left;
-    /* gap: 30%; */
     justify-content: space-between;
   }
   .modal-buttons-1 button{
@@ -736,12 +734,12 @@ body {
     /* width: 20vh; */
   }
   .text-area-pro{
-    max-height: 120px;
+    /* max-height: 120px; */
     min-height: 120px;
   }
   .modal-buttons-2{
     display: flex;
-    float: left;
+    /* float: left; */
     /* gap: 30%; */
     justify-content: space-between;
   }
@@ -894,6 +892,8 @@ body {
     width: 100%;
     height: fit-content;
     padding: 2px;
+    display: flex;
+    justify-content: space-between;
     /* font-size: 19px; */
   }
   .modal-buttons-1>button{
@@ -1005,7 +1005,7 @@ body {
   .modal-buttons>button{
     font-size: 26px;
     /* width: 33%; */
-margin-top: -5%;
+    margin-top: -5%;
   }
   /* for profile overview card */
   .modal-card-1 {
@@ -1212,7 +1212,7 @@ margin-top: -5%;
     display: flex;
     padding: 2%;
     justify-content: space-between;
-    margin-top: 15%;
+    margin-top: 7%;
     width: 100%;
   }
   .modal-buttons-1>button{
@@ -1228,6 +1228,7 @@ margin-top: -5%;
   }
   .modal-buttons-2>button{
     font-size: 30px;
+    margin-bottom: -10%;
     /* width: 20vh; */
 
   }
@@ -1235,12 +1236,13 @@ margin-top: -5%;
   .modal-card-e{
     width: 80%;
     margin: auto;
-    height: auto;
+    height: 65%;
   }
- 
   .input-wrapper-e{
-    width: 98%;
+    width: 96%;
+    overflow-y: auto;
     margin: auto;
+    height: 70%;
   }
 
   /* for language modal card */
@@ -1409,7 +1411,7 @@ margin-top: -5%;
     width: 100%;
     /* gap: 10%; */
     justify-content: space-between;
-    margin-top: 15%;
+    margin-top: 7%;
     padding: 2%;
   }
   .modal-buttons-1>button{
@@ -1432,11 +1434,13 @@ margin-top: -5%;
   .modal-card-e{
     width: 90%;
     margin: auto;
-    height: auto;
+    height: 70%;
   }
   .input-wrapper-e{
-    width: 98%;
+    width: 96%;
+    overflow-y: auto;
     margin: auto;
+    height: 70%;
   }
 
   /* for language modal card */

@@ -2,15 +2,52 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode"; 
+
+
 
 function ClientNav() {
   const [username, setUsername] = useState(null);
   const navigate = useNavigate();
 
+  // Logout function
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem("user");
+    setUsername(null);
+    toast.success('Logged out successfully');
+    navigate("/login");
+    window.location.reload();
+  };
+
+  // Auto-logout based on token expiry
   useEffect(() => {
     const userData = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+
     if (userData) {
       setUsername(JSON.parse(userData));
+    }
+
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        const now = Date.now() / 1000; 
+
+        if (decoded.exp < now) {
+          handleLogout(); 
+        } else {
+          // Set timeout to auto logout when token expires
+          const timeout = setTimeout(() => {
+            handleLogout();
+          }, (decoded.exp - now) * 1000); // in ms
+
+          return () => clearTimeout(timeout); // clear on unmount
+        }
+      } catch (error) {
+        console.error("Invalid token:", error);
+        handleLogout(); // In case of error
+      }
     }
 
     // Scroll behavior
@@ -24,18 +61,9 @@ function ClientNav() {
     };
 
     window.addEventListener('scroll', handleScroll);
-
     return () => window.removeEventListener('scroll', handleScroll);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem("user");
-    setUsername(null);
-    toast.success('Logged out successfully');
-    navigate("/login");
-    window.location.reload();
-  };
 
   return (
     <nav className="navbar navbar-expand-lg fixed-top main-nav">

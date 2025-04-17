@@ -11,11 +11,22 @@ const API_URL = 'https://job-search-project-330t.onrender.com';
 const JobRequest = () => {
   const [applications, setApplications] = useState([]);
   const [expandedProposals, setExpandedProposals] = useState({});
-  let {Id} =  JSON.parse(localStorage.getItem("user"))
+
+  let { _id: Id } = JSON.parse(localStorage.getItem("user") || "{}");
+
+
   useEffect(() => {
-    fetchApplications();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const Id = user._id;
+    if (Id) {
+      fetchApplications(Id);
+    } else {
+      console.error("User ID not found in localStorage");
+      setApplications([]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   const fetchApplications = async () => {
     try {
@@ -58,7 +69,14 @@ const JobRequest = () => {
       <div className="con-job-r">
         <h1 className="text-j">Applied Jobs</h1>
         {applications?.length === 0 ? (
-          <p>No applications found.</p>
+          <>
+            <div class="d-flex justify-content-center mt-5 mb-5">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+            <p>No applications found.</p>
+          </>
         ) : (
           <div className=" con-job-a ">
             {applications?.map((app) => {

@@ -15,20 +15,20 @@ dotenv.config();
 app.use(express.json()); 
 app.use(cors());
 
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/profile-images/');
+    cb(null, "uploads/"); 
   },
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-  }
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
 });
-
-const upload = multer({ 
-  storage: storage,
-  limits: { fileSize: 2 * 1024 * 1024 } // 2MB limit
-});
+const upload = multer({ storage });
+// const upload = multer({ 
+//   storage: storage,
+//   limits: { fileSize: 2 * 1024 * 1024 } // 2MB limit
+// });
 // Configure Nodemailer transporter
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -128,7 +128,7 @@ app.post("/login", async (req, res) => {
     if (user.password !== password) return res.status(400).json({ error: "Invalid email or password" });
     if (user.userType !== userType) return res.status(400).json({ error: "Invalid UserType" });
 
-    let  token = JTW.sign({id :user._id , Role: user.userType} ,process.env.JWT_SECRET, { expiresIn: "1h" }) 
+    let  token = JTW.sign({id :user._id , Role: user.userType} ,process.env.JWT_SECRET, { expiresIn: "48h" }) 
     let userData = user.toObject();
     delete userData.password;
     res.status(200).json({ message: "Login successful",
@@ -178,7 +178,7 @@ app.delete('/del/:id',async(req,res)=>{
 })
 
 //for profile update
-app.post('/ucprofileUpdate', upload.single('profileImage'), async (req, res) => {
+app.post('/ucprofileUpdate', upload.single("profileImage"),  async (req, res) => {
   try {
     const userId = req.body._id || req.user._id;
     const updateData = { ...req.body };
@@ -190,8 +190,7 @@ app.post('/ucprofileUpdate', upload.single('profileImage'), async (req, res) => 
 
     // Handle file upload
     if (req.file) {
-      updateData.profileImage = `http://job-search-project-330t.onrender.com/uploads/profile-images/${req.file.filename}`;
-      
+      updateData.profileImage = `http://job-search-project-330t.onrender.com/profileImage/${req.file.filename}`;
     }
 
     const updatedUser = await User.findByIdAndUpdate(userId,updateData, { new: true });
@@ -205,31 +204,43 @@ app.post('/ucprofileUpdate', upload.single('profileImage'), async (req, res) => 
 
 app.post("/clientprofileUpdate", upload.single("profileImage"), async (req, res) => {
   try {
-    const {username, email, phone, gender, address, dob,} = req.body;
-    // Build update object
-    let updateData = {username, email, phone, gender, address, dob,};
+    // console.log("💡 Incoming request to /clientprofileUpdate");
+    // console.log("📦 req.body:", req.body);
+    // console.log("🖼️ req.file:", req.file);
 
-    // Handle profile image update
-    if (req.file) {
-      updateData.profileImage = `http://job-search-project-330t.onrender.com/profileImage/${req.file.filename}`;
+    const { username, email, phone, gender, address, dob } = req.body;
+    if (!email) {
+      return res.status(400).json({ message: "Email is required to update profile" });
     }
-    // Find and update user profile
-    const updatedUser = await User.findOneAndUpdate({ email }, updateData, { new: true });
+
+    let updateData = { username, email, phone, gender, address, dob };
+
+    if (req.file) {
+      const imageUrl = `http://job-search-project-330t.onrender.com/profileImage/${req.file.filename}`;
+      updateData.profileImage = imageUrl;
+    }
+
+    const updatedUser = await User.findOneAndUpdate({ email }, updateData, {
+      new: true,
+    });
 
     if (!updatedUser) {
-      return res.status(404).json({ message: "User not Found" });
+      return res.status(404).json({ message: "User not found with this email" });
     }
-    // Return updated user data
+
     res.status(200).json({
       message: "User Profile Updated Successfully",
       user: updatedUser,
     });
   } catch (error) {
-    console.error("Error updating profile:", error);
-    res.status(500).json({ message: "Server error" });
+    console.error("❌ Error in /clientprofileUpdate:", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+      error: error.message,
+      stack: error.stack,
+    });
   }
 });
-
 
 // for saved job routes
 

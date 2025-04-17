@@ -360,10 +360,7 @@ function UserProfile() {
               <div className="input-wrapper-2">
                 <h1>Profile overview</h1>
                 <p>Use this space to show clients you have the skills and experience they're looking for.</p>
-                <ul>
-                  <li>Describe your strengths and skills</li>
-                  <li>Highlight projects, accomplishments and education</li>
-                </ul>
+            
                 <h3>Profile overview</h3>
                 <textarea name="overview" placeholder="Profile overview" value={userData.overview} onChange={handleChange} className="text-area-pro"></textarea>
               </div>
@@ -385,15 +382,15 @@ function UserProfile() {
 
               <div className="input-wrapper-2">
                 <h1>Edit your title</h1>
-                <p>Enter a single sentence description of your professional skills/experience (e.g. Expert Web Designer with Ajax experience)</p>
+                <p>Enter a single sentence description of your professional skills/experience</p>
 
                 <h4>Your title</h4>
                 <input type="text" name="title" placeholder="Your Title" value={userData.title} onChange={handleChange} className="text-area-title"></input>
               </div>
               {/* Buttons at bottom-right */}
-              <div className="modal-buttons">
-                <button className="btn btn-outline-danger btn-ss" onClick={() => setTitleShowModal(false)}>Cancel</button>
-                <button className="btn btn-outline-success btn-ss" onClick={handleSave}>Save</button>
+              <div className="modal-buttons-1">
+                <button className="btn btn-outline-danger" onClick={() => setTitleShowModal(false)}>Cancel</button>
+                <button className="btn btn-outline-success" onClick={handleSave}>Save</button>
               </div>
             </div>
           </div>
@@ -449,10 +446,7 @@ function UserProfile() {
             <div className="input-wrapper-2">
               <h1>Project overview</h1>
               <p>Use this space to show clients you have the skills and experience they're looking for.</p>
-              <ul>
-                <li>Highlight projects</li>
-                <li>Keep it short and make sure it's error-free</li>
-              </ul>
+             
               <h4>Project overview</h4>
               <textarea name="project" placeholder="Project overview" value={userData.project} onChange={handleChange} className="text-area-pro"></textarea>
             </div>
@@ -548,7 +542,7 @@ function UserProfile() {
                 <input type="text" name="areaOfStudy" value={education.areaOfStudy} onChange={handleEduChange} placeholder="Ex: Computer Science" className="text-area-title mb-2" />
 
                 <h4>Description (Optional)</h4>
-                <textarea name="description" value={education.description} onChange={handleEduChange} className="text-area-pro mb-2"></textarea>
+                <textarea name="description" value={education.description} onChange={handleEduChange} className="text-area-pro "></textarea>
               </div>
 
               <div className="modal-buttons-2">

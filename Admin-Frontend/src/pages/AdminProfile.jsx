@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./css/profile.css";
 
+const API_URL = "http://localhost:5200";
+// const API_URL = 'https://job-search-project-330t.onrender.com';
+
 function AdminProfile() {
   const [userData, setUserData] = useState({
-    profile: "",
+    profileImage: "",
     username: "",
     email: "",
     phone: "",
@@ -32,41 +35,48 @@ function AdminProfile() {
   };
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setSelectedFile(file);
+    setSelectedFile(e.target.files[0]);
   };
 
   const handleSave = async () => {
-    let updatedData = { ...userData };
-
-    if (selectedFile) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        updatedData = { ...updatedData, profile: reader.result };
-        saveData(updatedData);
-      };
-      reader.readAsDataURL(selectedFile);
-    } else {
-      saveData(updatedData);
-    }
-  };
-
-  const saveData = async (data) => {
     try {
-      await axios.post("http://localhost:5200/api/Admin/profileUpdate", data);
-      localStorage.setItem("user", JSON.stringify(data));
-      setUserData(data);
+      const formData = new FormData();
+      formData.append("username", userData.username);
+      formData.append("email", userData.email);
+      formData.append("phone", userData.phone);
+      formData.append("gender", userData.gender);
+      formData.append("address", userData.address);
+      formData.append("dob", userData.dob);
+  
+      if (selectedFile) {
+        formData.append("profileImage", selectedFile);
+      }
+  
+      const response = await axios.post(
+        `${API_URL}/api/Admin/profileUpdate`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+  
+      // Save updated user to localStorage
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      setUserData(response.data.user);
       setIsEditing(false);
-      calculateCompletion(data);
+      calculateCompletion(response.data.user);
+      window.location.reload();
     } catch (error) {
-      console.error("Error saving data:", error);
+      console.error("Error saving profile:", error);
     }
   };
-
+  
   // Function to calculate profile completeness
   const calculateCompletion = (data) => {
     // Define required fields (exclude optional fields like 'profile' if not mandatory)
-    const requiredFields = ["username", "email", "phone", "dob", "gender", "address","profile"];
+    const requiredFields = ["username", "email", "phone", "dob", "gender", "address","profileImage"];
   
     // Count filled fields (trim to remove spaces and check for valid values)
     const filledFields = requiredFields.filter((field) => data[field] && data[field].trim() !== "").length;
@@ -93,8 +103,9 @@ function AdminProfile() {
         </div>
 
         <div className="mb-3 text-center">
-          {userData.profile ? (
-            <img src={userData.profile} alt="Profile" className="profile-img mb-2" />
+          {userData.profileImage ? (
+            <img src={userData.
+              profileImage} alt="Profile" className="profile-img mb-2" />
           ) : (
             <p className="profile">No Profile Image</p>
           )}

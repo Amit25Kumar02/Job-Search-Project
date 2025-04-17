@@ -7,24 +7,22 @@ const cors = require("cors");
 const Otp = require('../models/Otpmodel.js')
 const crypto = require("crypto");
 const multer = require("multer");
-const fs = require('fs');
+
 const path = require('path');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
  
-// using multer save profile(offline)image
-const uploadDir =path.join(__dirname,"./profileImage");
-if(!fs.existsSync(uploadDir)){
-  fs.mkdirSync(uploadDir,{recursive:true});
-}
-const storage=multer.diskStorage({
-  destination:(req,file,cb)=>cb(null,uploadDir),
-  filename:(req,file,cb)=>cb(null.Date.now()+"-"+file.originalname)
-});
-
-const upload=multer({storage});
+ const storage = multer.diskStorage({
+   destination: function (req, file, cb) {
+     cb(null, "uploads/"); 
+   },
+   filename: function (req, file, cb) {
+     cb(null, Date.now() + path.extname(file.originalname));
+   },
+ });
+ const upload = multer({ storage });
 
 // Configure Nodemailer transporter
 const transporter = nodemailer.createTransport({
@@ -193,39 +191,43 @@ app.delete('/sub/:email', async (req, res) => {
   }
 });
 // for profile update routes
-app.post('/profileUpdate', upload.single("profileImage"), async (req, res) => {
+app.post("/profileUpdate", upload.single("profileImage"), async (req, res) => {
   try {
-    const { username, email, dob, phone, address, gender } = req.body;
+    console.log("💡 Incoming request to /adminprofileUpdate");
+    console.log("📦 req.body:", req.body);
+    console.log("🖼️ req.file:", req.file);
 
-    // Construct the update object
-    let updateData = {
-      username,
-      dob,
-      phone,
-      address,
-      gender,
-    };
+    const { username, email, phone, gender, address, dob } = req.body;
+    if (!email) {
+      return res.status(400).json({ message: "Email is required to update profile" });
+    }
 
-    // If a profile image is uploaded, update it
+    let updateData = { username, email, phone, gender, address, dob };
+
     if (req.file) {
-      updateData.profileImage = `profileImage/${req.file.filename}`;
+      const imageUrl = `http://localhost:5200/profileImage/${req.file.filename}`;
+      updateData.profileImage = imageUrl;
     }
 
-    // Update the admin profile in the database
-    const adminP = await Admin.findOneAndUpdate(
-      { email },
-      updateData,
-      { new: true }
-    );
+    const updatedUser = await Admin.findOneAndUpdate({ email }, updateData, {
+      new: true,
+    });
 
-    if (!adminP) {
-      return res.status(404).json({ message: "Details not found" });
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found with this email" });
     }
 
-    res.status(200).json({ message: "Profile Updated Successfully", data: adminP });
+    res.status(200).json({
+      message: "User Profile Updated Successfully",
+      user: updatedUser,
+    });
   } catch (error) {
-    console.error("Error:", error);
-    res.status(500).json({ message: "Server Error", error });
+    console.error("❌ Error in /clientprofileUpdate:", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+      error: error.message,
+      stack: error.stack,
+    });
   }
 });
 
