@@ -11,6 +11,7 @@ function NavbarSection() {
   useEffect(() => {
     const userData = localStorage.getItem("user");
     const token = localStorage.getItem("token");
+    let logoutTimeout;
     if (userData) {
       setUserName(JSON.parse(userData));
     }
@@ -23,11 +24,11 @@ function NavbarSection() {
           handleLogout(); 
         } else {
           // Set timeout to auto logout when token expires
-          const timeout = setTimeout(() => {
+           logoutTimeout = setTimeout(() => {
             handleLogout();
           }, (decoded.exp - now) * 1000); // in ms
 
-          return () => clearTimeout(timeout); // clear on unmount
+          // return () => clearTimeout(timeout); // clear on unmount
         }
       } catch (error) {
         console.error("Invalid token:", error);
@@ -38,18 +39,20 @@ function NavbarSection() {
 
     // 👇 Add scroll event listener
     const handleScroll = () => {
+      // console.log("Scrolled"); // for debugging
       const nav = document.querySelector('.navbar');
+      if (!nav) return;
       if (window.scrollY > 0) {
         nav.classList.add('scrolled');
       } else {
         nav.classList.remove('scrolled');
       }
     };
+    
 
     window.addEventListener('scroll', handleScroll);
-
-    // Cleanup listener on unmount
     return () => {
+      if (logoutTimeout) clearTimeout(logoutTimeout);
       window.removeEventListener('scroll', handleScroll);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps

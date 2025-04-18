@@ -80,9 +80,11 @@
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
-.navbar.scrolled>.nav-item>.nav-link{
-  color: black;
+
+.navbar.scrolled .nav-link {
+  color: black !important;
 }
+
 .navbar.scrolled::before{
   z-index: 100;
 }

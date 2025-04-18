@@ -22,49 +22,55 @@ function ClientNav() {
 
   // Auto-logout based on token expiry
   useEffect(() => {
+    // console.log("Navbar useEffect ran");
+  
     const userData = localStorage.getItem("user");
     const token = localStorage.getItem("token");
-
+    let logoutTimeout;
+  
     if (userData) {
       setUsername(JSON.parse(userData));
     }
-
+  
     if (token) {
       try {
         const decoded = jwtDecode(token);
-        const now = Date.now() / 1000; 
-
+        const now = Date.now() / 1000;
+  
         if (decoded.exp < now) {
-          handleLogout(); 
+          handleLogout();
         } else {
-          // Set timeout to auto logout when token expires
-          const timeout = setTimeout(() => {
+          logoutTimeout = setTimeout(() => {
             handleLogout();
-          }, (decoded.exp - now) * 1000); // in ms
-
-          return () => clearTimeout(timeout); // clear on unmount
+          }, (decoded.exp - now) * 1000);
         }
       } catch (error) {
         console.error("Invalid token:", error);
-        handleLogout(); // In case of error
+        handleLogout();
       }
     }
-
-    // Scroll behavior
+  
+    // ✅ Scroll handler - this now runs!
     const handleScroll = () => {
-      const nav = document.querySelector('.navbar');
+      // console.log("Scrolled ✅");
+      const nav = document.querySelector(".navbar");
+      if (!nav) return;
       if (window.scrollY > 0) {
-        nav.classList.add('scrolled');
+        nav.classList.add("scrolled");
       } else {
-        nav.classList.remove('scrolled');
+        nav.classList.remove("scrolled");
       }
     };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+  
+    window.addEventListener("scroll", handleScroll);
+  
+    return () => {
+      if (logoutTimeout) clearTimeout(logoutTimeout);
+      window.removeEventListener("scroll", handleScroll);
+    };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  
   return (
     <nav className="navbar navbar-expand-lg fixed-top main-nav">
       <div className="container">

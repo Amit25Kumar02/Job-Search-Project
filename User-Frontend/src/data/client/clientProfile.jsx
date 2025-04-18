@@ -85,7 +85,7 @@ function ClientProfile() {
   return (
     <div className="d-flex pro-card">
       <div className="card p-4 pro-div" style={{ width: "400px" }}>
-        <h2 className="text-center mb-4">Profile Page</h2>
+        <h2 className="text-center mb-4 text-danger">Profile Page</h2>
 
         <div className="progress mb-3">
           <div
