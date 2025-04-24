@@ -5,7 +5,8 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../store/authcontex';
-
+const API_URL = 'https://job-search-project-330t.onrender.com';
+// const API_URL = "http://localhost:5200";
 function Login() {
   const navigate = useNavigate();
   const [admindata, setAdmindata] = useState({
@@ -26,7 +27,7 @@ function Login() {
   const formSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5200/api/Admin/login", admindata);
+      const response = await axios.post(`${API_URL}/api/Admin/login`, admindata);
       toast.success(response.data.message, { position: "top-center" });
 
       // Store Token in AuthContext & Local Storage

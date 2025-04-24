@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+const API_URL = 'https://job-search-project-330t.onrender.com';
+// const API_URL = "http://localhost:5200";
 
 function UpdateUser() {
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ function UpdateUser() {
       return;
     }
     try {
-      const response = await axios.get(`http://localhost:5200/api/Admin/update/${email}`);
+      const response = await axios.get(`${API_URL}/api/Admin/update/${email}`);
       const user = response.data;
       setUsername(user.UserName);
       setPassword(user.Password);
@@ -38,7 +40,7 @@ function UpdateUser() {
     }
 
     try {
-      const response = await axios.put(`http://localhost:5200/api/Admin/update/${email}`, {
+      const response = await axios.put(`${API_URL}/api/Admin/update/${email}`, {
         username,
         password,
       });

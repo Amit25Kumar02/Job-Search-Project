@@ -4,6 +4,8 @@ import "./login.css";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+const API_URL = 'https://job-search-project-330t.onrender.com';
+// const API_URL = "http://localhost:5200";
 
 const DeleteUser = () => {
   const [email, setEmail] = useState("");
@@ -18,7 +20,7 @@ const DeleteUser = () => {
     }
 
     try {
-      const response = await axios.delete(`http://localhost:5200/api/Admin/sub/${email}`, {
+      const response = await axios.delete(`${API_URL}/api/Admin/sub/${email}`, {
         headers: { "Content-Type": "application/json" },
       });
 
