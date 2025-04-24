@@ -5,6 +5,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './css/data.css';
 
+const API_URL = 'https://job-search-project-330t.onrender.com';
+// const API_URL = "http://localhost:5200";
 
 const ApplyJob = () => {
   const [applications, setApplications] = useState([]);
@@ -15,7 +17,7 @@ const ApplyJob = () => {
 
   const fetchApplications = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5200/api/Ajobs/applications");
+      const { data } = await axios.get(`${API_URL}/api/Ajobs/applications`);
       console.log("API Response:", data);
       // window.location.reload();
 
@@ -37,7 +39,7 @@ const ApplyJob = () => {
       return; // Stop execution if user cancels
     }
     try {
-      await axios.delete(`http://localhost:5200/api/Ajobs/del/${id}`);
+      await axios.delete(`${API_URL}/api/Ajobs/del/${id}`);
       setApplications((prevApplications) => prevApplications.filter((app) => app._id !== id));
       toast.success("Application deleted successfully.");
     } catch (error) {

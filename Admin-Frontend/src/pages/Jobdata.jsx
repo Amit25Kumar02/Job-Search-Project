@@ -3,7 +3,8 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './css/data.css';
-
+const API_URL = 'https://job-search-project-330t.onrender.com';
+// const API_URL = "http://localhost:5200";
 
 const JobData = () => {
   const [jobs, setJobs] = useState([]);
@@ -14,7 +15,7 @@ const JobData = () => {
 
   const fetchJobs = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5200/api/jobs/all");
+      const { data } = await axios.get(`${API_URL}/api/jobs/all`);
       console.log("API Response:", data);
       setJobs(Array.isArray(data) ? data : data.jobs || []);
       // window.location.reload();
@@ -31,7 +32,7 @@ const JobData = () => {
       return; // Stop execution if user cancels
     }
     try {
-      await axios.delete(`http://localhost:5200/api/jobs/delete/${id}`);
+      await axios.delete(`${API_URL}/api/jobs/delete/${id}`);
       setJobs((prevJobs) => prevJobs.filter((job) => job._id !== id));
       toast.success("Job deleted successfully.");
     } catch (error) {

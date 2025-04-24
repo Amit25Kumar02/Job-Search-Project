@@ -5,7 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import './css/data.css';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
-
+const API_URL = 'https://job-search-project-330t.onrender.com';
+// const API_URL = "http://localhost:5200";
 
 const ConData = () => {
   const [users, setUsers] = useState([]);
@@ -16,7 +17,7 @@ const ConData = () => {
 
   const getUsers = async () => {
     try {
-      const {data}= await axios.get("http://localhost:5200/api/con/getContact");
+      const {data}= await axios.get(`${API_URL}/api/con/getContact`);
       setUsers(data);
       // console.log(data)
     } catch (error) {
@@ -31,7 +32,7 @@ const ConData = () => {
       return; // Stop execution if user cancels
     }
     try {
-      await axios.delete(`http://localhost:5200/api/con/del/${id}`,{});
+      await axios.delete(`${API_URL}/api/con/del/${id}`,{});
       toast.success("Data Deleted Successfully")
       getUsers();
     } catch (error) {
