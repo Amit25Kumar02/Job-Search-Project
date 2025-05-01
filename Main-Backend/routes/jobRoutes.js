@@ -106,7 +106,7 @@ app.get("/applications/:id", async (req, res) => {
 });
 app.get("/applications", async (req, res) => {
     try {
-      const applications = await JobApplication.find(); 
+      const applications = await JobApplication.find().populate("jobId"); 
       res.json({ success: true, applications });
     } catch (error) {
       console.error("Error fetching applications:", error.message);

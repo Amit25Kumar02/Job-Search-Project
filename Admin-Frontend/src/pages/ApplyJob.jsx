@@ -72,8 +72,8 @@ const ApplyJob = () => {
                   <td>{app.userName}</td>
                   <td>{app.userEmail}</td>
                   <td>{app.Phone}</td>
-                  <td>{app.jobId?.jobTitle || "N/A"}</td>
-                  <td>{app.jobId?.companyName || "N/A"}</td>
+                  <td>{app.jobId ?.jobTitle || "N/A"}</td>
+                  <td>{app.jobId ?.companyName || "N/A"}</td>
                   <td>
                     <button
                       onClick={() => deleteApplication(app._id)}
