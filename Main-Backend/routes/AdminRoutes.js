@@ -122,7 +122,7 @@ app.post('/login', async (req, res) => {
     if (user.password !== password) {
       res.status(401).json({ message: "Password not match" })
     } else {
-      const token = jwt.sign({ id: user._id }, "amit25", { expiresIn: "1h" });
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
       // console.log(token)
       res.status(200).json({ message: "Login Successfully", user, token })
     }
@@ -205,7 +205,7 @@ app.post("/profileUpdate", upload.single("profileImage"), async (req, res) => {
     let updateData = { username, email, phone, gender, address, dob };
 
     if (req.file) {
-      const imageUrl = `http://localhost:5200/profileImage/${req.file.filename}`;
+      const imageUrl = `https://job-search-project-330t.onrender.com/profileImage/${req.file.filename}`;
       updateData.profileImage = imageUrl;
     }
 

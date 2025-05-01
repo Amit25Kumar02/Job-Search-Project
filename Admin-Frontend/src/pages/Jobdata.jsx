@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './css/data.css';
+
 const API_URL = 'https://job-search-project-330t.onrender.com';
 // const API_URL = "http://localhost:5200";
 
@@ -14,35 +15,52 @@ const JobData = () => {
   }, []);
 
   const fetchJobs = async () => {
+    const token = localStorage.getItem('token'); // Get the token from localStorage
+    if (!token) {
+      toast.error('Authentication token is missing. Please login.');
+      return;
+    }
+
     try {
-      const { data } = await axios.get(`${API_URL}/api/jobs/all`);
-      console.log("API Response:", data);
-      setJobs(Array.isArray(data) ? data : data.jobs || []);
-      // window.location.reload();
+      const response = await axios.get(`${API_URL}/api/jobs/all`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Send the token in headers
+        },
+      });
+      const { jobs, success } = response.data;
+
+      if (success) {
+        setJobs(jobs || []);
+      } else {
+        toast.error('Failed to fetch job offers');
+      }
     } catch (error) {
-      toast.error("Failed to fetch jobs.",error);
+      console.error('Error fetching jobs:', error);
+      toast.error('Failed to fetch jobs. Please try again.');
     }
   };
-  
 
   const deleteItem = async (id) => {
-    const isConfirmed = window.confirm("Are you sure you want to delete this?");
-  
-    if (!isConfirmed) {
-      return; // Stop execution if user cancels
-    }
+    const isConfirmed = window.confirm('Are you sure you want to delete this?');
+    if (!isConfirmed) return;
+
     try {
-      await axios.delete(`${API_URL}/api/jobs/delete/${id}`);
+      const token = localStorage.getItem('token');
+      await axios.delete(`${API_URL}/api/jobs/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Send the token in headers
+        },
+      });
       setJobs((prevJobs) => prevJobs.filter((job) => job._id !== id));
-      toast.success("Job deleted successfully.");
+      toast.success('Job deleted successfully.');
     } catch (error) {
-      toast.error("Error deleting job.",error);
+      console.error('Error deleting job:', error);
+      toast.error('Error deleting job.');
     }
   };
 
   return (
     <>
-    
       <div className="con-d">
         <h1 className="data">Job List</h1>
         {jobs.length === 0 ? (
