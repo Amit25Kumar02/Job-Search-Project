@@ -73,26 +73,6 @@ app.get("/all", verifyToken, async (req, res) => {
     res.status(500).json({ success: false, error: err.message });
   }
 });
-app.get("/all", verifyToken, async (req, res) => {
-  try {
-    // Log user info to verify token was decoded correctly
-    console.log("User Info:", req.user);
-
-    // Create filter based on user role
-    const filter = req.user?.Role === "Client" ? { clientId: req.user.id } : {};
-    console.log("Filter object:", filter);
-
-    // Fetch jobs with the filter
-    const jobs = await JobOffer.find(filter);
-    console.log("Jobs fetched:", jobs); // Debug log
-
-    res.json({ success: true, jobs });
-  } catch (err) {
-    // Log the error for more information
-    console.error("Error fetching jobs:", err.message);
-    res.status(500).json({ success: false, error: err.message });
-  }
-});
 // GET Job Details
 app.get("/det/:id", async (req, res) => {
   try {

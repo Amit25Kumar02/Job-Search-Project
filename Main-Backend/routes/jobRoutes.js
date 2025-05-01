@@ -104,7 +104,15 @@ app.get("/applications/:id", async (req, res) => {
         res.status(500).json({ success: false, message: "Failed to fetch applications", error: error.message });
     }
 });
-
+app.get("/applications", async (req, res) => {
+    try {
+      const applications = await JobApplication.find(); 
+      res.json({ success: true, applications });
+    } catch (error) {
+      console.error("Error fetching applications:", error.message);
+      res.status(500).json({ success: false, error: error.message });
+    }
+  });
 
 app.get("/applications/:id", async (req, res) => {
     try {
