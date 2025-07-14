@@ -24,6 +24,7 @@
   text-decoration: none;
   font-size: 25px;
   z-index: 10000;
+   margin-right: 40px;
 }
 .jobs-nav:hover::after{
   width: 100%;
@@ -80,7 +81,7 @@
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
-.nav-gap,.con2 {
+.nav-gap {
   display: flex;
   gap: 1.5rem; 
 }
