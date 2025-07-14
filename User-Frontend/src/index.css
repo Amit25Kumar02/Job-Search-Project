@@ -80,7 +80,7 @@
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
-.nav-gap,.container-fluid,.container {
+.nav-gap,.con2 {
   display: flex;
   gap: 1.5rem; 
 }

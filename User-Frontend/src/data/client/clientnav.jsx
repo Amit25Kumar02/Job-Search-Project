@@ -74,7 +74,10 @@ function ClientNav() {
   return (
     <nav className="navbar navbar-expand-lg fixed-top main-nav">
       <div className="container">
+        <div className="con-2">
+
         <NavLink className="jobs-nav" to="/">AmitJobsHub</NavLink>
+        </div>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span className="navbar-toggler-icon"></span>
         </button>

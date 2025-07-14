@@ -70,7 +70,9 @@ function NavbarSection() {
   return (
     <nav className="navbar navbar-expand-lg  fixed-top">
       <div className="container-fluid">
+        <div className="con-2">
         <NavLink className=" jobs-nav" to="#">AmitJobsHub</NavLink>
+        </div>
         <button
           className="navbar-toggler"
           type="button"
