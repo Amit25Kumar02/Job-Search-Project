@@ -84,7 +84,7 @@ function NavbarSection() {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto mb-2">
+          <ul className="navbar-nav me-auto mb-2 nav-gap">
             <li className="nav-item">
               <NavLink
                 to="/home"
