@@ -13,8 +13,9 @@ function Login() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    userType: "Client", 
+    userType: "Client",
   });
+  const [loading, setLoading] = useState(false);
 
   const { setToken } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -29,14 +30,14 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       const response = await axios.post(`${API_URL}/api/users/login`, formData);
       toast.success(response.data.message, { position: "top-center" });
 
       // Store Token in AuthContext & Local Storage
       setToken(response.data.token);
-      localStorage.setItem("user",JSON.stringify(response.data.user));
+      localStorage.setItem("user", JSON.stringify(response.data.user));
       localStorage.setItem("token", response.data.token);
 
       // Redirect based on User Type
@@ -47,6 +48,8 @@ function Login() {
       }
     } catch (err) {
       toast.error(err.response?.data?.error || "Invalid credentials.", { position: "top-center" });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -58,35 +61,35 @@ function Login() {
             <h3 className="text-center text-dark mb-4">Log In</h3>
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
-                <input 
-                  type="email" 
-                  name="email" 
-                  className="form-control" 
-                  placeholder="Enter Email..." 
-                  value={formData.email} 
-                  onChange={handleChange} 
-                  required 
+                <input
+                  type="email"
+                  name="email"
+                  className="form-control"
+                  placeholder="Enter Email..."
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
                 />
               </div>
 
               <div className="mb-3">
-                <input 
-                  type="password" 
-                  name="password" 
-                  className="form-control" 
-                  placeholder="Enter Password..." 
-                  value={formData.password} 
-                  onChange={handleChange} 
-                  required 
+                <input
+                  type="password"
+                  name="password"
+                  className="form-control"
+                  placeholder="Enter Password..."
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
                 />
               </div>
 
               <div className="mb-3">
                 <label className="form-label text-dark">Select User Type:</label>
-                <select 
-                  name="userType" 
-                  className="form-select" 
-                  value={formData.userType} 
+                <select
+                  name="userType"
+                  className="form-select"
+                  value={formData.userType}
                   onChange={handleChange}
                 >
                   <option value="Client">Client</option>
@@ -94,8 +97,11 @@ function Login() {
                 </select>
               </div>
 
-              <button type="submit" className="btn btn-primary w-100">
-                Log In
+              <button
+                type="submit"
+                className="btn btn-primary w-100"
+                disabled={loading} >
+                {loading ? "Logging in..." : "Log In"}
               </button>
 
               <div className="text-center text-dark mt-3">
