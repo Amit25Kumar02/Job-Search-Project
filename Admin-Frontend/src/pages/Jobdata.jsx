@@ -4,8 +4,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './css/data.css';
 
-const API_URL = 'https://job-search-project-330t.onrender.com';
-// const API_URL = "http://localhost:5200";
+// const API_URL = 'https://job-search-project-330t.onrender.com';
+const API_URL = "http://localhost:5200";
 
 const JobData = () => {
   const [jobs, setJobs] = useState([]);
@@ -22,7 +22,7 @@ const JobData = () => {
     }
 
     try {
-      const response = await axios.get(`${API_URL}/api/jobs/all`, {
+      const response = await axios.get(`${API_URL}/api/jobs/adminall`, {
         headers: {
           Authorization: `Bearer ${token}`, // Send the token in headers
         },

@@ -20,15 +20,7 @@ app.post("/offer", verifyToken, async (req, res) => {
     res.status(500).json({ success: false, error: "Server error" });
   }
 });
-app.get('/alll', async (req, res) => {
-  try {
-    const jobs = await JobOffer.find(); // or Job.find({}) 
-    res.status(200).json({message:"Job shown"});
-  } catch (error) {
-    console.error('Error fetching jobs:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-});
+
 // UPDATE Job Offer
 app.put("/update/:id", verifyToken, async (req, res) => {
   const { id } = req.params;
@@ -69,25 +61,26 @@ app.delete("/delete/:id", verifyToken, async (req, res) => {
     res.status(500).json({ success: false, error: err.message });
   }
 });
-
+app.get('/adminall', async (req, res) => {
+  try {
+    const jobs = await JobOffer.find(); // or Job.find({}) 
+    res.status(200).json(jobs);
+  } catch (error) {
+    console.error('Error fetching jobs:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
 // GET All Jobs (Client sees only their jobs, others see all)
 app.get("/all", verifyToken, async (req, res) => {
   try {
-    const user = req.user || {};
-    const role = user.Role?.toLowerCase() || "unknown";
-
-    const filter = role === "client" && user.id
-      ? { clientId: user.id }
-      : {};
-
+    const filter = req.user?.Role === "Client" ? { clientId: req.user.id } : {};
     const jobs = await JobOffer.find(filter);
     res.json({ success: true, jobs });
   } catch (err) {
-    console.error("🔥 Error fetching jobs:", err.message);
+    console.error("Error fetching jobs:", err.message);
     res.status(500).json({ success: false, error: err.message });
   }
 });
-
 // GET Job Details
 app.get("/det/:id", async (req, res) => {
   try {
