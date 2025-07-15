@@ -4,8 +4,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './css/data.css';
 
-// const API_URL = 'https://job-search-project-330t.onrender.com';
-const API_URL = "http://localhost:5200";
+const API_URL = 'https://job-search-project-330t.onrender.com';
+// const API_URL = "http://localhost:5200";
 
 const JobData = () => {
   const [jobs, setJobs] = useState([]);
