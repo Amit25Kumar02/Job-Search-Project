@@ -73,7 +73,8 @@ app.delete("/delete/:id", verifyToken, async (req, res) => {
 // GET All Jobs (Client sees only their jobs, others see all)
 app.get("/all", verifyToken, async (req, res) => {
   try {
-    const filter = req.user?.Role === "Client" ? { clientId: req.user.id } : {};
+    const role = req.user?.Role?.toLowerCase(); // 'client' or 'admin'
+    const filter = role === "client" ? { clientId: req.user.id } : {}; // Admin gets all
     const jobs = await JobOffer.find(filter);
     res.json({ success: true, jobs });
   } catch (err) {
@@ -81,6 +82,7 @@ app.get("/all", verifyToken, async (req, res) => {
     res.status(500).json({ success: false, error: err.message });
   }
 });
+
 // GET Job Details
 app.get("/det/:id", async (req, res) => {
   try {
