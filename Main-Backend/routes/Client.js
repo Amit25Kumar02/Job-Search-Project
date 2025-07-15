@@ -63,7 +63,7 @@ app.delete("/delete/:id", verifyToken, async (req, res) => {
 });
 app.get('/adminall', async (req, res) => { 
   try {
-    const jobs = await Job.find(); 
+    const jobs = await JobOffer.find(); 
     res.status(200).json({ success: true, jobs }); // ✅ Fix here
   } catch (error) {
     console.error('Error fetching jobs:', error);
