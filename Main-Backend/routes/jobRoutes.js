@@ -128,15 +128,7 @@ app.get("/applications/:id", async (req, res) => {
     }
 });
 
-app.get('/all', async (req, res) => {
-  try {
-    const jobs = await JobOffer.find(); // or Job.find({}) 
-    res.status(200).json({message:"Job shown"});
-  } catch (error) {
-    console.error('Error fetching jobs:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-});
+
 
 app.delete("/del/:id", async (req, res) => {
     try {

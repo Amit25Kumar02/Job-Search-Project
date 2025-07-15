@@ -20,7 +20,15 @@ app.post("/offer", verifyToken, async (req, res) => {
     res.status(500).json({ success: false, error: "Server error" });
   }
 });
-
+app.get('/alll', async (req, res) => {
+  try {
+    const jobs = await JobOffer.find(); // or Job.find({}) 
+    res.status(200).json({message:"Job shown"});
+  } catch (error) {
+    console.error('Error fetching jobs:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
 // UPDATE Job Offer
 app.put("/update/:id", verifyToken, async (req, res) => {
   const { id } = req.params;
