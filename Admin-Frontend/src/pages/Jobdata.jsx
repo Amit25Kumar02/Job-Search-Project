@@ -22,7 +22,7 @@ const JobData = () => {
     }
 
     try {
-      const response = await axios.get(`${API_URL}/api/jobs/all`, {
+      const response = await axios.get(`${API_URL}/api/Ajobs/all`, {
         headers: {
           Authorization: `Bearer ${token}`, // Send the token in headers
         },
