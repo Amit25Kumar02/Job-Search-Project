@@ -73,12 +73,17 @@ app.delete("/delete/:id", verifyToken, async (req, res) => {
 // GET All Jobs (Client sees only their jobs, others see all)
 app.get("/all", verifyToken, async (req, res) => {
   try {
-    const role = req.user?.Role?.toLowerCase(); // 'client' or 'admin'
-    const filter = role === "client" ? { clientId: req.user.id } : {}; // Admin gets all
+    const user = req.user || {};
+    const role = user.Role?.toLowerCase() || "unknown";
+
+    const filter = role === "client" && user.id
+      ? { clientId: user.id }
+      : {};
+
     const jobs = await JobOffer.find(filter);
     res.json({ success: true, jobs });
   } catch (err) {
-    console.error("Error fetching jobs:", err.message);
+    console.error("🔥 Error fetching jobs:", err.message);
     res.status(500).json({ success: false, error: err.message });
   }
 });
