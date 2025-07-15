@@ -61,15 +61,16 @@ app.delete("/delete/:id", verifyToken, async (req, res) => {
     res.status(500).json({ success: false, error: err.message });
   }
 });
-app.get('/adminall', async (req, res) => {
+app.get('/adminall', async (req, res) => { 
   try {
-    const jobs = await JobOffer.find(); // or Job.find({}) 
-    res.status(200).json(jobs);
+    const jobs = await Job.find(); 
+    res.status(200).json({ success: true, jobs }); // ✅ Fix here
   } catch (error) {
     console.error('Error fetching jobs:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 });
+
 // GET All Jobs (Client sees only their jobs, others see all)
 app.get("/all", verifyToken, async (req, res) => {
   try {
