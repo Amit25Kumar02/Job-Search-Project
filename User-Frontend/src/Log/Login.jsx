@@ -7,8 +7,8 @@ import { AuthContext } from "../store/authcontex";
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode"; // ✅ Correct import
 
-// const API_URL = 'https://job-search-project-330t.onrender.com';
-const API_URL = "http://localhost:5200";
+const API_URL = 'https://job-search-project-330t.onrender.com';
+// const API_URL = "http://localhost:5200";
 
 function Login() {
   const [formData, setFormData] = useState({
