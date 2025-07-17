@@ -117,6 +117,10 @@ width: 10px;
   font-size: 18px;
 
 }
+.log-w-g{
+  display: block;
+  width: 100%;
+}
 
 .back-btn{
   text-decoration: none;

@@ -80,8 +80,8 @@ function Login() {
             <h3 className="text-center text-dark mb-3">Log In</h3>
 
             {/* 🔹 Google Login Button */}
-            {/* <div className="mb-3 text-center"> */}
-              {/* <div className="d-grid"> */}
+            <div className="log-w-g">
+              <div className="d-grid">
                 <GoogleLogin
 
                   onSuccess={handleGoogleLogin}
@@ -89,8 +89,8 @@ function Login() {
                     toast.error("Google Login Failed", { position: "top-center" })
                   }
                 />
-              {/* </div> */}
-            {/* </div> */}
+              </div>
+            </div>
 
             <hr />
 
