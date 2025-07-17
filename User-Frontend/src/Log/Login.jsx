@@ -81,13 +81,15 @@ function Login() {
 
             {/* 🔹 Google Login Button */}
             <div className="mb-3 text-center">
-              <GoogleLogin
-               className="form-control"
-                onSuccess={handleGoogleLogin}
-                onError={() =>
-                  toast.error("Google Login Failed", { position: "top-center" })
-                }
-              />
+              <div className="d-grid">
+                <GoogleLogin
+
+                  onSuccess={handleGoogleLogin}
+                  onError={() =>
+                    toast.error("Google Login Failed", { position: "top-center" })
+                  }
+                />
+              </div>
             </div>
 
             <hr />
