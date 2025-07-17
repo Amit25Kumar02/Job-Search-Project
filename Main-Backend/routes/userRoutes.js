@@ -9,6 +9,8 @@ const cors = require('cors');
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 const Otp = require('../models/userOtpSchema');
+const jwtDecode =require ('jwt-decode'); 
+
 // const fs = require('fs');
 const path = require('path');
 dotenv.config();
@@ -137,6 +139,27 @@ app.post("/login", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+// ✅ Require at the top
+app.post("/google-login", async (req, res) => {
+  const { email, name, googleId } = req.body;
+
+  try {
+    let user = await User.findOne({ email });
+    if (!user) {
+      user = await User.create({ email, name, googleId, userType: "User" });
+    }
+
+    const token = jwt.sign({ id: user._id, role: user.userType }, process.env.JWT_SECRET, { expiresIn: "48h" });
+
+    let userData = user.toObject();
+    delete userData.password;
+
+    res.status(200).json({ user: userData, token });
+  } catch (error) {
+    res.status(500).json({ error: "Login failed." });
+  }
+});
+
 
 app.get("/users", async (req, res) => {
   try {

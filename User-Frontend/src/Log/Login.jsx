@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../store/authcontex";
-
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode"; // ✅ Correct import
 
 const API_URL = 'https://job-search-project-330t.onrender.com';
 // const API_URL = "http://localhost:5200";
@@ -15,8 +16,8 @@ function Login() {
     password: "",
     userType: "Client",
   });
-  const [loading, setLoading] = useState(false);
 
+  const [loading, setLoading] = useState(false);
   const { setToken } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -35,21 +36,39 @@ function Login() {
       const response = await axios.post(`${API_URL}/api/users/login`, formData);
       toast.success(response.data.message, { position: "top-center" });
 
-      // Store Token in AuthContext & Local Storage
       setToken(response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
       localStorage.setItem("token", response.data.token);
 
-      // Redirect based on User Type
-      if (formData.userType === "Client") {
-        navigate('/client');
-      } else {
-        navigate('/home');
-      }
+      navigate(formData.userType === "Client" ? "/client" : "/home");
     } catch (err) {
-      toast.error(err.response?.data?.error || "Invalid credentials.", { position: "top-center" });
+      toast.error(err.response?.data?.error || "Invalid credentials.", {
+        position: "top-center",
+      });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async (credentialResponse) => {
+    try {
+      const decoded = jwtDecode(credentialResponse.credential);
+      // 🔽 Send to backend
+      const { data } = await axios.post(`${API_URL}/api/users/google-login`, {
+        email: decoded.email,
+        name: decoded.name,
+        googleId: decoded.sub,
+      });
+
+      toast.success("Login Successful", { position: "top-center" });
+      setToken(data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("token", data.token);
+
+      navigate("/home");
+    } catch (err) {
+      console.error(err);
+      toast.error("Google Login Failed", { position: "top-center" });
     }
   };
 
@@ -58,7 +77,21 @@ function Login() {
       <div className="row justify-content-center">
         <div className="col-md-6 col-lg-4">
           <div className="card p-4 shadow rounded">
-            <h3 className="text-center text-dark mb-4">Log In</h3>
+            <h3 className="text-center text-dark mb-3">Log In</h3>
+
+            {/* 🔹 Google Login Button */}
+            <div className="mb-3 text-center">
+              <GoogleLogin
+                onSuccess={handleGoogleLogin}
+                onError={() =>
+                  toast.error("Google Login Failed", { position: "top-center" })
+                }
+              />
+            </div>
+
+            <hr />
+
+            {/* 🔸 Email/Password Login Form */}
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <input
@@ -100,7 +133,8 @@ function Login() {
               <button
                 type="submit"
                 className="btn btn-primary w-100"
-                disabled={loading} >
+                disabled={loading}
+              >
                 {loading ? "Logging in..." : "Log In"}
               </button>
 
@@ -111,7 +145,6 @@ function Login() {
           </div>
         </div>
       </div>
-
       <ToastContainer />
     </div>
   );
