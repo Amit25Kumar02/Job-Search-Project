@@ -120,13 +120,12 @@ width: 10px;
 .google-btn-wrapper {
   width: 100%;
   display: flex;
-  justify-content: stretch; /* or center */
+  justify-content: center; 
 }
 
-.google-btn-wrapper > * {
-  flex: 1 !important;
-  width: 100% !important;
-  max-width: 100% !important;
+.google-btn-wrapper iframe {
+    transform: scale(1.4);   /* increase or decrease as needed */
+  transform-origin: left center;
 }
 
 
