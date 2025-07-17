@@ -117,10 +117,11 @@ width: 10px;
   font-size: 18px;
 
 }
-.log-w-g{
-  display: block;
-  width: 100%;
+.log-w-g iframe {
+  width: 100% !important;
+  max-width: 100% !important;
 }
+
 
 .back-btn{
   text-decoration: none;
