@@ -117,15 +117,10 @@ width: 10px;
   font-size: 18px;
 
 }
-.google-btn-wrapper {
+.google-btn {
   width: 100%;
   display: flex;
   justify-content: center; 
-}
-
-.google-btn-wrapper iframe {
-    transform: scale(1.4);   /* increase or decrease as needed */
-  transform-origin: left center;
 }
 
 
