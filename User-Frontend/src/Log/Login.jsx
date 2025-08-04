@@ -80,7 +80,7 @@ function Login() {
             <h3 className="text-center text-dark mb-3">Log In</h3>
 
             {/* 🔹 Google Login Button */}
-            <div className="google-btn-wrapper">
+            <div className="btn btn-primary w-100">
               <GoogleLogin
                 onSuccess={handleGoogleLogin}
                 onError={() =>
