@@ -83,7 +83,7 @@ function Login() {
     }
 
     try {
-      await axios.post(`${API_URL}/api/auth/forgot-password`, {
+      await axios.post(`${API_URL}/api/users/forgot-password`, {
         email: forgotEmail,
       });
 
