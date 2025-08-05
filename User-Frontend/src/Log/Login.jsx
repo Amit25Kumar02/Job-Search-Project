@@ -4,11 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../store/authcontex";
-import { GoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from "jwt-decode"; // ✅ Correct import
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+import "./Reset.css"
 
-const API_URL = 'https://job-search-project-330t.onrender.com';
-// const API_URL = "http://localhost:5200";
+// const API_URL = "https://job-search-project-330t.onrender.com";
+const API_URL = "http://localhost:5200";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -17,7 +18,10 @@ function Login() {
     userType: "Client",
   });
 
+  const [showForgotModal, setShowForgotModal] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState("");
   const [loading, setLoading] = useState(false);
+
   const { setToken } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -42,7 +46,7 @@ function Login() {
 
       navigate(formData.userType === "Client" ? "/client" : "/home");
     } catch (err) {
-      toast.error(err.response?.data?.error || "Invalid credentials.", {
+      toast.error(err?.response?.data?.error || "Invalid credentials.", {
         position: "top-center",
       });
     } finally {
@@ -53,7 +57,7 @@ function Login() {
   const handleGoogleLogin = async (credentialResponse) => {
     try {
       const decoded = jwtDecode(credentialResponse.credential);
-      // 🔽 Send to backend
+
       const { data } = await axios.post(`${API_URL}/api/users/google-login`, {
         email: decoded.email,
         name: decoded.name,
@@ -72,6 +76,25 @@ function Login() {
     }
   };
 
+  const handleForgotPassword = async () => {
+    if (!forgotEmail) {
+      toast.warn("⚠ Please enter your email");
+      return;
+    }
+
+    try {
+      await axios.post(`${API_URL}/api/auth/forgot-password`, {
+        email: forgotEmail,
+      });
+
+      toast.success("✅ Reset link sent to your email");
+      setShowForgotModal(false);
+      setForgotEmail("");
+    } catch (err) {
+      toast.error("❌ Failed to send reset link",err);
+    }
+  };
+
   return (
     <div className="container con">
       <div className="row justify-content-center">
@@ -79,10 +102,9 @@ function Login() {
           <div className="card p-4 shadow rounded">
             <h3 className="text-center text-dark mb-3">Log In</h3>
 
-            {/* 🔹 Google Login Button */}
-            <div >
+            {/* Google Login */}
+            <div className="mb-3 text-center">
               <GoogleLogin
-              // className="google-btn"
                 onSuccess={handleGoogleLogin}
                 onError={() =>
                   toast.error("Google Login Failed", { position: "top-center" })
@@ -90,10 +112,9 @@ function Login() {
               />
             </div>
 
-
             <hr />
 
-            {/* 🔸 Email/Password Login Form */}
+            {/* Email/Password Form */}
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <input
@@ -117,6 +138,18 @@ function Login() {
                   onChange={handleChange}
                   required
                 />
+              </div>
+
+              {/* Forgot Password link */}
+              <div className="mb-2 text-end">
+                <button
+                  type="button"
+                  className="btn btn-link p-0"
+                  onClick={() => setShowForgotModal(true)}
+                  style={{ fontSize: "14px" }}
+                >
+                  Forgot Password?
+                </button>
               </div>
 
               <div className="mb-3">
@@ -147,6 +180,34 @@ function Login() {
           </div>
         </div>
       </div>
+
+      {/* Forgot Password Modal */}
+      {showForgotModal && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3 className="mb-3">Forgot Password</h3>
+            <input
+              className="form-control mb-3"
+              type="email"
+              placeholder="Enter your email"
+              value={forgotEmail}
+              onChange={(e) => setForgotEmail(e.target.value)}
+            />
+            <div className="d-flex justify-content-center gap-2">
+              <button className="btn btn-success" onClick={handleForgotPassword}>
+                Send Link
+              </button>
+              <button
+                className="btn btn-secondary"
+                onClick={() => setShowForgotModal(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <ToastContainer />
     </div>
   );

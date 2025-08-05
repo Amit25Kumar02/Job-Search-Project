@@ -22,6 +22,7 @@ import Footer from './data/footer.jsx';
 import UserServices from './data/UserServices.jsx';
 import { Clientcontact } from './data/client/Clientcontact.jsx';
 import { Usercontact } from './data/usercontact.jsx';
+import ResetPassword from './Log/ResetPassword.jsx';
 
 function ProtectedRoute({ children }) {
   const { token } = useContext(AuthContext);
@@ -74,6 +75,7 @@ function App() {
           <Route path="/" element={token ? <Navigate to="/home" /> : <Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path='/resetpassword' element={<ResetPassword/>}/>
         </Routes>
       }
 
