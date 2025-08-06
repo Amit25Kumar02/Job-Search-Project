@@ -36,12 +36,12 @@ const ResetPassword = () => {
       <h2>Reset Password</h2>
       <input
         type="password"
-        className="inp2"
+        className="form-control"
         placeholder="Enter new password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button className="btuu" onClick={handleReset}>
+      <button className="btn btn-primary w-100" onClick={handleReset}>
         Submit
       </button>
     </div>
