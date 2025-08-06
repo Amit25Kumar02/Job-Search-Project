@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const API_URL = 'https://job-search-project-330t.onrender.com';
 // const API_URL = "http://localhost:5200";
@@ -17,13 +18,13 @@ function SignUp() {
     email: "",
     password: "",
     userType: "Client",
-    otp:""
+    otp: ""
   });
 
   const [loading, setLoading] = useState(false);
   const [otpSent, setOtpSent] = useState(false);
-  const [otpsending , setIsotpsending] = useState(false)
-
+  const [otpsending, setIsotpsending] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // 👁️ toggle state
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,7 +44,7 @@ function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsotpsending(true)
+    setIsotpsending(true);
     if (loading) return;
 
     const validationError = validateForm();
@@ -51,7 +52,7 @@ function SignUp() {
       toast.error(validationError, { position: "top-center" });
       return;
     }
-    setIsotpsending(false)
+    setIsotpsending(false);
 
     setLoading(true);
     try {
@@ -67,32 +68,29 @@ function SignUp() {
       setTimeout(() => {
         navigate("/");
       }, 2000);
-      
     } catch (err) {
       toast.error(err.response?.data?.error || "Something went wrong.", { position: "top-center" });
     } finally {
       setLoading(false);
-
+      setIsotpsending(false);
     }
-    setIsotpsending(false)
   };
-    
+
   const sendOtp = async () => {
-    setIsotpsending(true)
+    setIsotpsending(true);
     if (!formData.email) {
       toast.error("Please enter a valid email address.");
-      setIsotpsending(false)
+      setIsotpsending(false);
       return;
     }
     try {
-      const response = await axios.post(`${API_URL}/api/users/send-otp`, { email:formData.email });
+      const response = await axios.post(`${API_URL}/api/users/send-otp`, { email: formData.email });
       toast.success(response.data.message);
-      setOtpSent(true); // OTP has been sent successfully
+      setOtpSent(true);
     } catch (error) {
       toast.error(error.response ? error.response.data.message : "Something went wrong!");
     }
-    
-    setIsotpsending(false)
+    setIsotpsending(false);
   };
 
   return (
@@ -103,73 +101,102 @@ function SignUp() {
             <h3 className="text-center text-dark mb-4">Sign Up</h3>
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
-                <input 
-                  type="text" 
-                  name="username" 
-                  className="form-control" 
-                  placeholder="Enter Username..." 
-                  value={formData.username} 
-                  onChange={handleChange} 
-                  required 
-                  autoFocus 
+                <input
+                  type="text"
+                  name="username"
+                  className="form-control"
+                  placeholder="Enter Username..."
+                  value={formData.username}
+                  onChange={handleChange}
+                  required
+                  autoFocus
                 />
               </div>
 
               <div className="mb-3">
-                <input 
-                  type="email" 
-                  name="email" 
-                  className="form-control" 
-                  placeholder="Enter Email..." 
+                <input
+                  type="email"
+                  name="email"
+                  className="form-control"
+                  placeholder="Enter Email..."
                   disabled={otpSent}
-                  value={formData.email} 
-                  onChange={handleChange} 
-                  required 
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
                 />
               </div>
 
-              <div className="mb-3">
-                <input 
-                  type="password" 
-                  name="password" 
-                  className="form-control" 
-                  placeholder="Enter Password..." 
-                  value={formData.password} 
-                  onChange={handleChange} 
-                  required 
+              <div className="mb-3 input-group">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  className="form-control"
+                  placeholder="Enter Password..."
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
                 />
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  tabIndex={-1}
+                >
+                  <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                </button>
               </div>
-       
 
               <div className="mb-3">
                 <label className="form-label text-dark">Select User Type:</label>
-                <select 
-                  name="userType" 
-                  className="form-select" 
-                  value={formData.userType} 
+                <select
+                  name="userType"
+                  className="form-select"
+                  value={formData.userType}
                   onChange={handleChange}
                 >
                   <option value="Client">Client</option>
                   <option value="User">User</option>
                 </select>
               </div>
-              {
-         !otpSent && 
-          <button type='button' disabled={otpsending ? true :false} onClick={sendOtp} className="btn btn-primary btn-o">
-            {otpsending?"wait... otp is sending": "Send OTP"}
-          </button>
-          } 
-              {/* OTP Input and Verify OTP Button */}
+
+              {!otpSent && (
+                <button
+                  type="button"
+                  disabled={otpsending}
+                  onClick={sendOtp}
+                  className="btn btn-primary btn-o"
+                >
+                  {otpsending ? "Wait... OTP is sending" : "Send OTP"}
+                </button>
+              )}
+
               {otpSent && (
-            <>
-              <input type="text" name="otp" placeholder="Enter OTP" onChange={handleChange} value={formData.otp}   className="form-control"  />
-               <input type="submit" value={otpsending ? 'submiting...wait..':"submit"} disabled={otpsending ? true :false} className="btn-o" />
-              {/* Resend OTP Button */}
-              <button type="button" onClick={sendOtp} disabled={otpsending ? true :false} className="btn btn-primary btn-o" >
-              {otpsending?"wait... otp is sending": " Re-Send OTP"}
-              </button>
-            </>
-          )}
+                <>
+                  <input
+                    type="text"
+                    name="otp"
+                    placeholder="Enter OTP"
+                    onChange={handleChange}
+                    value={formData.otp}
+                    className="form-control mt-3"
+                    required
+                  />
+                  <input
+                    type="submit"
+                    value={otpsending ? "Submitting... please wait" : "Submit"}
+                    disabled={otpsending}
+                    className="btn btn-success btn-o mt-2"
+                  />
+                  <button
+                    type="button"
+                    onClick={sendOtp}
+                    disabled={otpsending}
+                    className="btn btn-primary btn-o mt-2"
+                  >
+                    {otpsending ? "Wait... OTP is sending" : "Re-Send OTP"}
+                  </button>
+                </>
+              )}
 
               <div className="text-center text-dark mt-3">
                 Already have an account? <Link to="/login">Log In</Link>

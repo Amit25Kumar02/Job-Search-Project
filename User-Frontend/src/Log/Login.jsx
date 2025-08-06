@@ -6,7 +6,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../store/authcontex";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
-import "./Reset.css"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import "./Reset.css";
 
 const API_URL = "https://job-search-project-330t.onrender.com";
 // const API_URL = "http://localhost:5200";
@@ -21,6 +23,7 @@ function Login() {
   const [showForgotModal, setShowForgotModal] = useState(false);
   const [forgotEmail, setForgotEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // 👁️ toggle state
 
   const { setToken } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -91,7 +94,7 @@ function Login() {
       setShowForgotModal(false);
       setForgotEmail("");
     } catch (err) {
-      toast.error("❌ Failed to send reset link",err);
+      toast.error("❌ Failed to send reset link", err);
     }
   };
 
@@ -128,9 +131,9 @@ function Login() {
                 />
               </div>
 
-              <div className="mb-3">
+              <div className="mb-3 input-group">
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   className="form-control"
                   placeholder="Enter Password..."
@@ -138,6 +141,14 @@ function Login() {
                   onChange={handleChange}
                   required
                 />
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  tabIndex={-1}
+                >
+                  <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                </button>
               </div>
 
               {/* Forgot Password link */}

@@ -1,4 +1,3 @@
-// src/pages/ResetPassword.jsx
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -11,6 +10,7 @@ const ResetPassword = () => {
     const { token } = useParams();
     const navigate = useNavigate();
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false); // 👈 Toggle state
 
     const handleReset = async () => {
         if (!password) {
@@ -37,13 +37,24 @@ const ResetPassword = () => {
                 <div className="col-md-6 col-lg-4">
                     <div className="card p-4 shadow rounded">
                         <h3 className="text-center text-dark mb-3">Reset Password</h3>
-                        <input
-                            type="password"
-                            className="form-control mb-3"
-                            placeholder="Enter new password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
+                        <div className="input-group mb-3">
+                            <input
+                                type={showPassword ? "text" : "password"} // 👈 Toggle input type
+                                className="form-control"
+                                placeholder="Enter new password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <button
+                                type="button"
+                                className="btn btn-outline-secondary"
+                                onClick={() => setShowPassword(!showPassword)}
+                                tabIndex={-1}
+                            >
+                                {showPassword ? "🙈" : "👁️"} {/* Or use font-awesome icons */}
+                            </button>
+                        </div>
+
                         <button className="btn btn-primary w-100" onClick={handleReset}>
                             Submit
                         </button>
