@@ -336,7 +336,7 @@ app.post("/forgot-password", async (req, res) => {
     if (!user) return res.status(404).json({ message: "User not found" });
 
     // Generate token
-    const resetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "15m" });
+    const resetToken = JTW.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "15m" });
 
     // Send Email
     const resetLink = `https://amitjobhub.netlify.app/resetpassword/${resetToken}`; // Frontend link
