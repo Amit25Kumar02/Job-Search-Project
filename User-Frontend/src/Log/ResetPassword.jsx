@@ -39,7 +39,7 @@ const ResetPassword = () => {
                         <h3 className="text-center text-dark mb-3">Reset Password</h3>
                         <input
                             type="password"
-                            className="form-control"
+                            className="form-control mb-3"
                             placeholder="Enter new password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
