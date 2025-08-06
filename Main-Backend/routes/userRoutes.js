@@ -362,7 +362,7 @@ app.post("/reset-password", async (req, res) => {
   try {
     const { token, newPassword } = req.body;
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = JTW.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.id);
 
     if (!user) return res.status(404).json({ message: "User not found" });
