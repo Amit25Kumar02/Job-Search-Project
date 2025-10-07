@@ -50,19 +50,19 @@ const JobDetails = () => {
             <div className="job-card shadow">
               <div className="job-card-body">
                 <Link to='/userjob' className="back-button">🔙 Back to Jobs</Link>
-                <p className="job-posted-date">Published Date{new Date(job.postedAt).toLocaleDateString()}</p>
+                <p className="job-posted-date">Published Date : {new Date(job.postedAt).toLocaleDateString("en-GB")}</p>
                 <h2 className="job-title">{job.jobTitle}</h2>
-                <p className="job-meta job-company">Company: {job.companyName}</p>
-                <p className="job-description">{job.jobDescription}</p>
-                <p className="job-meta job-location">Location: {job.location}</p>
-                <p className="job-meta job-experience">Experience: {job.Experience}</p>
-                <p className="job-meta job-salary">Salary: ₹ {job.salary} / PA</p>
-                <div className="job-skills">
+                <p className="job-meta job-company">Company : {job.companyName}</p>
+                <p className="job-description">Description : {job.jobDescription}</p>
+                <p className="job-meta job-location">Location : {job.location}</p>
+                <p className="job-meta job-experience">Experience : {job.Experience}</p>
+                <p className="job-meta job-salary">Salary : ₹ {job.salary} / PA</p>
+                <div className="job-skills"> Required Skills : 
                   {job.skills.map((skill, index) => (
                     <span key={index} className="skill-tag">{skill}</span>
                   ))}
                 </div>
-                <p className="job-meta job-deadline">Deadline: {new Date(job.applicationDeadline).toLocaleDateString()}</p>
+                <p className="job-meta job-deadline">Deadline: {new Date(job.applicationDeadline).toLocaleDateString("en-GB")}</p>
                 <Link to={`/applybtn/${job._id}`} state={{ job, user }} className="apply-link">
                   <button className="apply-button">Apply Now</button>
                 </Link>

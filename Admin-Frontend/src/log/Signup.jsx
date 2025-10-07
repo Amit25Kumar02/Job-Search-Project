@@ -18,7 +18,7 @@ function Home() {
   const navigate = useNavigate();
 
   const inpChange = (e) => {
-    console.log(e.target)
+    // console.log(e.target)
     setForm({
       ...form,
       [e.target.name]: e.target.value,

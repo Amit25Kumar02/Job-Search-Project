@@ -12,6 +12,29 @@ body {
   /* margin-top: 6%; */
 }
 
+.initial-avatar {
+  width: 120px;
+  height: 120px;
+  background-color: #0d6efd;
+  color: white;
+  border-radius: 50%;
+  font-size: 36px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  text-transform: uppercase;
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
 .pro-div {
   width: 400px;
   background: #fff;
@@ -72,7 +95,8 @@ body {
     width: 90%;
     padding: 15px;
   }
-  .pro-card{
+
+  .pro-card {
     margin: -5% auto;
   }
 
@@ -126,7 +150,8 @@ body {
   .pro-div {
     width: 400px;
   }
-  .pro-card{
-    margin-top:5% ;
+
+  .pro-card {
+    margin-top: 5%;
   }
 }
