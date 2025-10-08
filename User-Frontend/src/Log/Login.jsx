@@ -90,11 +90,11 @@ function Login() {
         email: forgotEmail,
       });
 
-      toast.success("✅ Reset link sent to your email");
+      toast.success("Reset link sent to your email");
       setShowForgotModal(false);
       setForgotEmail("");
     } catch (err) {
-      toast.error("❌ Failed to send reset link", err);
+      toast.error("Failed to send reset link", err);
     }
   };
 
@@ -106,13 +106,15 @@ function Login() {
             <h3 className="text-center text-dark mb-3">Log In</h3>
 
             {/* Google Login */}
-            <div className="mb-3 text-center">
-              <GoogleLogin
-                onSuccess={handleGoogleLogin}
-                onError={() =>
-                  toast.error("Google Login Failed", { position: "top-center" })
-                }
-              />
+            <div className="flex w-full justify-center"> 
+              <div >
+                <GoogleLogin
+                  onSuccess={handleGoogleLogin}
+                  onError={() =>
+                    toast.error("Google Login Failed", { position: "top-center" })
+                  }
+                />
+              </div>
             </div>
 
             <hr />
