@@ -7,13 +7,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 // Environment-based API URL
-const API_URL = "https://job-search-project-330t.onrender.com";
-// const API_URL = "http://localhost:5200";
+// const API_URL = "https://job-search-project-330t.onrender.com";
+const API_URL = "http://localhost:5200";
 
 // Create axios instance with default config
 const api = axios.create({
   baseURL: API_URL,
-  timeout: 15000,
+  timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
   }
