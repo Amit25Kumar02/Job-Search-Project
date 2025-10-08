@@ -79,7 +79,7 @@ app.post("/send-otp", async (req, res) => {
 
     // Send email in background without waiting
     sendOtpEmail(email, otp).catch(error => {
-      console.error(`❌ Email sending failed for ${email}:`, error);
+      console.error(`Email sending failed for ${email}:`, error);
     });
 
     // Respond immediately without waiting for email
@@ -109,7 +109,7 @@ async function sendOtpEmail(email, otp) {
         <div style="padding: 30px; text-align: center;">
           <img src="https://i.ibb.co/hRW1BJZS/8133820.png" alt="Verify Icon" width="60" style="margin-bottom: 20px;" />
           <h2>Verify Your Email Address</h2>
-          <p style="font-size: 16px; color: #444;">Verify your email to finish signing up with AmitJobHub. Use the following verification code:</p>
+          <p style="font-size: 16px; color: #000000ff;">Verify your email to finish signing up with AmitJobHub. Use the following verification code:</p>
           <div style="font-size: 32px; font-weight: bold; margin: 20px 0; color: #00b894;">${otp}</div>
           <p style="color: #888;">The verification code is valid for 10 minutes.</p>
         </div>
@@ -121,9 +121,9 @@ async function sendOtpEmail(email, otp) {
     };
 
     await transporter.sendMail(mailOptions);
-    console.log(`✅ OTP email sent to: ${email}`);
+
   } catch (error) {
-    console.error(`❌ Failed to send OTP email to ${email}:`, error);
+    console.error(`Failed to send OTP email to ${email}:`, error);
     throw error;
   }
 }
@@ -178,7 +178,7 @@ app.post("/verify-otp", async (req, res) => {
     const newUser = new User({ username, email, password, userType });
     await newUser.save();
 
-    console.log(`✅ User registered: ${email} (OTP from: ${otpSource})`);
+    console.log(`User registered: ${email} (OTP from: ${otpSource})`);
 
     res.status(200).json({ 
       message: "User registered successfully",
@@ -256,7 +256,7 @@ app.post("/google-login", async (req, res) => {
     res.status(200).json({ success: true, user, token });
 
   } catch (error) {
-    console.error("❌ Google login error:", error);
+    console.error("Google login error:", error);
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 });

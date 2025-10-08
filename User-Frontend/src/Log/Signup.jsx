@@ -76,10 +76,10 @@ function SignUp() {
   const testConnection = async () => {
     try {
       const response = await api.get("/health");
-      console.log("✅ API Connection Test:", response.data);
+      console.log("API Connection Test:", response.data);
       return true;
     } catch (error) {
-      console.error("❌ API Connection Failed:", error);
+      console.error("API Connection Failed:", error);
       toast.error("Cannot connect to server. Please try again later.");
       return false;
     }
@@ -100,17 +100,17 @@ function SignUp() {
     setSendingOtp(true);
 
     try {
-      console.log("📧 Sending OTP to:", formData.email);
-      
-      const res = await api.post("/api/users/send-otp", { 
-        email: formData.email 
+      console.log("Sending OTP to:", formData.email);
+
+      const res = await api.post("/api/users/send-otp", {
+        email: formData.email
       });
 
       toast.success(res.data.message || "OTP sent successfully! Check your email.");
       setOtpSent(true);
     } catch (error) {
-      console.error("❌ OTP Error:", error);
-      
+      console.error("OTP Error:", error);
+
       if (error.response) {
         // Server responded with error status
         toast.error(error.response.data?.message || "Failed to send OTP. Please try again.");
@@ -146,7 +146,7 @@ function SignUp() {
 
     try {
       console.log("🚀 Submitting registration...");
-      
+
       const res = await api.post("/api/users/verify-otp", {
         username: formData.username.trim(),
         email: formData.email.trim(),
@@ -156,16 +156,16 @@ function SignUp() {
       });
 
       toast.success(res.data.message || "🎉 Signup successful! Redirecting...");
-      
+
       // Store user data if needed
       if (res.data.user) {
         localStorage.setItem("user", JSON.stringify(res.data.user));
       }
-      
+
       setTimeout(() => navigate("/login"), 2000);
     } catch (error) {
-      console.error("❌ Signup Error:", error);
-      
+      console.error("Signup Error:", error);
+
       if (error.response) {
         toast.error(error.response.data?.error || error.response.data?.message || "Registration failed.");
       } else if (error.request) {
@@ -184,13 +184,10 @@ function SignUp() {
         <div className="col-md-6 col-lg-4">
           <div className="card p-4 shadow rounded">
             <h3 className="text-center text-dark mb-4">Sign Up</h3>
-            <p className="text-center text-muted small mb-3">
-              API: {API_URL}
-            </p>
 
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
-                <label className="form-label text-dark small">Username</label>
+                <label className="form-label text-dark small">UserName</label>
                 <input
                   type="text"
                   name="username"
@@ -231,7 +228,7 @@ function SignUp() {
                   />
                   <button
                     type="button"
-                    className="btn btn-outline-secondary"
+                    className="btn"
                     onClick={() => setShowPassword((prev) => !prev)}
                     tabIndex={-1}
                   >
@@ -324,13 +321,7 @@ function SignUp() {
       </div>
       <ToastContainer
         position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
+        autoClose={2000}
         pauseOnHover
       />
     </div>
