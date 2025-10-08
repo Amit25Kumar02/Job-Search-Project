@@ -106,16 +106,15 @@ function Login() {
             <h3 className="text-center text-dark mb-3">Log In</h3>
 
             {/* Google Login */}
-            <div className="flex w-full justify-center"> 
-              <div >
+            {/* <div className="flex w-full justify-center">  */}
+            
                 <GoogleLogin
                   onSuccess={handleGoogleLogin}
                   onError={() =>
                     toast.error("Google Login Failed", { position: "top-center" })
                   }
                 />
-              </div>
-            </div>
+            {/* </div> */}
 
             <hr />
 
