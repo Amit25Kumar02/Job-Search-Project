@@ -13,16 +13,16 @@ require("dotenv").config();
 const app = express();
 
 // -------------------
-// ✅ Middleware
+//  Middleware
 // -------------------
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
-// ✅ Correct CORS configuration
+//  Correct CORS configuration
 const allowedOrigins = [
   "https://amitjobhub.netlify.app",
   "https://amitjob-admin.netlify.app",
-  "http://localhost:3000",
+  "http://localhost:5173",
 ];
 
 app.use(
@@ -34,7 +34,7 @@ app.use(
   })
 );
 
-// ✅ Explicitly handle preflight requests
+// Explicitly handle preflight requests
 app.options("*", cors({
   origin: allowedOrigins,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -43,18 +43,18 @@ app.options("*", cors({
 }));
 
 // -------------------
-// 🗂 Static files
+//  Static files
 // -------------------
 app.use("/uploads", express.static("uploads"));
 app.use("/profileImage", express.static("uploads"));
 
 // -------------------
-// 🧠 Connect to DB
+//  Connect to DB
 // -------------------
 connectDB();
 
 // -------------------
-// 🔌 Routes
+//  Routes
 // -------------------
 app.use("/api/Ajobs", JobRoutes);
 app.use("/api/users", userRoutes);
@@ -64,14 +64,14 @@ app.use("/api/Favroit", Favroit);
 app.use("/api/con", ContactRoutes);
 
 // -------------------
-// 🧭 Root route
+//  Root route
 // -------------------
 app.get("/", (req, res) => {
   res.send("🚀 API is running...");
 });
 
 // -------------------
-// 🚀 Start Server
+//  Start Server
 // -------------------
 const PORT = process.env.PORT || 5200;
-app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
