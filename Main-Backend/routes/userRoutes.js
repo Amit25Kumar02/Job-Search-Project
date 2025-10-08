@@ -2,7 +2,7 @@ const express = require("express");
 const User = require("../models/userSchema");
 const Job = require('../models/JobSchema');
 const JTW = require('jsonwebtoken')
-const app = express();
+// const app = express(); // ❌ REMOVED: Use router instead
 const dotenv = require("dotenv");
 const multer = require('multer');
 const cors = require('cors');
@@ -10,11 +10,16 @@ const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 const Otp = require('../models/userOtpSchema');
 const jwtDecode = require('jwt-decode');
-
 const path = require('path');
+
 dotenv.config();
-app.use(express.json());
-app.use(cors());
+
+// ✅ FIX: Use express.Router() to create a modular, mountable router
+const router = express.Router(); 
+
+// Middleware applied to this router
+router.use(express.json()); 
+router.use(cors()); 
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -41,8 +46,43 @@ const generateOTP = () => crypto.randomInt(100000, 999999).toString();
 // Store OTPs in memory for faster access (complementary to DB)
 const memoryOtpStore = new Map();
 
+// Async function to send email (doesn't block main response)
+async function sendOtpEmail(email, otp) {
+  try {
+    const mailOptions = {
+      from: `"AmitJobsHub" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: "🔐 Email Verification OTP for AmitJobsHub",
+      html: `
+      <div style="max-width: 600px; margin: auto; font-family: Arial, sans-serif; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
+        <div style="background-color: #00b894; padding: 20px; text-align: center;">
+          <h1 style="color: white; margin: 0;">AmitJobHub</h1>
+        </div>
+        <div style="padding: 30px; text-align: center;">
+          <img src="https://i.ibb.co/hRW1BJZS/8133820.png" alt="Verify Icon" width="60" style="margin-bottom: 20px;" />
+          <h2>Verify Your Email Address</h2>
+          <p style="font-size: 16px; color: #000000ff;">Verify your email to finish signing up with AmitJobHub. Use the following verification code:</p>
+          <div style="font-size: 32px; font-weight: bold; margin: 20px 0; color: #00b894;">${otp}</div>
+          <p style="color: #888;">The verification code is valid for 10 minutes.</p>
+        </div>
+        <div style="padding: 20px; background-color: #f9f9f9; text-align: center; font-size: 12px; color: #666;">
+          For any queries or concerns, feel free to contact us by replying to this email.
+        </div>
+      </div>
+      `
+    };
+
+    await transporter.sendMail(mailOptions);
+
+  } catch (error) {
+    console.error(`Failed to send OTP email to ${email}:`, error);
+    throw error;
+  }
+}
+
 // Optimized OTP sending route - responds immediately
-app.post("/send-otp", async (req, res) => {
+// 🚨 FIX: Routes are now on the router instance
+router.post("/send-otp", async (req, res) => {
   try {
     const { email } = req.body;
     
@@ -94,42 +134,9 @@ app.post("/send-otp", async (req, res) => {
   }
 });
 
-// Async function to send email (doesn't block main response)
-async function sendOtpEmail(email, otp) {
-  try {
-    const mailOptions = {
-      from: `"AmitJobsHub" <${process.env.EMAIL_USER}>`,
-      to: email,
-      subject: "🔐 Email Verification OTP for AmitJobsHub",
-      html: `
-      <div style="max-width: 600px; margin: auto; font-family: Arial, sans-serif; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
-        <div style="background-color: #00b894; padding: 20px; text-align: center;">
-          <h1 style="color: white; margin: 0;">AmitJobHub</h1>
-        </div>
-        <div style="padding: 30px; text-align: center;">
-          <img src="https://i.ibb.co/hRW1BJZS/8133820.png" alt="Verify Icon" width="60" style="margin-bottom: 20px;" />
-          <h2>Verify Your Email Address</h2>
-          <p style="font-size: 16px; color: #000000ff;">Verify your email to finish signing up with AmitJobHub. Use the following verification code:</p>
-          <div style="font-size: 32px; font-weight: bold; margin: 20px 0; color: #00b894;">${otp}</div>
-          <p style="color: #888;">The verification code is valid for 10 minutes.</p>
-        </div>
-        <div style="padding: 20px; background-color: #f9f9f9; text-align: center; font-size: 12px; color: #666;">
-          For any queries or concerns, feel free to contact us by replying to this email.
-        </div>
-      </div>
-      `
-    };
-
-    await transporter.sendMail(mailOptions);
-
-  } catch (error) {
-    console.error(`Failed to send OTP email to ${email}:`, error);
-    throw error;
-  }
-}
-
 // Optimized OTP verification
-app.post("/verify-otp", async (req, res) => {
+// 🚨 FIX: Routes are now on the router instance
+router.post("/verify-otp", async (req, res) => {
   try {
     const { username, email, otp, password, userType } = req.body;
 
@@ -204,10 +211,8 @@ app.post("/verify-otp", async (req, res) => {
   }
 });
 
-// ... REST OF YOUR EXISTING ROUTES REMAIN THE SAME ...
-
 // for login and create token
-app.post("/login", async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     const { email, password, userType } = req.body;
 
@@ -229,7 +234,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post("/google-login", async (req, res) => {
+router.post("/google-login", async (req, res) => {
   try {
     const { email, name, googleId } = req.body;
     if (!email || !googleId) {
@@ -261,7 +266,7 @@ app.post("/google-login", async (req, res) => {
   }
 });
 
-app.get("/users", async (req, res) => {
+router.get("/users", async (req, res) => {
   try {
     const users = await User.find().select("-password");
     res.json(users);
@@ -270,7 +275,7 @@ app.get("/users", async (req, res) => {
   }
 });
 
-app.put('/update', async (req, res) => {
+router.put('/update', async (req, res) => {
   const { username, email } = req.body;
   const userId = req.user.id;
   try {
@@ -288,7 +293,7 @@ app.put('/update', async (req, res) => {
 });
 
 // for deleting user or client by admin
-app.delete('/del/:id', async (req, res) => {
+router.delete('/del/:id', async (req, res) => {
   try {
     const { id } = req.params
     const userD = await User.findByIdAndDelete(id);
@@ -302,7 +307,7 @@ app.delete('/del/:id', async (req, res) => {
 })
 
 //for profile update
-app.post('/ucprofileUpdate', upload.single("profileImage"), async (req, res) => {
+router.post('/ucprofileUpdate', upload.single("profileImage"), async (req, res) => {
   try {
     const userId = req.body._id || req.user._id;
     const updateData = { ...req.body };
@@ -326,7 +331,7 @@ app.post('/ucprofileUpdate', upload.single("profileImage"), async (req, res) => 
   }
 });
 
-app.post("/clientprofileUpdate", upload.single("profileImage"), async (req, res) => {
+router.post("/clientprofileUpdate", upload.single("profileImage"), async (req, res) => {
   try {
     const { username, email, phone, gender, address, dob } = req.body;
     if (!email) {
@@ -363,7 +368,7 @@ app.post("/clientprofileUpdate", upload.single("profileImage"), async (req, res)
 });
 
 // for saved job routes
-app.post('/save-job', async (req, res) => {
+router.post('/save-job', async (req, res) => {
   try {
     const { userId, jobId } = req.body;
 
@@ -390,7 +395,7 @@ app.post('/save-job', async (req, res) => {
   }
 });
 
-app.get('/:userId/saved-jobs', async (req, res) => {
+router.get('/:userId/saved-jobs', async (req, res) => {
   try {
     const { userId } = req.params;
     const user = await User.findById(userId).populate("savedJobs");
@@ -405,7 +410,7 @@ app.get('/:userId/saved-jobs', async (req, res) => {
 });
 
 // Send Reset Password Link via Email
-app.post("/forgot-password", async (req, res) => {
+router.post("/forgot-password", async (req, res) => {
   try {
     const { email } = req.body;
 
@@ -436,7 +441,7 @@ app.post("/forgot-password", async (req, res) => {
 });
 
 // Reset Password using Token
-app.post("/reset-password", async (req, res) => {
+router.post("/reset-password", async (req, res) => {
   try {
     const { token, newPassword } = req.body;
 
@@ -455,4 +460,5 @@ app.post("/reset-password", async (req, res) => {
   }
 });
 
-module.exports = app;
+// ✅ FIX: Export the router instance
+module.exports = router;

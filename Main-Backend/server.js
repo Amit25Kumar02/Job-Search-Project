@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const connectDB = require("./mongoDB");
-const userRoutes = require("./routes/userRoutes");
+const userRoutes = require("./routes/userRoutes"); // This is now a proper router
 const jobOfferRoutes = require("./routes/Client");
 const AdminRoutes = require("./routes/AdminRoutes");
 const JobRoutes = require("./routes/jobRoutes");
@@ -13,7 +13,7 @@ require("dotenv").config();
 const app = express();
 
 // -------------------
-//  Enhanced CORS Configuration
+//  Enhanced CORS Configuration
 // -------------------
 const allowedOrigins = [
   "https://amitjobhub.netlify.app",
@@ -43,24 +43,24 @@ app.use(cors({
 app.options("*", cors());
 
 // -------------------
-//  Middleware
+//  Middleware
 // -------------------
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
 // -------------------
-//  Static files
+//  Static files
 // -------------------
 app.use("/uploads", express.static("uploads"));
 app.use("/profileImage", express.static("uploads"));
 
 // -------------------
-//  Connect to DB
+//  Connect to DB
 // -------------------
 connectDB();
 
 // -------------------
-//  Health Check Route
+//  Health Check Route
 // -------------------
 app.get("/health", (req, res) => {
   res.status(200).json({ 
@@ -72,17 +72,17 @@ app.get("/health", (req, res) => {
 });
 
 // -------------------
-//  Routes
+//  Routes
 // -------------------
 app.use("/api/Ajobs", JobRoutes);
-app.use("/api/users", userRoutes);
+app.use("/api/users", userRoutes); // ⬅️ This line mounts the router correctly
 app.use("/api/jobs", jobOfferRoutes);
 app.use("/api/Admin", AdminRoutes);
 app.use("/api/Favroit", Favroit);
 app.use("/api/con", ContactRoutes);
 
 // -------------------
-//  Root route
+//  Root route
 // -------------------
 app.get("/", (req, res) => {
   res.json({ 
@@ -98,7 +98,7 @@ app.get("/", (req, res) => {
 });
 
 // -------------------
-//  Enhanced Error Handling Middleware
+//  Enhanced Error Handling Middleware
 // -------------------
 app.use((err, req, res, next) => {
   if (err.message === "Not allowed by CORS") {
@@ -126,7 +126,7 @@ app.use("*", (req, res) => {
 });
 
 // -------------------
-//  Start Server
+//  Start Server
 // -------------------
 const PORT = process.env.PORT || 5200;
 app.listen(PORT, () => {

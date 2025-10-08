@@ -75,7 +75,8 @@ function SignUp() {
   // Test API connection
   const testConnection = async () => {
     try {
-      const response = await api.get("/health");
+      // Test against the /health endpoint, which is directly on the base URL
+      const response = await api.get("/health"); 
       console.log("API Connection Test:", response.data);
       return true;
     } catch (error) {
@@ -102,7 +103,13 @@ function SignUp() {
     try {
       console.log("Sending OTP to:", formData.email);
 
-      const res = await api.post("/api/users/send-otp", {
+      // 🚨 FIX: Ensure the path is correct
+      // This path is relative to the API_URL, so it should be the full path:
+      // API_URL + "/api/users/send-otp"
+      // Since userRoutes is mounted at /api/users, the path is correct if we assume
+      // the base path in the userRoutes file is just `/send-otp` (which it is, but 
+      // the component needs the full path including the mount point).
+      const res = await api.post("/api/users/send-otp", { 
         email: formData.email
       });
 
@@ -147,7 +154,9 @@ function SignUp() {
     try {
       console.log("🚀 Submitting registration...");
 
-      const res = await api.post("/api/users/verify-otp", {
+      // 🚨 FIX: Ensure the path is correct
+      // API_URL + "/api/users/verify-otp"
+      const res = await api.post("/api/users/verify-otp", { 
         username: formData.username.trim(),
         email: formData.email.trim(),
         password: formData.password.trim(),
