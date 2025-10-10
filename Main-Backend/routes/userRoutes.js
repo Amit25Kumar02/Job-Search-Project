@@ -134,8 +134,47 @@ router.post("/send-otp", async (req, res) => {
   }
 });
 
-// Optimized OTP verification
-// 🚨 FIX: Routes are now on the router instance
+router.get("/test-email-config", async (req, res) => {
+  try {
+    const testEmail = "test@example.com";
+    const testOtp = "123456";
+    
+    console.log('🧪 Testing email configuration...');
+    
+    if (!transporter) {
+      return res.json({
+        success: false,
+        message: "Email transporter not configured",
+        reason: "Missing EMAIL_USER or EMAIL_PASS environment variables",
+        solution: "Check Render environment variables"
+      });
+    }
+
+    // Test transporter connection
+    await transporter.verify();
+    console.log('✅ Email transporter verified successfully');
+
+    // Try sending test email
+    const testResult = await sendOtpEmail(testEmail, testOtp);
+    
+    res.json({
+      success: true,
+      message: "Email configuration test completed",
+      transporter: "Connected and verified",
+      emailService: "Gmail",
+      testResult: testResult
+    });
+
+  } catch (error) {
+    console.error('❌ Email config test failed:', error);
+    res.status(500).json({
+      success: false,
+      message: "Email configuration test failed",
+      error: error.message
+    });
+  }
+});
+
 router.post("/verify-otp", async (req, res) => {
   try {
     const { username, email, otp, password, userType } = req.body;
