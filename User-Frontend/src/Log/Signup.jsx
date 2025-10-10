@@ -102,13 +102,6 @@ function SignUp() {
 
     try {
       console.log("Sending OTP to:", formData.email);
-
-      // 🚨 FIX: Ensure the path is correct
-      // This path is relative to the API_URL, so it should be the full path:
-      // API_URL + "/api/users/send-otp"
-      // Since userRoutes is mounted at /api/users, the path is correct if we assume
-      // the base path in the userRoutes file is just `/send-otp` (which it is, but 
-      // the component needs the full path including the mount point).
       const res = await api.post("/api/users/send-otp", { 
         email: formData.email
       });
